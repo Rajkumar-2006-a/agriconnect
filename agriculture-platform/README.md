@@ -104,4 +104,28 @@ All APIs use the `/api` prefix. Protected requests require `Authorization: Beare
 | AI Assistant (AgriBot) | `POST /chat` |
 | Administration | `/admin/stats`, `/admin/users`, `/admin/content` |
 
-Images are stored locally under `backend/uploads` and served from `/uploads/<filename>`. For deployment, replace this with cloud storage and use HTTPS, a managed MongoDB instance, a strong random `JWT_SECRET`, and restricted CORS origins.
+Images are uploaded and served securely via Cloudinary in production (with automatic fallback to local `backend/uploads` if Cloudinary credentials are not provided). Configure `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET` in your backend environment variables for deployment.
+
+### Deploying on Vercel
+
+#### Option A: Deploying Backend & Frontend as Separate Vercel Projects (Recommended)
+
+1. **Backend Deployment**:
+   - In Vercel, import your repository.
+   - Set **Root Directory** to `agriculture-platform/backend`.
+   - Add Environment Variables:
+     - `MONGODB_URI` / `MONGO_URI`
+     - `JWT_SECRET`
+     - `CLIENT_URL` (URL of your deployed frontend, e.g. `https://your-frontend.vercel.app` or `*`)
+     - `CLOUDINARY_CLOUD_NAME`
+     - `CLOUDINARY_API_KEY`
+     - `CLOUDINARY_API_SECRET`
+     - `GEMINI_API_KEY`
+   - Deploy.
+
+2. **Frontend Deployment**:
+   - In Vercel, import your repository.
+   - Set **Root Directory** to `agriculture-platform/frontend`.
+   - Add Environment Variable:
+     - `VITE_API_URL` (e.g., `https://your-backend.vercel.app/api`)
+   - Deploy.

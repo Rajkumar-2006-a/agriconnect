@@ -1,5 +1,21 @@
 import Product from '../models/Product.js'; import Equipment from '../models/Equipment.js'; import Order from '../models/Order.js'; import RentalRequest from '../models/RentalRequest.js'; import Post from '../models/Post.js'; import Comment from '../models/Comment.js';
-const image=req=>req.file?`/uploads/${req.file.filename}`:undefined; const attachmentData=req=>{let names=[];try{names=JSON.parse(req.body.attachmentNames||'[]')}catch{}const files=req.files?.attachmentImages||[];return names.map((name,index)=>({name,image:files[index]?`/uploads/${files[index].filename}`:undefined})).filter(item=>item.name);}; const can=(doc,user,field)=>user.role==='admin'||String(doc[field])===String(user._id);
+const resolveImageUrl = (file) => {
+  if (!file) return undefined;
+  if (file.secure_url) return file.secure_url;
+  if (file.path && (file.path.startsWith('http://') || file.path.startsWith('https://'))) return file.path;
+  return file.filename ? `/uploads/${file.filename}` : undefined;
+};
+const image = req => resolveImageUrl(req.file);
+const attachmentData = req => {
+  let names = [];
+  try { names = JSON.parse(req.body.attachmentNames || '[]'); } catch {}
+  const files = req.files?.attachmentImages || [];
+  return names.map((name, index) => ({
+    name,
+    image: resolveImageUrl(files[index])
+  })).filter(item => item.name);
+};
+const can = (doc, user, field) => user.role === 'admin' || String(doc[field]) === String(user._id);
 export const products=async(req,res,next)=>{try{const q={};if(req.query.category)q.category=req.query.category;if(req.query.search)q.productName={$regex:req.query.search,$options:'i'};if(req.query.includeSold!=='true')q.isSold={$ne:true};res.json(await Product.find(q).populate('farmer','name email phone').sort('-createdAt'));}catch(e){next(e);}};
 export const product=async(req,res,next)=>{try{const p=await Product.findById(req.params.id).populate('farmer','name email phone');if(!p)return res.status(404).json({message:'Product not found'});res.json(p);}catch(e){next(e);}};
 export const createProduct=async(req,res,next)=>{try{if(req.body.sellerPhone){req.user.phone=req.body.sellerPhone;await req.user.save();}if(!req.user.phone)return res.status(400).json({message:'Add the seller phone number before listing a product'});res.status(201).json(await Product.create({...req.body,image:image(req),farmer:req.user._id}));}catch(e){next(e);}};
@@ -7,7 +23,7 @@ export const updateProduct=async(req,res,next)=>{try{const p=await Product.findB
 export const deleteProduct=async(req,res,next)=>{try{const p=await Product.findById(req.params.id);if(!p)return res.status(404).json({message:'Product not found'});if(!can(p,req.user,'farmer'))return res.status(403).json({message:'Forbidden'});await p.deleteOne();res.json({message:'Product deleted'});}catch(e){next(e);}};
 export const equipment=async(req,res,next)=>{try{const q={};if(req.query.category)q.category=req.query.category;if(req.query.location)q.location={$regex:req.query.location,$options:'i'};if(req.query.search){const searchRegex={$regex:req.query.search,$options:'i'};q.$or=[{equipmentName:searchRegex},{category:searchRegex},{description:searchRegex},{location:searchRegex}];}res.json(await Equipment.find(q).populate('owner','name email phone').sort('-createdAt'));}catch(e){next(e);}};
 export const equipmentById=async(req,res,next)=>{try{const d=await Equipment.findById(req.params.id).populate('owner','name email phone');if(!d)return res.status(404).json({message:'Equipment not found'});res.json(d);}catch(e){next(e);}};
-export const createEquipment=async(req,res,next)=>{try{if(req.body.ownerPhone){req.user.phone=req.body.ownerPhone;await req.user.save();}if(!req.user.phone)return res.status(400).json({message:'Add the equipment owner phone number before publishing a listing'});const attachments=attachmentData(req);res.status(201).json(await Equipment.create({...req.body,image:req.files?.image?.[0]?`/uploads/${req.files.image[0].filename}`:undefined,attachments,owner:req.user._id}));}catch(e){next(e);}};
+export const createEquipment=async(req,res,next)=>{try{if(req.body.ownerPhone){req.user.phone=req.body.ownerPhone;await req.user.save();}if(!req.user.phone)return res.status(400).json({message:'Add the equipment owner phone number before publishing a listing'});const attachments=attachmentData(req);res.status(201).json(await Equipment.create({...req.body,image:resolveImageUrl(req.files?.image?.[0]),attachments,owner:req.user._id}));}catch(e){next(e);}};
 export const updateEquipment=async(req,res,next)=>{try{const d=await Equipment.findById(req.params.id);if(!d)return res.status(404).json({message:'Equipment not found'});if(!can(d,req.user,'owner'))return res.status(403).json({message:'Forbidden'});Object.assign(d,req.body);if(image(req))d.image=image(req);await d.save();res.json(d);}catch(e){next(e);}};
 export const deleteEquipment=async(req,res,next)=>{try{const d=await Equipment.findById(req.params.id);if(!d)return res.status(404).json({message:'Equipment not found'});if(!can(d,req.user,'owner'))return res.status(403).json({message:'Forbidden'});await d.deleteOne();res.json({message:'Equipment deleted'});}catch(e){next(e);}};
 export const createOrder=async(req,res,next)=>{try{const {products}=req.body;if(!products?.length)return res.status(400).json({message:'Cart is empty'});const listings=await Product.find({_id:{$in:products.map(item=>item.product)},isSold:{$ne:true}});if(listings.length!==products.length)return res.status(400).json({message:'One or more products are unavailable'});const safeProducts=products.map(item=>{const listing=listings.find(product=>String(product._id)===String(item.product));const quantity=Number(item.quantity);if(!listing||!Number.isInteger(quantity)||quantity<1||quantity>listing.quantity)throw new Error(`Insufficient quantity for ${listing?.productName||'product'}`);return {product:listing._id,productName:listing.productName,quantity,price:listing.price};});const totalAmount=safeProducts.reduce((total,item)=>total+item.price*item.quantity,0);res.status(201).json(await Order.create({buyer:req.user._id,products:safeProducts,totalAmount}));}catch(e){if(e.message?.startsWith('Insufficient quantity'))return res.status(400).json({message:e.message});next(e);}};
