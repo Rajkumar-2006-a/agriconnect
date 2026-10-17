@@ -10,40 +10,32 @@ import { notFound, errorHandler } from './middleware/error.js';
 
 dotenv.config();
 
-// Attempt initial DB connection
-connectDB().catch((err) => {
-  console.error('Initial MongoDB connection error:', err.message);
-});
-
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Ensure DB connection for serverless/cold-start invocations
+// Ensure DB is connected on every request (works for both standalone & Vercel serverless)
 app.use(async (req, res, next) => {
   try {
     await connectDB();
     next();
   } catch (err) {
-    next(err);
+    console.error('DB connection failed:', err.message);
+    res.status(503).json({ message: 'Database connection failed. Please try again.' });
   }
 });
 
-// CORS configured to work with local dev and Vercel domains
+// CORS — allow all Vercel preview URLs, localhost, and the configured CLIENT_URL
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (
+      const allowed =
         !origin ||
         !process.env.CLIENT_URL ||
         process.env.CLIENT_URL === '*' ||
         origin.includes('vercel.app') ||
         origin.includes('localhost') ||
-        origin === process.env.CLIENT_URL
-      ) {
-        callback(null, true);
-      } else {
-        callback(null, true);
-      }
+        origin === process.env.CLIENT_URL;
+      callback(null, allowed ? true : new Error('Not allowed by CORS'));
     },
     credentials: true,
   })
@@ -52,10 +44,10 @@ app.use(
 app.use(express.json());
 app.use(morgan('dev'));
 
-// Static uploads directory (for backwards compatibility with existing local uploads)
+// Serve locally uploaded files (fallback when Cloudinary is not configured)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Health check and root endpoints
+// ─── Health & Root ────────────────────────────────────────────────────────────
 app.get('/', (req, res) => {
   res.json({
     message: '🌾 Welcome to AgriConnect API',
@@ -72,32 +64,28 @@ app.get('/', (req, res) => {
       fertilizers: '/api/fertilizers',
       schemes: '/api/schemes',
       chat: '/api/chat',
-      admin: '/api/admin'
+      admin: '/api/admin',
+      'agri-doctors': '/api/agri-doctors',
     },
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
-
-app.get('/health', (req, res) =>
-  res.json({ status: 'ok', message: 'AgriConnect API is running smoothly' })
-);
 
 app.get('/api/health', (req, res) =>
   res.json({ status: 'ok', message: 'AgriConnect API is running smoothly' })
 );
 
-// Main API routes (mounted under both /api and / so endpoints work whether /api is included or stripped)
+// ─── Main API Routes (only under /api prefix) ─────────────────────────────────
 app.use('/api', routes);
-app.use('/', routes);
 
-// Error handling middleware
+// ─── Error Handlers ───────────────────────────────────────────────────────────
 app.use(notFound);
 app.use(errorHandler);
 
-// Listen when run as a standalone server (not on Vercel serverless)
+// Listen when running as standalone server (not on Vercel)
 if (!process.env.VERCEL) {
   const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`API running on port ${PORT}`));
+  app.listen(PORT, () => console.log(`🌾 AgriConnect API running on port ${PORT}`));
 }
 
 export default app;
