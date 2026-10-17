@@ -1,0 +1,448 @@
+[
+  {
+    "schemeCode": "PM-KISAN",
+    "title": "PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)",
+    "titleTa": "பிரதம மந்திரி கிசான் சம்மான் நிதி (PM-KISAN)",
+    "description": "Direct income support of ₹6,000 per year provided in three equal installments of ₹2,000 to all eligible landholding farmer families via Direct Benefit Transfer (DBT).",
+    "descriptionTa": "அனைத்து நிலம் வைத்திருக்கும் விவசாய குடும்பங்களுக்கும் ஆண்டுக்கு ₹6,000 நேரடி பண உதவி. ₹2,000 வீதம் 3 தவணைகளில் வங்கி கணக்கில் நேரடியாக செலுத்தப்படுகிறது.",
+    "department": "Central",
+    "category": "Income Support",
+    "subsidyRate": "₹6,000 / Year (100% Grant)",
+    "maxBenefit": "₹6,000 per financial year",
+    "targetBeneficiary": "All Landholding Farmer Families",
+    "targetBeneficiaryTa": "நில உரிமை கொண்ட அனைத்து விவசாய குடும்பங்கள்",
+    "eligibleLandholding": ["marginal", "small", "large"],
+    "eligibilityCriteria": [
+      "Farmer family must hold cultivable agricultural land in their name",
+      "Land ownership recorded in state land records (Patta / Chitta)",
+      "Institutional landholders and high-income taxpayers are excluded",
+      "Bank account must be active and mapped to NPCI with Aadhaar"
+    ],
+    "eligibilityCriteriaTa": [
+      "விவசாய குடும்பத்தின் பெயரில் சாகுபடிக்கு உகந்த நிலம் இருக்க வேண்டும்",
+      "பட்டா / சிட்டாவில் பெயர் பதிவு செய்யப்படிருக்க வேண்டும்",
+      "அரசு ஊழியர்கள் மற்றும் வருமான வரி செலுத்துபவர்கள் தவிர மற்ற விவசாயிகள்",
+      "வங்கி கணக்கு ஆதாருடன் (NPCI) இணைக்கப்பட்டிருக்க வேண்டும்"
+    ],
+    "requiredDocuments": [
+      "Aadhaar Card (Mandatory)",
+      "Patta / Chitta Land Title document",
+      "Bank Passbook copy (Aadhaar linked)",
+      "Active Mobile number linked to Aadhaar"
+    ],
+    "requiredDocumentsTa": [
+      "ஆதார் அட்டை (கட்டாயம்)",
+      "பட்டா / சிட்டா நில உரிமை நகல்",
+      "ஆதாருடன் இணைக்கப்பட்ட வங்கி கணக்கு புத்தகம்",
+      "ஆதாருடன் இணைக்கப்பட்ட செல்போன் எண்"
+    ],
+    "officialPortalUrl": "https://pmkisan.gov.in",
+    "helpline": "155261",
+    "deadlineInfo": "Open throughout the year (Apply anytime via CSC / e-Sevai)",
+    "isActive": true,
+    "tags": ["dbt", "income", "central", "all-farmers"]
+  },
+  {
+    "schemeCode": "PMKSY-MICRO-IRRIGATION",
+    "title": "Micro Irrigation Scheme (PMKSY - Drip & Sprinkler Subsidy)",
+    "titleTa": "பிரதம மந்திரி நுண்ணீர் பாசன திட்டம் (சொட்டு நீர் & தெளிப்பு நீர் பாசனம்)",
+    "description": "Comprehensive irrigation subsidy providing 100% subsidy for Small & Marginal farmers and 75% for other farmers in Tamil Nadu to install modern water-saving drip and sprinkler irrigation systems.",
+    "descriptionTa": "தமிழ்நாட்டில் சிறு மற்றும் குறு விவசாயிகளுக்கு 100% முழு மானியம், இதர விவசாயிகளுக்கு 75% மானியத்தில் சொட்டு நீர் மற்றும் தெளிப்பு நீர் பாசன கருவிகள் வழங்கப்படுகிறது.",
+    "department": "State - Tamil Nadu",
+    "category": "Irrigation",
+    "subsidyRate": "100% for Small/Marginal, 75% for Others",
+    "maxBenefit": "Up to ₹1,15,000 / hectare",
+    "targetBeneficiary": "Small & Marginal Farmers (< 5 Acres), All Cultivators",
+    "targetBeneficiaryTa": "சிறு & குறு விவசாயிகள் (< 5 ஏக்கர்), அனைத்து விவசாயிகள்",
+    "eligibleLandholding": ["marginal", "small", "large"],
+    "eligibilityCriteria": [
+      "Must hold agricultural/horticultural land with valid Patta/Chitta",
+      "Must have an assured functional water source (Open well, Borewell, or Canal)",
+      "Electricity service connection or diesel pump set on the farm",
+      "100% subsidy applies to land holding up to 5 acres (2 hectares)"
+    ],
+    "eligibilityCriteriaTa": [
+      "சொந்த விவசாய நிலம் மற்றும் செல்லுபடியாகும் பட்டா/சிட்டா இருக்க வேண்டும்",
+      "கிணறு, ஆழ்துளை கிணறு போன்ற உறுதி செய்யப்பட்ட நீர் ஆதாரம் இருக்க வேண்டும்",
+      "மின்சார இணைப்பு அல்லது டீசல் பம்ப் செட் பயன்பாட்டில் இருக்க வேண்டும்",
+      "சிறு குறு விவசாயிகளுக்கு (5 ஏக்கர் வரை) 100% முழு மானியம்"
+    ],
+    "requiredDocuments": [
+      "Aadhaar Card",
+      "Patta / Chitta document",
+      "FMB Sketch (Field Measurement Book)",
+      "Adangal / Crop Sowing Certificate from VAO",
+      "Soil & Water Testing Report (from Agrisnet AEC lab)",
+      "Bank Passbook copy"
+    ],
+    "requiredDocumentsTa": [
+      "ஆதார் அட்டை",
+      "பட்டா / சிட்டா நகல்",
+      "FMB நில வரைபடம்",
+      "VAO வழங்கிய அடங்கல் சான்றிதழ்",
+      "மண் மற்றும் நீர் பரிசோதனை அறிக்கை",
+      "வங்கி கணக்கு புத்தக நகல்"
+    ],
+    "officialPortalUrl": "https://tnhorticulture.tn.gov.in/horti/pmksy",
+    "helpline": "1800-180-1551",
+    "deadlineInfo": "Applications accepted round the year through Horticulture Extension Centre / Uzhavan App",
+    "isActive": true,
+    "tags": ["drip", "irrigation", "tamil-nadu", "100-subsidy", "water"]
+  },
+  {
+    "schemeCode": "SMAM-AGRICULTURAL-MECHANIZATION",
+    "title": "Sub-Mission on Agricultural Mechanization (SMAM - Farm Equipment)",
+    "titleTa": "விவசாய இயந்திரமயமாக்கல் திட்டம் (டிராக்டர் & கருவி மானியம்)",
+    "description": "Financial assistance of 40% to 50% for purchasing agricultural machinery including Tractors, Power Tillers, Rotavators, Paddy Transplanters, Combine Harvesters, and Multi-crop Thrashers.",
+    "descriptionTa": "டிராக்டர், பவர் டில்லர், ரோட்டவேட்டர், நெல் நடவு இயந்திரம் மற்றும் அறுவடை இயந்திரங்கள் வாங்க 40% முதல் 50% வரை மானியம் வழங்கப்படுகிறது.",
+    "department": "State - Tamil Nadu",
+    "category": "Machinery",
+    "subsidyRate": "40% - 50% on Equipment Cost",
+    "maxBenefit": "Up to ₹2,50,000 depending on machine type",
+    "targetBeneficiary": "Individual Farmers, SC/ST (50%), Women Farmers (50%)",
+    "targetBeneficiaryTa": "விவசாயிகள், ஆதிதிராவிடர்/பழங்குடியினர் (50%), பெண் விவசாயிகள் (50%)",
+    "eligibleLandholding": ["marginal", "small", "large"],
+    "eligibilityCriteria": [
+      "Individual farmer must possess cultivable agricultural land",
+      "Must not have availed subsidy for the same equipment type in the last 5 years",
+      "Preference given to Small, Marginal, Women, and SC/ST farmers (higher 50% bracket)",
+      "Equipment must be purchased from Government empanelled dealers"
+    ],
+    "eligibilityCriteriaTa": [
+      "விவசாய நிலம் வைத்திருக்கும் அனைத்து விவசாயிகளும் தகுதியுடையவர்கள்",
+      "கடந்த 5 ஆண்டுகளில் இதே கருவிக்கு அரசு மானியம் பெற்றிருக்கக் கூடாது",
+      "பெண்கள் மற்றும் ஆதிதிராவிட விவசாயிகளுக்கு முன்னுரிமை மற்றும் 50% மானியம்",
+      "அங்கீகரிக்கப்பட்ட டீலர்களிடம் மட்டுமே கருவிகளை வாங்க வேண்டும்"
+    ],
+    "requiredDocuments": [
+      "Aadhaar Card",
+      "Patta / Chitta title deed",
+      "Passport size photos (2)",
+      "Bank Passbook copy",
+      "Community Certificate (for SC/ST higher subsidy)",
+      "Equipment quotation from authorized dealer"
+    ],
+    "requiredDocumentsTa": [
+      "ஆதார் அட்டை",
+      "பட்டா / சிட்டா நகல்",
+      "பாஸ்போர்ட் அளவு புகைப்படங்கள் (2)",
+      "வங்கி கணக்கு புத்தக நகல்",
+      "சாதி சான்றிதழ் (கூடுதல் மானியத்திற்கு)",
+      "டீலரின் விலை மதிப்பீட்டு ரசீது (Quotation)"
+    ],
+    "officialPortalUrl": "https://agrimachinery.nic.in",
+    "helpline": "044-29530260",
+    "deadlineInfo": "Seasonal batches released through Tamil Nadu Agricultural Engineering Department",
+    "isActive": true,
+    "tags": ["tractor", "equipment", "machinery", "sub-mission", "mechanization"]
+  },
+  {
+    "schemeCode": "PMFBY-CROP-INSURANCE",
+    "title": "Pradhan Mantri Fasal Bima Yojana (PMFBY - Crop Insurance)",
+    "titleTa": "பிரதம மந்திரி பயிர் காப்பீட்டுத் திட்டம் (PMFBY)",
+    "description": "Comprehensive yield-based crop insurance protecting farmers against non-preventable natural risks (floods, drought, unseasonal rain, pests) at heavily subsidized nominal premium rates (1.5% - 2%).",
+    "descriptionTa": "இயற்கை பேரிடர், வெள்ளம், வறட்சி, பூச்சி தாக்குதலால் ஏற்படும் பயிர் இழப்பிற்கு முழு பாதுகாப்பு. விவசாயிகள் 1.5% முதல் 2% குறைந்த பிரீமியம் மட்டும் செலுத்தினால் போதும்.",
+    "department": "Central",
+    "category": "Insurance",
+    "subsidyRate": "Govt pays 90%+ Premium (Farmer pays only 1.5% - 2%)",
+    "maxBenefit": "Sum insured up to full crop value per acre",
+    "targetBeneficiary": "All Farmers cultivating notified crops (Loanee & Non-Loanee)",
+    "targetBeneficiaryTa": "அறிவிக்கப்பட்ட பயிர்களை பயிரிடும் அனைத்து விவசாயிகளும்",
+    "eligibleLandholding": ["marginal", "small", "large"],
+    "eligibilityCriteria": [
+      "Farmers growing notified seasonal crops (Paddy, Cotton, Maize, Groundnut, etc.) in notified revenue villages",
+      "Both owner cultivators and documented tenant farmers are eligible",
+      "Must enroll before the seasonal crop cut-off deadline",
+      "Bank account must be active for direct claim payout"
+    ],
+    "eligibilityCriteriaTa": [
+      "அறிவிக்கப்பட்ட கிராமங்களில் அறிவிக்கப்பட்ட பயிர்களை பயிரிடும் விவசாயிகள்",
+      "நில உரிமையாளர்கள் மற்றும் குத்தகை விவசாயிகள் இருவருமே தகுதியுடையவர்கள்",
+      "பருவக்கால கடைசி தேதி முடிவதற்குள் பதிவு செய்ய வேண்டும்",
+      "நேரடி இழப்பீட்டு தொகை பெற வங்கி கணக்கு அவசியம்"
+    ],
+    "requiredDocuments": [
+      "Aadhaar Card",
+      "Land Record (Patta / Chitta)",
+      "Sowing Certificate / Adangal issued by VAO",
+      "Bank Passbook copy (showing IFSC and Account number)",
+      "Tenant agreement (for tenant cultivators)"
+    ],
+    "requiredDocumentsTa": [
+      "ஆதார் அட்டை",
+      "பட்டா / சிட்டா நகல்",
+      "கிராம நிர்வாக அலுவலர் (VAO) வழங்கிய அடங்கல்",
+      "வங்கி கணக்கு புத்தக நகல்",
+      "குத்தகை ஒப்பந்த ஆவணம் (குத்தகை விவசாயிகளுக்கு)"
+    ],
+    "officialPortalUrl": "https://pmfby.gov.in",
+    "helpline": "14447",
+    "deadlineInfo": "Kharif: July 31 | Rabi / Samba Paddy: Nov 15 – Dec 15",
+    "isActive": true,
+    "tags": ["insurance", "crop-loss", "flood", "drought", "paddy"]
+  },
+  {
+    "schemeCode": "PM-KUSUM-SOLAR-PUMPS",
+    "title": "PM-KUSUM Scheme (Solar Agriculture Pump Set Subsidy)",
+    "titleTa": "பிஎம்-குசும் திட்டம் (சூரிய சக்தி விவசாய பம்ப் செட் மானியம்)",
+    "description": "Up to 70% capital subsidy (30% Central + 40% Tamil Nadu State) to install standalone 3 HP, 5 HP, and 7.5 HP solar agricultural pumps, reducing reliance on costly diesel and erratic grid power.",
+    "descriptionTa": "டீசல் மற்றும் மின்சார பற்றாக்குறையை போக்க 3 HP, 5 HP, 7.5 HP சூரிய ஒளி மின் மோட்டார்களுக்கு 70% வரை அரசு மானியம் வழங்கப்படுகிறது.",
+    "department": "State - Tamil Nadu",
+    "category": "Solar & Energy",
+    "subsidyRate": "Up to 70% Subsidy (Farmer pays only 30%)",
+    "maxBenefit": "Up to ₹1,80,000 capital subsidy",
+    "targetBeneficiary": "Farmers with agriculture wells without regular grid connection",
+    "targetBeneficiaryTa": "மின் இணைப்பு இல்லாத கிணறு மற்றும் போர்வெல் வைத்துள்ள விவசாயிகள்",
+    "eligibleLandholding": ["marginal", "small", "large"],
+    "eligibilityCriteria": [
+      "Must own agricultural land with functional open well or borewell",
+      "Farmers waiting on TANGEDCO agricultural electricity waiting list get priority",
+      "Adequate ground water depth as certified by local Agricultural Engineering Dept",
+      "Land must have shadow-free space for mounting solar panels"
+    ],
+    "eligibilityCriteriaTa": [
+      "நிலம் மற்றும் பயன்பாட்டில் உள்ள கிணறு அல்லது ஆழ்துளை கிணறு இருக்க வேண்டும்",
+      "மின்சார வாரிய காத்திருப்போர் பட்டியலில் உள்ள விவசாயிகளுக்கு முன்னுரிமை",
+      "வேளாண் பொறியியல் துறை ஆய்வின்படி போதுமான நிலத்தடி நீர் இருக்க வேண்டும்",
+      "சோலார் பேனல் அமைக்க நிழல் இல்லாத இடம் இருக்க வேண்டும்"
+    ],
+    "requiredDocuments": [
+      "Aadhaar Card",
+      "Patta / Chitta document",
+      "Ground Water depth & yield certificate",
+      "FMB Sketch of farm location",
+      "Electricity Board (TANGEDCO) NOC or application slip"
+    ],
+    "requiredDocumentsTa": [
+      "ஆதார் அட்டை",
+      "பட்டா / சிட்டா நகல்",
+      "நிலத்தடி நீர் மட்ட சான்றிதழ்",
+      "FMB வரைபடம்",
+      "TANGEDCO மின்சார வாரிய பதிவு ரசீது"
+    ],
+    "officialPortalUrl": "https://pmkusum.mnre.gov.in",
+    "helpline": "1800-180-3333",
+    "deadlineInfo": "Allocations released quarterly by Tamil Nadu Energy Development Agency (TEDA)",
+    "isActive": true,
+    "tags": ["solar", "pump", "electricity", "kusum", "energy"]
+  },
+  {
+    "schemeCode": "TN-UZHAVAR-PATHUKAPPU",
+    "title": "Chief Minister’s Uzhavar Pathukappu Thittam (Farmers Welfare Scheme)",
+    "titleTa": "முதலமைச்சரின் உழவர் பாதுகாப்புத் திட்டம்",
+    "description": "Comprehensive social welfare scheme providing educational aid (₹1,500–₹6,000), marriage assistance (₹10,000), accidental death compensation (₹1,00,000), and old age pension (₹1,000/mo) to farmers and farm laborers.",
+    "descriptionTa": "விவசாயிகள் மற்றும் விவசாய தொழிலாளர்களுக்கு கல்வி உதவித்தொகை, திருமண உதவி, விபத்து நிவாரணம் (₹1,00,000) மற்றும் மாதாந்திர முதியோர் உதவித்தொகை (₹1,000) வழங்கும் திட்டம்.",
+    "department": "State - Tamil Nadu",
+    "category": "Social Welfare",
+    "subsidyRate": "100% Social Security Grants & Pensions",
+    "maxBenefit": "Up to ₹1,00,000 for accidental relief + ₹1,000/mo pension",
+    "targetBeneficiary": "Small/Marginal Farmers, Agricultural Laborers & Families",
+    "targetBeneficiaryTa": "சிறு, குறு விவசாயிகள் மற்றும் விவசாய தொழிலாளர்கள்",
+    "eligibleLandholding": ["marginal", "small"],
+    "eligibilityCriteria": [
+      "Small and marginal farmers holding less than 2.5 acres of wetland or 5.0 acres of dryland",
+      "Agricultural laborers engaged in farm work in Tamil Nadu",
+      "Age of the applicant must be between 18 and 65 years",
+      "Holder of Uzhavar Pathukappu Thittam membership card"
+    ],
+    "eligibilityCriteriaTa": [
+      "2.5 ஏக்கர் நஞ்சை அல்லது 5 ஏக்கர் புஞ்சை நிலம் உள்ள விவசாயிகள்",
+      "தமிழ்நாட்டில் விவசாய கூலி வேலை செய்யும் தொழிலாளர்கள்",
+      "வயது 18 முதல் 65-க்குள் இருக்க வேண்டும்",
+      "உழவர் பாதுகாப்பு அட்டை பெற்றிருக்க வேண்டும்"
+    ],
+    "requiredDocuments": [
+      "Uzhavar Pathukappu Membership Card",
+      "Aadhaar Card",
+      "VAO Income and Land possession certificate",
+      "Bank Passbook copy",
+      "Relevant certificate (Educational bonafide, Marriage invitation, or Death certificate)"
+    ],
+    "requiredDocumentsTa": [
+      "உழவர் பாதுகாப்பு அடையாள அட்டை",
+      "ஆதார் அட்டை",
+      "VAO வருமானம் மற்றும் நில உடைமை சான்றிதழ்",
+      "வங்கி கணக்கு புத்தக நகல்",
+      "தேவையான சான்றிதழ் (கல்வி/திருமணம்/மருத்துவ ஆவணம்)"
+    ],
+    "officialPortalUrl": "https://www.tn.gov.in",
+    "helpline": "044-25671556",
+    "deadlineInfo": "Ongoing through Special Tahsildar (Uzhavar Pathukappu Thittam) in all Taluk offices",
+    "isActive": true,
+    "tags": ["social-welfare", "tamil-nadu", "pension", "education", "insurance"]
+  },
+  {
+    "schemeCode": "KISAN-CREDIT-CARD",
+    "title": "Kisan Credit Card (KCC - Low Interest Crop Loans)",
+    "titleTa": "கிசான் கிரெடிட் கார்டு (குறைந்த வட்டி விவசாய கடன்)",
+    "description": "Timely short-term agricultural credit up to ₹3,00,000 at a concessional effective interest rate of 4% per annum (with prompt repayment incentive). Collateral-free loans available up to ₹1,60,000.",
+    "descriptionTa": "விவசாயிகளுக்கு ₹3,00,000 வரை குறைந்த வட்டி (4%) பயிர்க்கடன். ₹1,60,000 வரை எந்த பிணையமும் (Collateral) இன்றி உடனடியாக கடன் பெறலாம்.",
+    "department": "Central",
+    "category": "Credit & Finance",
+    "subsidyRate": "4% Effective Interest Rate (3% Prompt Subsidy)",
+    "maxBenefit": "Credit limit up to ₹3,00,000",
+    "targetBeneficiary": "All Farmers, Tenant Farmers, Dairy & Poultry Farmers",
+    "targetBeneficiaryTa": "அனைத்து விவசாயிகள், குத்தகைதாரர்கள், கால்நடை வளர்ப்போர்",
+    "eligibleLandholding": ["marginal", "small", "large"],
+    "eligibilityCriteria": [
+      "Owner cultivators, tenant farmers, oral lessees, and sharecroppers",
+      "Self-Help Groups (SHGs) or Joint Liability Groups (JLGs) of farmers",
+      "Animal husbandry, dairy, and fisheries farmers are also eligible",
+      "Valid land cultivation proof or animal asset records"
+    ],
+    "eligibilityCriteriaTa": [
+      "நில உரிமையாளர்கள் மற்றும் குத்தகை விவசாயிகள்",
+      "விவசாய சுயஉதவி குழுக்கள் மற்றும் கூட்டு பொறுப்பு குழுக்கள்",
+      "கால்நடை, பால் பண்ணை மற்றும் மீன்வளர்ப்பு தொழிலில் உள்ளவர்கள்",
+      "சாகுபடி அல்லது கால்நடை விவரங்கள் இருக்க வேண்டும்"
+    ],
+    "requiredDocuments": [
+      "Aadhaar Card and PAN Card",
+      "Land Ownership Record (Patta / Chitta / Land Tax receipt)",
+      "Sowing Certificate from VAO",
+      "Passport size photos (2)",
+      "No-due certificate from primary cooperative bank"
+    ],
+    "requiredDocumentsTa": [
+      "ஆதார் அட்டை மற்றும் பான் அட்டை",
+      "பட்டா / சிட்டா / நில வரி ரசீது",
+      "VAO சாகுபடி சான்றிதழ்",
+      "பாஸ்போர்ட் புகைப்படங்கள் (2)",
+      "வங்கி நிலுவை இல்லா சான்றிதழ்"
+    ],
+    "officialPortalUrl": "https://www.myscheme.gov.in/schemes/kcc",
+    "helpline": "1800-115-565",
+    "deadlineInfo": "Available at all Nationalized Banks, Regional Rural Banks & Primary Agriculture Cooperative Societies (PACS)",
+    "isActive": true,
+    "tags": ["credit", "loan", "kcc", "bank", "low-interest"]
+  },
+  {
+    "schemeCode": "TN-FREE-POWER-SUPPLY",
+    "title": "Tamil Nadu Free Electricity for Agricultural Pumpsets",
+    "titleTa": "தமிழ்நாடு விவசாய பம்ப் செட்டுகளுக்கான இலவச மின்சாரம்",
+    "description": "100% Free unmetered electricity supply for agricultural borewells and open wells across Tamil Nadu under the state welfare commitment to ensure round-the-clock irrigation support.",
+    "descriptionTa": "விவசாயிகளுக்கு தடையற்ற பாசன வசதியை உறுதி செய்ய தமிழ்நாட்டில் உள்ள அனைத்து விவசாய பம்ப் செட்டுகளுக்கும் 100% இலவச மின்சாரம் வழங்கப்படுகிறது.",
+    "department": "State - Tamil Nadu",
+    "category": "Solar & Energy",
+    "subsidyRate": "100% Free Power (Zero Electricity Tariff)",
+    "maxBenefit": "100% electricity tariff covered by State Govt",
+    "targetBeneficiary": "All Agricultural Landholders with Wells in Tamil Nadu",
+    "targetBeneficiaryTa": "தமிழ்நாட்டில் கிணறு/போர்வெல் வைத்துள்ள அனைத்து விவசாயிகள்",
+    "eligibleLandholding": ["marginal", "small", "large"],
+    "eligibilityCriteria": [
+      "Applicant must own cultivable agricultural land in Tamil Nadu",
+      "Must have a registered agricultural open well or borewell",
+      "Water pumped must be used solely for farming crops or livestock, not commercial manufacturing",
+      "Registered with TANGEDCO under Agricultural Category Tariff"
+    ],
+    "eligibilityCriteriaTa": [
+      "தமிழ்நாட்டில் விவசாய நிலம் உள்ளவராக இருக்க வேண்டும்",
+      "பதிவு செய்யப்பட்ட விவசாய கிணறு அல்லது ஆழ்துளை கிணறு இருக்க வேண்டும்",
+      "தண்ணீர் விவசாய தேவைகளுக்கு மட்டுமே பயன்படுத்தப்பட வேண்டும்",
+      "TANGEDCO மின்சார வாரியத்தில் பதிவு செய்யப்பட்டிருக்க வேண்டும்"
+    ],
+    "requiredDocuments": [
+      "Patta / Chitta in applicant's name",
+      "FMB sketch demarcating well location",
+      "Aadhaar Card",
+      "VAO Sowing / Adangal Certificate",
+      "TANGEDCO Application Form & Readiness Certificate"
+    ],
+    "requiredDocumentsTa": [
+      "விண்ணப்பதாரர் பெயரில் உள்ள பட்டா / சிட்டா",
+      "கிணறு அமைவிடத்தை குறிக்கும் FMB வரைபடம்",
+      "ஆதார் அட்டை",
+      "VAO அடங்கல் சான்றிதழ்",
+      "மின்சார வாரிய விண்ணப்ப படிவம்"
+    ],
+    "officialPortalUrl": "https://www.tangedco.gov.in",
+    "helpline": "1912",
+    "deadlineInfo": "Ongoing registrations via local TANGEDCO Executive Engineer (O&M) offices",
+    "isActive": true,
+    "tags": ["electricity", "power", "tangedco", "free", "irrigation"]
+  },
+  {
+    "schemeCode": "NHM-POLYHOUSE-SHADENET",
+    "title": "National Horticulture Mission (Polyhouse & Shade Net Nursery Subsidy)",
+    "titleTa": "தேசிய தோட்டக்கலை இயக்கம் (பசுமைக்குடில் & நிழல்வலை குடில் மானியம்)",
+    "description": "50% capital subsidy for the erection of protected cultivation structures (Naturally Ventilated Polyhouses, Shade Net Houses, and High-Tech Nurseries) for high-value vegetable and flower farming.",
+    "descriptionTa": "காய்கறி மற்றும் மலர் சாகுபடிக்கான பசுமைக்குடில், நிழல்வலை குடில் மற்றும் நாற்றங்கால் அமைக்க 50% மானியம் தேசிய தோட்டக்கலை இயக்கத்தால் வழங்கப்படுகிறது.",
+    "department": "State - Tamil Nadu",
+    "category": "Machinery",
+    "subsidyRate": "50% Capital Subsidy",
+    "maxBenefit": "Up to ₹4,67,500 for a 1,000 sq. metre unit",
+    "targetBeneficiary": "Progressive Farmers, Floriculturists, Vegetable Growers",
+    "targetBeneficiaryTa": "காய்கறி, மலர் மற்றும் தோட்டக்கலை பயிர் செய்யும் விவசாயிகள்",
+    "eligibleLandholding": ["marginal", "small", "large"],
+    "eligibilityCriteria": [
+      "Farmers owning at least 0.5 to 1.0 acre of cultivable land",
+      "Assured irrigation facility with good water quality",
+      "Commitment to cultivate high-value crops (Capsicum, English Cucumber, Carnation, Rose, Tomato)",
+      "Construction must follow approved Technical Specifications of NHM"
+    ],
+    "eligibilityCriteriaTa": [
+      "குறைந்தது 0.5 முதல் 1 ஏக்கர் சொந்த நிலம் இருக்க வேண்டும்",
+      "உறுதியான நல்ல தரமான நீர் பாசன வசதி அவசியம்",
+      "குடைமிளகாய், வெள்ளரி, மலர்கள் போன்ற உயர் மதிப்பு பயிர்களை பயிரிட வேண்டும்",
+      "அரசு அங்கீகரித்த தொழில் நுட்ப முறையில் குடில் அமைக்கப்பட வேண்டும்"
+    ],
+    "requiredDocuments": [
+      "Aadhaar Card",
+      "Patta / Chitta document",
+      "Detailed project estimate from empanelled fabricator",
+      "Soil and Water quality test certificate",
+      "Bank Passbook copy"
+    ],
+    "requiredDocumentsTa": [
+      "ஆதார் அட்டை",
+      "பட்டா / சிட்டா நகல்",
+      "அங்கீகரிக்கப்பட்ட நிறுவனத்தின் திட்ட மதிப்பீடு",
+      "மண் மற்றும் நீர் பரிசோதனை அறிக்கை",
+      "வங்கி கணக்கு புத்தக நகல்"
+    ],
+    "officialPortalUrl": "https://tnhorticulture.tn.gov.in",
+    "helpline": "1800-180-1551",
+    "deadlineInfo": "State quota allocations updated each financial year at District Horticulture Offices",
+    "isActive": true,
+    "tags": ["polyhouse", "horticulture", "shadenet", "nursery", "protected-farming"]
+  },
+  {
+    "schemeCode": "TN-AGRISNET-SEEDS-FERTILIZERS",
+    "title": "Subsidized Seeds & Bio-Fertilizer Distribution (TN Agrisnet)",
+    "titleTa": "மானிய விலையில் விதைகள் & உயிர் உரங்கள் விநியோகம்",
+    "description": "50% subsidy on certified high-yielding paddy, pulses, and oilseeds, along with 50% subsidized bio-fertilizers (Azospirillum, Phosphobacteria) distributed through Agricultural Extension Centres (AEC).",
+    "descriptionTa": "வேளாண் விரிவாக்க மையங்கள் மூலம் சான்று பெற்ற நெல், பயறு, எண்ணெய்வித்து விதைகள் மற்றும் உயிர் உரங்களுக்கு 50% மானியத்தில் விநியோகம்.",
+    "department": "State - Tamil Nadu",
+    "category": "Inputs & Seeds",
+    "subsidyRate": "50% Subsidy on Seeds and Bio-Inputs",
+    "maxBenefit": "Direct price concession at Agricultural Extension Centre",
+    "targetBeneficiary": "All Farmers registered in Tamil Nadu",
+    "targetBeneficiaryTa": "தமிழ்நாட்டில் பதிவு செய்துள்ள அனைத்து விவசாயிகள்",
+    "eligibleLandholding": ["marginal", "small", "large"],
+    "eligibilityCriteria": [
+      "Farmer cultivating seasonal notified crops in Tamil Nadu",
+      "Registration on Uzhavan App / Agrisnet farmer database",
+      "Maximum allocation limit based on land area declared in Adangal"
+    ],
+    "eligibilityCriteriaTa": [
+      "தமிழ்நாட்டில் பருவக்கால பயிர்களை பயிரிடும் விவசாயிகள்",
+      "உழவன் செயலி அல்லது அக்ரிஸ்நெட் தளத்தில் பதிவு செய்திருக்க வேண்டும்",
+      "அடங்கலில் உள்ள நில அளவுக்கு ஏற்ப அதிகபட்ச விதை ஒதுக்கீடு செய்யப்படும்"
+    ],
+    "requiredDocuments": [
+      "Aadhaar Card",
+      "Uzhavan App Registration / Farmer ID",
+      "Chitta / Adangal copy (current season)"
+    ],
+    "requiredDocumentsTa": [
+      "ஆதார் அட்டை",
+      "உழவன் செயலி விவசாயி அடையாள எண்",
+      "நடப்பு பருவ சிட்டா / அடங்கல் நகல்"
+    ],
+    "officialPortalUrl": "https://agrisnet.tn.gov.in",
+    "helpline": "1800-180-1551",
+    "deadlineInfo": "Available at the beginning of each crop season (Samba, Kuruvai, Navarai)",
+    "isActive": true,
+    "tags": ["seeds", "bio-fertilizers", "agrisnet", "uzhavan", "subsidized-inputs"]
+  }
+]
