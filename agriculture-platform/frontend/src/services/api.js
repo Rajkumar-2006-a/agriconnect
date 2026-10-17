@@ -1,22 +1,39 @@
 import axios from 'axios';
 
-// Reads VITE_API_URL from .env (e.g. https://your-backend.vercel.app/api)
-// Falls back to local dev server when not set
-const baseURL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').trim().replace(/\/+$/, '');
+// Normalize the backend API URL:
+// 1. Read VITE_API_URL or default to localhost
+// 2. Strip any trailing slash
+// 3. Ensure it ends with /api so calls like api.post('/auth/login') or api.get('/products') route correctly
+let rawUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').trim().replace(/\/+$/, '');
+if (!rawUrl.endsWith('/api')) {
+  rawUrl = `${rawUrl}/api`;
+}
 
-const api = axios.create({ baseURL });
+const baseURL = rawUrl;
 
-// Attach JWT Bearer token to every protected request
+const api = axios.create({
+  baseURL,
+  withCredentials: true,
+});
+
+// Interceptor:
+// - Attach JWT token if present
+// - Prevent accidental double '/api' (e.g. if a component calls api.get('/api/agri-doctors'))
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
-  if (token) config.headers.Authorization = `Bearer ${token}`;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  if (config.url && config.url.startsWith('/api/')) {
+    config.url = config.url.replace(/^\/api/, '');
+  }
   return config;
 });
 
 /**
- * Resolve a stored image path to a full URL.
- * - Cloudinary images already return https:// URLs → returned as-is.
- * - Local uploads are prefixed with the backend origin.
+ * Resolve an image URL:
+ * - Full http(s) URLs (e.g., Cloudinary or Unsplash) are returned directly
+ * - Local /uploads/... paths are prepended with the backend origin
  */
 export const imageUrl = (p) => {
   if (!p) return '';

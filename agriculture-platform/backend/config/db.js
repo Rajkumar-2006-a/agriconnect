@@ -15,9 +15,11 @@ export const connectDB = async () => {
 
   // If a connection attempt is in-flight, await the same promise
   if (!cached.promise) {
-    const uri = process.env.MONGODB_URI || process.env.MONGO_URI;
+    const uri = (process.env.MONGODB_URI || process.env.MONGO_URI || '').trim();
     if (!uri) {
-      throw new Error('Neither MONGODB_URI nor MONGO_URI is defined in environment variables.');
+      throw new Error(
+        'MongoDB connection string is missing. Please set MONGODB_URI in your Vercel Project Settings > Environment Variables.'
+      );
     }
 
     const opts = {
