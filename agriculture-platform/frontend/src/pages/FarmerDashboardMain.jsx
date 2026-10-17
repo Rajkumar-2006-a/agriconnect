@@ -467,16 +467,6 @@ export default function FarmerDashboardMain({ initialSection }) {
           </button>
         </div>
 
-        <div className="sidebar-user-header">
-          <div className="sidebar-avatar-circle">
-            <LeafIcon size={18} />
-          </div>
-          <div className="sidebar-greeting-text">
-            <p className="sidebar-greeting-sub">FARMER DASHBOARD</p>
-            <p className="sidebar-farmer-name">Hello, {user?.name || 'Farmer'}</p>
-          </div>
-        </div>
-
         <nav className="sidebar-nav-list">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
