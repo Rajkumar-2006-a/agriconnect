@@ -13,7 +13,6 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const findSeedFile = () => {
   const possiblePaths = [
     path.resolve(__dirname, '../data/schemes.json'),
-    path.resolve(__dirname, '../../data/schemes.json'),
     path.resolve(process.cwd(), 'data/schemes.json'),
     path.resolve(process.cwd(), 'backend/data/schemes.json')
   ];
@@ -29,7 +28,7 @@ const findSeedFile = () => {
 export const seedSchemes = async () => {
   const filePath = findSeedFile();
   if (!filePath) {
-    console.error('Error: schemes.json seed file not found! Please ensure data/schemes.json exists.');
+    console.error('Error: schemes.json seed file not found! Please ensure backend/data/schemes.json exists.');
     process.exit(1);
   }
 

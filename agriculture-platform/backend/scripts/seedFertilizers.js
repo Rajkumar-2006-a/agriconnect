@@ -14,7 +14,6 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const findSeedFile = () => {
   const possiblePaths = [
     path.resolve(__dirname, '../data/fertilizers.json'),
-    path.resolve(__dirname, '../../data/fertilizers.json'),
     path.resolve(process.cwd(), 'data/fertilizers.json'),
     path.resolve(process.cwd(), 'backend/data/fertilizers.json')
   ];
@@ -30,7 +29,7 @@ const findSeedFile = () => {
 export const seedFertilizers = async () => {
   const filePath = findSeedFile();
   if (!filePath) {
-    console.error('Error: fertilizers.json seed file not found! Please ensure data/fertilizers.json exists.');
+    console.error('Error: fertilizers.json seed file not found! Please ensure backend/data/fertilizers.json exists.');
     process.exit(1);
   }
 

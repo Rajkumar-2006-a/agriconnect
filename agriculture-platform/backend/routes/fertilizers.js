@@ -69,7 +69,6 @@ const REFERENCE_PRICES = {
 const findSeedFile = () => {
   const possiblePaths = [
     path.resolve(__dirname, '../data/fertilizers.json'),
-    path.resolve(__dirname, '../../data/fertilizers.json'),
     path.resolve(process.cwd(), 'data/fertilizers.json'),
     path.resolve(process.cwd(), 'backend/data/fertilizers.json')
   ];
