@@ -1,29 +1,51 @@
 import mongoose from 'mongoose';
 
-let cachedConnection = null;
+// Cache connection globally for serverless (Vercel) environments to prevent multiple connections
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
 
 export const connectDB = async () => {
-  if (cachedConnection && mongoose.connection.readyState >= 1) {
-    return cachedConnection;
+  // If connection is already open and ready, reuse it immediately
+  if (cached.conn && mongoose.connection.readyState === 1) {
+    return cached.conn;
   }
 
-  const uri = process.env.MONGODB_URI || process.env.MONGO_URI;
-  if (!uri) {
-    throw new Error('Neither MONGODB_URI nor MONGO_URI is defined in environment variables.');
+  // If a connection attempt is in-flight, await the same promise
+  if (!cached.promise) {
+    const uri = process.env.MONGODB_URI || process.env.MONGO_URI;
+    if (!uri) {
+      throw new Error('Neither MONGODB_URI nor MONGO_URI is defined in environment variables.');
+    }
+
+    const opts = {
+      bufferCommands: true, // Allow Mongoose to buffer model queries while connecting
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 10000,
+    };
+
+    mongoose.set('bufferCommands', true);
+
+    cached.promise = mongoose
+      .connect(uri, opts)
+      .then((mongooseInstance) => {
+        console.log('MongoDB connected successfully');
+        return mongooseInstance;
+      })
+      .catch((err) => {
+        cached.promise = null;
+        console.error('MongoDB connection error:', err.message);
+        throw err;
+      });
   }
 
   try {
-    const conn = await mongoose.connect(uri, {
-      bufferCommands: false
-    });
-    cachedConnection = conn;
-    console.log('MongoDB connected');
-    return conn;
+    cached.conn = await cached.promise;
+    return cached.conn;
   } catch (error) {
-    console.error('MongoDB error:', error.message);
-    if (process.env.NODE_ENV !== 'production') {
-      // In dev or seed scripts, don't necessarily hard crash if already handled
-    }
+    cached.promise = null;
     throw error;
   }
 };
