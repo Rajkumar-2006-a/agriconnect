@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const rawUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').trim().replace(/\/+$/, '');
+const baseURL = rawUrl.endsWith('/api') ? rawUrl : `${rawUrl}/api`;
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL,
 });
 
 api.interceptors.request.use(c => {
@@ -13,7 +16,8 @@ api.interceptors.request.use(c => {
 export const imageUrl = (p) => {
   if (!p) return '';
   if (p.startsWith('http://') || p.startsWith('https://')) return p;
-  return `${api.defaults.baseURL.replace('/api', '')}${p}`;
+  const origin = baseURL.replace(/\/api\/?$/, '');
+  return `${origin}${p.startsWith('/') ? '' : '/'}${p}`;
 };
 
 export default api;

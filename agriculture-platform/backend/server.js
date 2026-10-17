@@ -55,9 +55,6 @@ app.use(morgan('dev'));
 // Static uploads directory (for backwards compatibility with existing local uploads)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Main API routes
-app.use('/api', routes);
-
 // Health check and root endpoints
 app.get('/', (req, res) => {
   res.json({
@@ -81,9 +78,17 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/health', (req, res) =>
+  res.json({ status: 'ok', message: 'AgriConnect API is running smoothly' })
+);
+
 app.get('/api/health', (req, res) =>
   res.json({ status: 'ok', message: 'AgriConnect API is running smoothly' })
 );
+
+// Main API routes (mounted under both /api and / so endpoints work whether /api is included or stripped)
+app.use('/api', routes);
+app.use('/', routes);
 
 // Error handling middleware
 app.use(notFound);
