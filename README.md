@@ -57,36 +57,36 @@ Smallholder and marginal farmers often face severe structural challenges:
 ```mermaid
 flowchart TD
     subgraph Clients["Frontend (React 18 + Vite + Bootstrap 5)"]
-        FARMER[🌾 Farmer Dashboard]
-        BUYER[🛒 Buyer Marketplace]
-        RENTAL_OWNER[🚜 Equipment Rental Hub]
-        ADMIN[🛡️ Admin Console]
-        BOT_UI[🤖 AgriBot Voice & Chat Widget]
+        FARMER["🌾 Farmer Dashboard"]
+        BUYER["🛒 Buyer Marketplace"]
+        RENTAL_OWNER["🚜 Equipment Rental Hub"]
+        ADMIN["🛡️ Admin Console"]
+        BOT_UI["🤖 AgriBot Voice & Chat Widget"]
     end
 
     subgraph API_Gateway["Express 4 REST API Layer"]
-        AUTH_ROUTER[/api/auth]
-        PRODUCT_ROUTER[/api/products]
-        EQUIP_ROUTER[/api/equipment]
-        ORDER_ROUTER[/api/orders]
-        RENTAL_ROUTER[/api/rentals]
-        POST_ROUTER[/api/posts]
-        FERT_ROUTER[/api/fertilizers]
-        SCHEME_ROUTER[/api/schemes]
-        CHAT_ROUTER[/api/chat]
-        ADMIN_ROUTER[/api/admin]
+        AUTH_ROUTER["/api/auth"]
+        PRODUCT_ROUTER["/api/products"]
+        EQUIP_ROUTER["/api/equipment"]
+        ORDER_ROUTER["/api/orders"]
+        RENTAL_ROUTER["/api/rentals"]
+        POST_ROUTER["/api/posts"]
+        FERT_ROUTER["/api/fertilizers"]
+        SCHEME_ROUTER["/api/schemes"]
+        CHAT_ROUTER["/api/chat"]
+        ADMIN_ROUTER["/api/admin"]
     end
 
     subgraph Security_Storage["Security & Media Infrastructure"]
-        JWT[JWT Authentication & RBAC Middleware]
-        MULTER[Multer Image Upload Stream]
-        CLOUDINARY[(Cloudinary CDN / Local Fallback)]
+        JWT["JWT Authentication & RBAC Middleware"]
+        MULTER["Multer Image Upload Stream"]
+        CLOUDINARY["Cloudinary CDN / Local Storage"]
     end
 
     subgraph Intelligence_Data["External Services & Database"]
-        GEMINI[Google Gemini AI API]
-        AGRISNET[Agrisnet Tamil Nadu Fertilizer API]
-        MONGO[(MongoDB Database / Atlas Cluster)]
+        GEMINI["Google Gemini AI API"]
+        AGRISNET["Agrisnet Tamil Nadu Fertilizer API"]
+        MONGO[("MongoDB Database / Atlas Cluster")]
     end
 
     Clients --> API_Gateway
