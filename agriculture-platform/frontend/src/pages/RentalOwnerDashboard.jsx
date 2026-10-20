@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../services/api';
+import api, { imageUrl, DEFAULT_EQUIPMENT_IMAGE } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { TAMIL_NADU_DISTRICTS } from '../constants/tamilNaduLocations';
 import './RentalOwnerDashboard.css';
@@ -150,9 +150,12 @@ export default function RentalOwnerDashboard() {
   return (
     <main className="owner-dashboard">
       <aside className="owner-sidebar">
-        <div className="owner-brand auth-logo">
-          <span className="auth-logo-yellow">Agri</span>
-          <span className="auth-logo-white">Connect</span>
+        <div className="owner-brand auth-logo d-inline-flex align-items-center">
+          <img src="/logo.png" alt="AgriConnect" className="brand-logo-img me-2" style={{ width: 34, height: 34 }} />
+          <span>
+            <span className="auth-logo-yellow">Agri</span>
+            <span className="auth-logo-white">Connect</span>
+          </span>
         </div>
         <div className="owner-identity">
           <span>EO</span>
@@ -162,14 +165,14 @@ export default function RentalOwnerDashboard() {
           </div>
         </div>
         {[
-          ['overview', 'Overview'],
-          ['equipment', 'My Equipment'],
-          ['add', editingId ? 'Edit Equipment' : 'Add Equipment'],
-          ['requests', 'Rental Requests']
+          ['overview', '📊 Overview'],
+          ['equipment', '🚜 My Equipment'],
+          ['add', editingId ? '✏️ Edit Equipment' : '➕ Add Equipment'],
+          ['requests', '📋 Rental Requests']
         ].map(([key, label]) => (
           <button
             key={key}
-            className={section === key ? 'active' : ''}
+            className={`owner-nav-btn ${section === key ? 'active' : ''}`}
             onClick={() => {
               if (key === 'add' && !editingId) {
                 setForm({ ...blank, ownerPhone: user?.phone || '' });
@@ -177,7 +180,12 @@ export default function RentalOwnerDashboard() {
               setSection(key);
             }}
           >
-            {label}
+            <span>{label}</span>
+            {key === 'requests' && rentals.filter((r) => r.requestStatus === 'pending').length > 0 && (
+              <span className="owner-badge-count">
+                {rentals.filter((r) => r.requestStatus === 'pending').length}
+              </span>
+            )}
           </button>
         ))}
         <button
@@ -187,7 +195,7 @@ export default function RentalOwnerDashboard() {
             navigate('/');
           }}
         >
-          Log out
+          🚪 Log out
         </button>
       </aside>
 
@@ -197,14 +205,16 @@ export default function RentalOwnerDashboard() {
             <p className="owner-eyebrow">EQUIPMENT RENTAL CENTER</p>
             <h1>{titles[section]}</h1>
           </div>
-          <button className="btn btn-success" onClick={handleAddNew}>
-            + Add new equipment
-          </button>
+          {section !== 'add' && (
+            <button className="btn btn-success d-inline-flex align-items-center gap-2" onClick={handleAddNew}>
+              <span>+</span> Add new equipment
+            </button>
+          )}
         </header>
 
         {notice && (
           <div className="alert alert-success owner-notice">
-            {notice}
+            <span>{notice}</span>
             <button className="btn-close" onClick={() => setNotice('')} />
           </div>
         )}
@@ -213,10 +223,86 @@ export default function RentalOwnerDashboard() {
           <div className="owner-panel">
             <h2>Welcome, {user?.name}</h2>
             <div className="owner-stats">
-              <Metric label="My equipment" value={equipment.length} />
-              <Metric label="Available" value={equipment.filter((item) => item.availability).length} />
-              <Metric label="Rental requests" value={rentals.length} />
+              <Metric label="My equipment" value={equipment.length} icon="🚜" />
+              <Metric label="Available for rent" value={equipment.filter((item) => item.availability).length} icon="✅" />
+              <Metric label="Rental requests" value={rentals.length} icon="📋" />
             </div>
+
+            {equipment.length > 0 && (
+              <div className="owner-quick-section mt-4">
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <h3 className="h5 mb-0 fw-bold text-dark">Recent Equipment Listings</h3>
+                  <button
+                    className="btn btn-sm btn-outline-success"
+                    onClick={() => setSection('equipment')}
+                  >
+                    View all ({equipment.length}) →
+                  </button>
+                </div>
+                <div className="owner-equipment-grid">
+                  {equipment.slice(0, 3).map((item) => (
+                    <article className="owner-equipment-card" key={item._id}>
+                      <div className="owner-equipment-image">
+                        {item.image ? (
+                          <img
+                            src={imageUrl(item.image, DEFAULT_EQUIPMENT_IMAGE)}
+                            alt={item.equipmentName}
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = DEFAULT_EQUIPMENT_IMAGE;
+                            }}
+                          />
+                        ) : (
+                          <div className="owner-equipment-placeholder">
+                            <span>🚜</span>
+                          </div>
+                        )}
+                        <div className="owner-card-badges">
+                          {item.category && (
+                            <span className="owner-cat-tag">{item.category}</span>
+                          )}
+                          <span className={`owner-status-tag ${item.availability ? 'available' : 'unavailable'}`}>
+                            <span className="status-dot"></span>
+                            {item.availability ? 'Available' : 'Unavailable'}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="owner-equipment-body">
+                        <div className="owner-card-top-info">
+                          <h3 className="owner-equipment-title" title={item.equipmentName}>
+                            {item.equipmentName}
+                          </h3>
+                          <span className="owner-location-badge">
+                            📍 {item.location || 'Tamil Nadu'}
+                          </span>
+                        </div>
+                        {item.description && (
+                          <p className="owner-equipment-desc" title={item.description}>
+                            {item.description}
+                          </p>
+                        )}
+                        <div className="owner-card-footer">
+                          <div className="owner-price-box">
+                            <span className="price-currency">₹</span>
+                            <span className="price-val">{item.rentalPrice}</span>
+                            <span className="price-period">/ hour</span>
+                          </div>
+                          <div className="owner-card-btn-group">
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-success"
+                              onClick={() => startEdit(item)}
+                            >
+                              ✏️ Edit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
@@ -232,7 +318,13 @@ export default function RentalOwnerDashboard() {
 
         {section === 'equipment' && (
           <div className="owner-panel">
-            <h2>My equipment</h2>
+            <div className="owner-section-intro mb-4">
+              <h2 className="mb-1">My Equipment Listings</h2>
+              <small className="text-muted">
+                Showing {equipment.length} machinery listing{equipment.length === 1 ? '' : 's'} in Tamil Nadu
+              </small>
+            </div>
+
             <div className="owner-equipment-grid">
               {equipment.length ? (
                 equipment.map((item) => (
@@ -240,46 +332,90 @@ export default function RentalOwnerDashboard() {
                     <div className="owner-equipment-image">
                       {item.image ? (
                         <img
-                          src={`${api.defaults.baseURL.replace('/api', '')}${item.image}`}
+                          src={imageUrl(item.image, DEFAULT_EQUIPMENT_IMAGE)}
                           alt={item.equipmentName}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = DEFAULT_EQUIPMENT_IMAGE;
+                          }}
                         />
                       ) : (
-                        '🚜'
+                        <div className="owner-equipment-placeholder">
+                          <span>🚜</span>
+                        </div>
                       )}
-                      <span className={item.availability ? 'available' : 'unavailable'}>
-                        {item.availability ? 'Available' : 'Unavailable'}
-                      </span>
+                      
+                      <div className="owner-card-badges">
+                        {item.category && (
+                          <span className="owner-cat-tag">
+                            {item.category}
+                          </span>
+                        )}
+                        <span className={`owner-status-tag ${item.availability ? 'available' : 'unavailable'}`}>
+                          <span className="status-dot"></span>
+                          {item.availability ? 'Available' : 'Unavailable'}
+                        </span>
+                      </div>
                     </div>
+
                     <div className="owner-equipment-body">
-                      <small>{item.category}</small>
-                      <h3>{item.equipmentName}</h3>
-                      <p>{item.description}</p>
-                      <p>📍 {item.location}</p>
-                      <b>
-                        Rs. {item.rentalPrice}
-                        <em>/ hour</em>
-                      </b>
-                      <div className="d-flex align-items-center gap-2 mt-3">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-success d-inline-flex align-items-center gap-1"
-                          onClick={() => startEdit(item)}
-                        >
-                          ✏️ Edit
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1"
-                          onClick={() => remove(item._id)}
-                        >
-                          🗑️ Delete
-                        </button>
+                      <div className="owner-card-top-info">
+                        <h3 className="owner-equipment-title" title={item.equipmentName}>
+                          {item.equipmentName}
+                        </h3>
+                        <span className="owner-location-badge">
+                          📍 {item.location || 'Tamil Nadu'}
+                        </span>
+                      </div>
+
+                      {item.description ? (
+                        <p className="owner-equipment-desc" title={item.description}>
+                          {item.description}
+                        </p>
+                      ) : (
+                        <p className="owner-equipment-desc text-muted fst-italic">
+                          No description provided for this machinery.
+                        </p>
+                      )}
+
+                      <div className="owner-card-footer">
+                        <div className="owner-price-box">
+                          <span className="price-currency">₹</span>
+                          <span className="price-val">{item.rentalPrice}</span>
+                          <span className="price-period">/ hour</span>
+                        </div>
+
+                        <div className="owner-card-btn-group">
+                          <button
+                            type="button"
+                            className="btn btn-sm btn-outline-success d-inline-flex align-items-center gap-1"
+                            onClick={() => startEdit(item)}
+                            title="Edit listing details"
+                          >
+                            ✏️ Edit
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1"
+                            onClick={() => remove(item._id)}
+                            title="Delete this listing"
+                          >
+                            🗑️ Delete
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </article>
                 ))
               ) : (
-                <p className="owner-empty">No equipment listings yet.</p>
+                <div className="owner-empty-box">
+                  <div className="owner-empty-icon">🚜</div>
+                  <h3>No machinery listings yet</h3>
+                  <p>Publish your tractors, power tillers, or harvesters to start receiving rental requests from farmers across Tamil Nadu.</p>
+                  <button className="btn btn-success mt-2" onClick={handleAddNew}>
+                    + Add your first equipment
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -520,9 +656,10 @@ function EquipmentForm({ form, change, publish, editingId, cancelEdit }) {
   );
 }
 
-function Metric({ label, value }) {
+function Metric({ label, value, icon }) {
   return (
     <div className="owner-metric">
+      {icon && <span className="owner-metric-icon">{icon}</span>}
       <div>
         <small>{label}</small>
         <b>{value}</b>

@@ -5,7 +5,8 @@ import Layout from './components/Layout';
 import Protected from './components/Protected';
 import ErrorBoundary from './components/ErrorBoundary';
 import { useAuth } from './context/AuthContext';
-import { About, Cart } from './pages/Pages';
+import { About } from './pages/Pages';
+import CartPage from './pages/CartPage';
 import { ProductDetailPage, EquipmentDetailPage } from './pages/DetailPages';
 import FarmerDashboardMain from './pages/FarmerDashboardMain';
 import RentalOwnerDashboard from './pages/RentalOwnerDashboard';
@@ -97,7 +98,7 @@ export default function App() {
             <Route path="/community" element={<FarmerCommunity />} />
             <Route path="/fertilizers" element={<FertilizerRoute />} />
             <Route path="/schemes" element={<SchemeRoute />} />
-            <Route path="/cart" element={<Protected roles={['buyer']}><Cart /></Protected>} />
+            <Route path="/cart" element={<Protected roles={['buyer']}><CartPage /></Protected>} />
             <Route path="/admin" element={<Protected roles={['admin']}><AdminDashboard /></Protected>} />
             <Route path="/dashboard" element={<Protected><DashboardPage /></Protected>} />
             <Route path="*" element={<Navigate to="/login" replace />} />

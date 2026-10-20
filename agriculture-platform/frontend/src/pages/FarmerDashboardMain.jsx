@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import api from '../services/api';
+import api, { imageUrl, DEFAULT_EQUIPMENT_IMAGE } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { TAMIL_NADU_DISTRICTS } from '../constants/tamilNaduLocations';
 import MyProductsSection from '../components/MyProductsSection';
@@ -328,9 +328,7 @@ export default function FarmerDashboardMain({ initialSection }) {
             role="button"
             tabIndex={0}
           >
-            <span className="topbar-brand-leaf">
-              <LeafIcon size={22} />
-            </span>
+            <img src="/logo.png" alt="AgriConnect" className="brand-logo-img me-2" style={{ width: 32, height: 32 }} />
             <span className="topbar-brand-title">
               <span className="auth-logo-yellow">Agri</span><span className="auth-logo-white">Connect</span>
             </span>
@@ -449,9 +447,7 @@ export default function FarmerDashboardMain({ initialSection }) {
             role="button"
             tabIndex={0}
           >
-            <span className="sidebar-brand-icon">
-              <LeafIcon size={22} />
-            </span>
+            <img src="/logo.png" alt="AgriConnect" className="brand-logo-img me-2" style={{ width: 32, height: 32 }} />
             <span className="sidebar-brand-title">
               <span className="auth-logo-yellow">Agri</span><span className="auth-logo-white">Connect</span>
             </span>
@@ -662,8 +658,12 @@ export default function FarmerDashboardMain({ initialSection }) {
                     <div className="farmer-equipment-img-wrap">
                       {item.image ? (
                         <img
-                          src={`${api.defaults.baseURL.replace('/api', '')}${item.image}`}
+                          src={imageUrl(item.image, DEFAULT_EQUIPMENT_IMAGE)}
                           alt={item.equipmentName}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = DEFAULT_EQUIPMENT_IMAGE;
+                          }}
                         />
                       ) : (
                         <div className="farmer-equipment-placeholder">
@@ -782,7 +782,7 @@ export default function FarmerDashboardMain({ initialSection }) {
                   }
 
                   const equipImage = item.equipment?.image
-                    ? `${api.defaults.baseURL.replace('/api', '')}${item.equipment.image}`
+                    ? imageUrl(item.equipment.image, DEFAULT_EQUIPMENT_IMAGE)
                     : null;
 
                   return (
@@ -790,7 +790,14 @@ export default function FarmerDashboardMain({ initialSection }) {
                       <div className="rental-grid-card-head">
                         <div className="rental-equipment-visual">
                           {equipImage ? (
-                            <img src={equipImage} alt={item.equipment?.equipmentName || 'Equipment'} />
+                            <img
+                              src={equipImage}
+                              alt={item.equipment?.equipmentName || 'Equipment'}
+                              onError={(e) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = DEFAULT_EQUIPMENT_IMAGE;
+                              }}
+                            />
                           ) : (
                             <span style={{ fontSize: 28 }}>🚜</span>
                           )}
@@ -1078,11 +1085,12 @@ export default function FarmerDashboardMain({ initialSection }) {
               <div className="details-modal-image-wrap" style={{ height: 200, background: '#eef6f0', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                 {bookingEquip.image ? (
                   <img
-                    src={`${api.defaults.baseURL.replace('/api', '')}${bookingEquip.image}`}
+                    src={imageUrl(bookingEquip.image, DEFAULT_EQUIPMENT_IMAGE)}
                     alt={bookingEquip.equipmentName}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => {
-                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = DEFAULT_EQUIPMENT_IMAGE;
                     }}
                   />
                 ) : (

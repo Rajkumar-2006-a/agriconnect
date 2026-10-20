@@ -30,16 +30,26 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+export const DEFAULT_EQUIPMENT_IMAGE =
+  'https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=900&q=80';
+
+export const DEFAULT_PRODUCT_IMAGE =
+  'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80';
+
 /**
  * Resolve an image URL:
  * - Full http(s) URLs (e.g., Cloudinary or Unsplash) are returned directly
  * - Local /uploads/... paths are prepended with the backend origin
+ * - Returns fallback if url is empty or invalid
  */
-export const imageUrl = (p) => {
-  if (!p) return '';
-  if (p.startsWith('http://') || p.startsWith('https://')) return p;
+export const imageUrl = (p, fallback = '') => {
+  if (!p || typeof p !== 'string') return fallback;
+  const trimmed = p.trim();
+  if (!trimmed) return fallback;
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
   const origin = baseURL.replace(/\/api\/?$/, '');
-  return `${origin}${p.startsWith('/') ? p : `/${p}`}`;
+  const cleanPath = trimmed.replace(/^[/\\]+/, '').replace(/\\/g, '/');
+  return `${origin}/${cleanPath}`;
 };
 
 export default api;

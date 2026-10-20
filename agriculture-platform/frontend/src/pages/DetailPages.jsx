@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import api, { imageUrl } from '../services/api';
+import api, { imageUrl, DEFAULT_PRODUCT_IMAGE, DEFAULT_EQUIPMENT_IMAGE } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import './DetailPages.css';
 
-const Photo = ({ src, alt }) => {
+const Photo = ({ src, alt, type = 'product' }) => {
   const [hasError, setHasError] = useState(false);
-  if (!src || hasError) {
+  const fallback = type === 'equipment' ? DEFAULT_EQUIPMENT_IMAGE : DEFAULT_PRODUCT_IMAGE;
+
+  if (!src && hasError) {
     return (
       <div className="detail-photo detail-photo-empty">
-        <span style={{ fontSize: '4.5rem' }}>🚜</span>
-        <span style={{ fontSize: '13px', color: '#64748b', fontWeight: 600 }}>Agricultural Machinery</span>
+        <span style={{ fontSize: '4.5rem' }}>{type === 'equipment' ? '🚜' : '🌾'}</span>
+        <span style={{ fontSize: '13px', color: '#64748b', fontWeight: 600 }}>
+          {type === 'equipment' ? 'Agricultural Machinery' : 'Farm Fresh Harvest'}
+        </span>
       </div>
     );
   }
+
   return (
     <img
       className="detail-photo"
-      src={src.startsWith('http') ? src : imageUrl(src)}
+      src={imageUrl(src, fallback)}
       alt={alt}
-      onError={() => setHasError(true)}
+      onError={(e) => {
+        if (!hasError) {
+          setHasError(true);
+          e.currentTarget.src = fallback;
+        }
+      }}
     />
   );
 };
@@ -58,7 +68,7 @@ export function ProductDetailPage() {
 
   return (
     <main className="detail-page-wrapper">
-      <div className="container py-4">
+      <div className="container-fluid px-3 px-md-4 py-4">
         <div className="mb-4">
           <Link className="detail-back-btn" to="/products">
             ← Back to Marketplace

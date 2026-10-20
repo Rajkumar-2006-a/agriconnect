@@ -7,7 +7,8 @@
     "start": "node server.js",
     "seed": "node utils/seedAdmin.js",
     "seed:fertilizers": "node scripts/seedFertilizers.js",
-    "seed:schemes": "node scripts/seedSchemes.js"
+    "seed:schemes": "node scripts/seedSchemes.js",
+    "seed:products": "node seed_marketplace_products.mjs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

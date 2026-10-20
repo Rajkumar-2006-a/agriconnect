@@ -101,8 +101,22 @@ export default function AgriChatbot() {
   }, [isTa]);
 
   const toggleLanguage = (lang) => {
+    const switchingToTamil = lang === 'ta';
     setLanguage(lang);
     localStorage.setItem('agribot_lang', lang);
+
+    const switchNotice = switchingToTamil
+      ? '🌐 **மொழி தமிழாக மாற்றப்பட்டுள்ளது.**\n\nவணக்கம்! நான் உங்கள் **AgriBot** — வேளாண் AI உதவியாளர்.🌾\n\nஅரசு மானியங்கள், டிராக்டர் வாடகை, விளைபொருள் விற்பனை, உரம் அல்லது பயிர் நோய் மேலாண்மை குறித்து எதையும் தமிழில் கேளுங்கள்!'
+      : '🌐 **Language switched to English.**\n\nHello! I am **AgriBot** — your AgriConnect AI farming assistant. 🌾\n\nAsk me anything about Government Subsidies, Equipment Rental, Selling Crops, Fertilizer Prices, or Plant Diseases!';
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: 'bot',
+        text: switchNotice,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }
+    ]);
   };
 
   const handleVoiceInput = () => {

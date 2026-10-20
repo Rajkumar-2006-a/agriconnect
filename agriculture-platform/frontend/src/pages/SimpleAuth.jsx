@@ -41,8 +41,11 @@ export default function SimpleAuth({ mode }) {
       {/* 1. Left Side: Yellow Logo + "Login" + 2-line statement */}
       <section className="auth-left-section">
         <div className="auth-logo-wrap">
-          <Link className="auth-logo" to="/">
-            <span className="auth-logo-yellow">Agri</span><span className="auth-logo-white">Connect</span>
+          <Link className="auth-logo d-inline-flex align-items-center" to="/">
+            <img src="/logo.png" alt="AgriConnect" className="brand-logo-img me-2" style={{ width: 42, height: 42 }} />
+            <span>
+              <span className="auth-logo-yellow">Agri</span><span className="auth-logo-white">Connect</span>
+            </span>
           </Link>
         </div>
 

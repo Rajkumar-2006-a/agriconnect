@@ -77,6 +77,19 @@ h1,
   content: '' !important;
 }
 
+.brand-logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ffffff;
+  border: 2px solid #fbbf24;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .auth-logo-yellow {
   color: #FFB928 !important;
 }
