@@ -466,8 +466,13 @@ export default function FarmerCollaborationSection({ onNavigateSection }) {
                           <div className="d-flex align-items-center gap-2">
                             <span className="collab-author-name">{authorName}</span>
                             <span className="collab-verified-pill">
-                              <CheckIcon size={11} /> Verified Farmer
+                              <CheckIcon size={11} /> Verified {item.author?.role === 'rentalOwner' ? 'Owner' : item.author?.role === 'buyer' ? 'Buyer' : 'Farmer'}
                             </span>
+                            {item.author?.location && (
+                              <span className="badge text-bg-light border text-muted" style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '12px' }}>
+                                📍 {item.author.location}
+                              </span>
+                            )}
                           </div>
                           <span className="collab-post-date">{createdDate}</span>
                         </div>
@@ -528,9 +533,16 @@ export default function FarmerCollaborationSection({ onNavigateSection }) {
                                 </div>
                                 <div className="collab-comment-content">
                                   <div className="d-flex align-items-center justify-content-between mb-1">
-                                    <b className="collab-comment-author">
-                                      {c.user?.name || 'Farmer'}
-                                    </b>
+                                    <div className="d-flex align-items-center gap-2">
+                                      <b className="collab-comment-author">
+                                        {c.user?.name || 'Farmer'}
+                                      </b>
+                                      {c.user?.location && (
+                                        <span className="badge text-bg-light border text-muted" style={{ fontSize: '10px', padding: '1px 6px', borderRadius: '10px' }}>
+                                          📍 {c.user.location}
+                                        </span>
+                                      )}
+                                    </div>
                                     <small className="text-muted" style={{ fontSize: 11 }}>
                                       {c.createdAt
                                         ? new Date(c.createdAt).toLocaleDateString('en-IN', {

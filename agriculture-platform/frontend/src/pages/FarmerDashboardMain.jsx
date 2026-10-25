@@ -409,6 +409,11 @@ export default function FarmerDashboardMain({ initialSection }) {
             <div className="topbar-user-profile-badge">
               <UserIcon size={16} />
               <span>Hi, {user?.name || 'Farmer'}</span>
+              {user?.location && (
+                <span className="badge text-bg-light border text-success fw-normal" style={{ fontSize: '11px', padding: '1px 6px', borderRadius: '10px' }}>
+                  📍 {user.location}
+                </span>
+              )}
               <span style={{ fontSize: 10, opacity: 0.65 }}>▼</span>
             </div>
 
@@ -556,7 +561,12 @@ export default function FarmerDashboardMain({ initialSection }) {
                 <div className="order-row" key={order._id}>
                   <div>
                     <b>Order #{order._id.slice(-6)}</b>
-                    <small>Buyer: {order.buyer?.name} · Phone: {order.buyer?.phone || 'Not provided'}</small>
+                    <small>
+                      Buyer: {order.buyer?.name} · Phone: {order.buyer?.phone || 'Not provided'}
+                      {order.buyer?.location && (
+                        <span className="ms-1 text-success fw-semibold">· 📍 {order.buyer.location}</span>
+                      )}
+                    </small>
                   </div>
                   {order.orderStatus === 'pending' ? (
                     <div>

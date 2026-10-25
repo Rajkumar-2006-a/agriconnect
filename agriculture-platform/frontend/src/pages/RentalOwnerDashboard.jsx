@@ -162,6 +162,9 @@ export default function RentalOwnerDashboard() {
           <div>
             <b>{user?.name}</b>
             <small>Equipment owner</small>
+            {user?.location && (
+              <small className="text-white-50 d-block" style={{ fontSize: '11px' }}>📍 {user.location}</small>
+            )}
           </div>
         </div>
         {[
@@ -431,6 +434,9 @@ export default function RentalOwnerDashboard() {
                     <b>{item.equipment?.equipmentName}</b>
                     <small>
                       Farmer: {item.farmer?.name} · {item.farmer?.phone || 'Phone not provided'}
+                      {item.farmer?.location && (
+                        <span className="ms-1 text-success fw-semibold">· 📍 {item.farmer.location}</span>
+                      )}
                     </small>
                     <small>Farm area: {item.acres} acres</small>
                   </div>

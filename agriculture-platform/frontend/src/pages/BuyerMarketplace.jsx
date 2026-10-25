@@ -5,17 +5,133 @@ import { useAuth } from '../context/AuthContext';
 import './BuyerMarketplace.css';
 
 const CATEGORIES = [
-  { id: 'all', label: 'All Produce', icon: '🌟' },
-  { id: 'Vegetables', label: 'Vegetables', icon: '🥦' },
-  { id: 'Fruits', label: 'Fruits', icon: '🍎' },
-  { id: 'Grains & Cereals', label: 'Grains & Cereals', icon: '🌾' },
-  { id: 'Spices', label: 'Spices', icon: '🌿' },
-  { id: 'Other', label: 'Other', icon: '📦' }
+  { id: 'all', labelEn: 'All Produce', labelTa: 'அனைத்தும்', icon: '🌟' },
+  { id: 'Vegetables', labelEn: 'Vegetables', labelTa: 'காய்கறிகள்', icon: '🥦' },
+  { id: 'Fruits', labelEn: 'Fruits', labelTa: 'பழங்கள்', icon: '🍎' },
+  { id: 'Grains & Cereals', labelEn: 'Grains & Cereals', labelTa: 'தானியங்கள்', icon: '🌾' },
+  { id: 'Spices', labelEn: 'Spices', labelTa: 'மசாலாப் பொருட்கள்', icon: '🌿' },
+  { id: 'Other', labelEn: 'Other', labelTa: 'மற்றவை', icon: '📦' }
 ];
+
+// Agricultural Vocabulary Dictionary for instant fallback
+const TAMIL_NAME_MAP = {
+  'tomato': 'தக்காளி',
+  'tomatoes': 'தக்காளி',
+  'country tomatoes': 'நாட்டு தக்காளி',
+  'potato': 'உருளைக்கிழங்கு',
+  'potatoes': 'உருளைக்கிழங்கு',
+  'onion': 'வெங்காயம்',
+  'shallot': 'சின்ன வெங்காயம்',
+  'shallots': 'சின்ன வெங்காயம்',
+  'sambar onion': 'சின்ன வெங்காயம்',
+  'garlic': 'பூண்டு',
+  'ginger': 'இஞ்சி',
+  'chilli': 'மிளகாய்',
+  'green chilli': 'பச்சை மிளகாய்',
+  'carrot': 'கேரட்',
+  'carrots': 'கேரட்',
+  'beetroot': 'பீட்ரூட்',
+  'radish': 'முள்ளங்கி',
+  'cabbage': 'முட்டைக்கோஸ்',
+  'cauliflower': 'காலிஃபிளவர்',
+  'brinjal': 'கத்தரிக்காய்',
+  'eggplant': 'கத்தரிக்காய்',
+  'okra': 'வெண்டைக்காய்',
+  'lady finger': 'வெண்டைக்காய்',
+  'drumstick': 'முருங்கைக்காய்',
+  'moringa': 'முருங்கைக்காய்',
+  'bitter gourd': 'பாகற்காய்',
+  'bottle gourd': 'சுரைக்காய்',
+  'pumpkin': 'பரங்கிக்காய்',
+  'cucumber': 'வெள்ளரிக்காய்',
+  'beans': 'பீன்ஸ்',
+  'peas': 'பட்டாணி',
+  'spinach': 'கீரை',
+  'mushroom': 'காளான்',
+  'banana': 'வாழைப்பழம்',
+  'plantain': 'வாழைக்காய்',
+  'mango': 'மாம்பழம்',
+  'mangoes': 'மாம்பழம்',
+  'apple': 'ஆப்பிள்',
+  'orange': 'ஆரஞ்சு',
+  'lemon': 'எலுமிச்சை',
+  'pomegranate': 'மாதுளை',
+  'guava': 'கொய்யா',
+  'papaya': 'பப்பாளி',
+  'watermelon': 'தர்பூசணி',
+  'grapes': 'திராட்சை',
+  'coconut': 'தேங்காய்',
+  'rice': 'அரிசி',
+  'ponni rice': 'பொன்னி அரிசி',
+  'wheat': 'கோதுமை',
+  'ragi': 'கேழ்வரகு',
+  'millet': 'சிறுநவதானியங்கள்',
+  'corn': 'மக்காச்சோளம்',
+  'toor dal': 'துவரம் பருப்பு',
+  'urad dal': 'உளுத்தம் பருப்பு',
+  'moong dal': 'பாசிப்பருப்பு',
+  'chana dal': 'கடலைப் பருப்பு',
+  'groundnut': 'நிலக்கடலை',
+  'peanut': 'நிலக்கடலை',
+  'turmeric': 'மஞ்சள்',
+  'pepper': 'மிளகு',
+  'black pepper': 'கருப்பு மிளகு',
+  'coriander': 'கொத்தமல்லி',
+  'mint': 'புதினா',
+  'curry leaves': 'கறிவேப்பிலை',
+  'mustard': 'கடுகு',
+  'cumin': 'சீரகம்',
+  'sugarcane': 'கரும்பு',
+  'cotton': 'பருத்தி',
+  'honey': 'தேன்'
+};
+
+// Strips any bracketed text completely e.g. "Carrots (கேரட்)" -> "Carrots"
+const cleanName = (str) => {
+  if (!str) return '';
+  return str.replace(/\s*\([^)]*\)/g, '').trim();
+};
+
+const getDisplayName = (product, isTa) => {
+  if (!product) return '';
+  if (isTa) {
+    // 1. Direct from MongoDB (stored from farmer input or auto-translated by backend)
+    if (product.productNameTa && product.productNameTa.trim()) {
+      return cleanName(product.productNameTa);
+    }
+
+    // 2. If farmer typed product name directly in Tamil script
+    if (/[\u0B80-\u0BFF]/.test(product.productName)) {
+      return cleanName(product.productName);
+    }
+
+    // 3. If there were old bracketed translations
+    const match = product.productName?.match(/\(([^)]+)\)/);
+    if (match && /[\u0B80-\u0BFF]/.test(match[1])) return match[1].trim();
+
+    // 4. Substring & word match in comprehensive agricultural dictionary
+    const cleanLower = cleanName(product.productName).toLowerCase();
+    if (TAMIL_NAME_MAP[cleanLower]) return TAMIL_NAME_MAP[cleanLower];
+    for (const [en, ta] of Object.entries(TAMIL_NAME_MAP)) {
+      if (cleanLower.includes(en)) return ta;
+    }
+  }
+
+  // English: clean name without brackets
+  return cleanName(product.productName);
+};
 
 export default function BuyerMarketplace() {
   const { user } = useAuth();
   const navigate = useNavigate();
+
+  const [language, setLanguage] = useState(() => localStorage.getItem('marketplace_lang') || 'en');
+  const isTa = language === 'ta';
+
+  const toggleLanguage = (lang) => {
+    setLanguage(lang);
+    localStorage.setItem('marketplace_lang', lang);
+  };
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -58,7 +174,7 @@ export default function BuyerMarketplace() {
     loadProducts();
   }, []);
 
-  // Filter & Sort Logic
+  // Filter & Sort Logic (supports both English and Tamil search)
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
@@ -71,16 +187,31 @@ export default function BuyerMarketplace() {
       );
     }
 
-    // Search query filter
+    // Search query filter (matches English, Tamil, descriptions, categories)
     if (search.trim()) {
       const query = search.toLowerCase().trim();
-      result = result.filter(
-        (p) =>
-          (p.productName && p.productName.toLowerCase().includes(query)) ||
-          (p.description && p.description.toLowerCase().includes(query)) ||
-          (p.category && p.category.toLowerCase().includes(query)) ||
-          (p.farmer?.name && p.farmer.name.toLowerCase().includes(query))
-      );
+      result = result.filter((p) => {
+        const enClean = cleanName(p.productName).toLowerCase();
+        const taClean = (p.productNameTa || getDisplayName(p, true) || '').toLowerCase();
+        const rawName = (p.productName || '').toLowerCase();
+        const desc = (p.description || '').toLowerCase();
+        const cat = (p.category || '').toLowerCase();
+        const catObj = CATEGORIES.find((c) => c.id.toLowerCase() === cat);
+        const catTa = catObj?.labelTa.toLowerCase() || '';
+        const farmerName = (p.farmer?.name || '').toLowerCase();
+        const farmerLocation = (p.farmer?.location || '').toLowerCase();
+
+        return (
+          enClean.includes(query) ||
+          taClean.includes(query) ||
+          rawName.includes(query) ||
+          desc.includes(query) ||
+          cat.includes(query) ||
+          catTa.includes(query) ||
+          farmerName.includes(query) ||
+          farmerLocation.includes(query)
+        );
+      });
     }
 
     // Sorting
@@ -130,9 +261,14 @@ export default function BuyerMarketplace() {
         });
       }, 1500);
 
-      showToast(`🛒 "${product.productName}" added to your cart!`);
+      const displayName = getDisplayName(product, isTa);
+      showToast(
+        isTa
+          ? `🛒 "${displayName}" கூடையில் சேர்க்கப்பட்டது!`
+          : `🛒 "${displayName}" added to your cart!`
+      );
     } catch {
-      showToast('Could not add to cart.', 'error');
+      showToast(isTa ? 'கூடையில் சேர்க்க முடியவில்லை.' : 'Could not add to cart.', 'error');
     }
   };
 
@@ -179,23 +315,55 @@ export default function BuyerMarketplace() {
   return (
     <div className="buyer-marketplace-page">
       <div className="container-fluid px-3 px-md-4 pt-3">
-        {/* Sleek Page Header */}
-        <div className="d-flex flex-wrap justify-content-between align-items-center mb-3">
+        {/* Sleek Page Header with Language Switch */}
+        <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
           <div>
-            <h1 className="h4 fw-bold text-dark mb-1">🛒 Fresh Agricultural Marketplace</h1>
+            <h1 className="h4 fw-bold text-dark mb-1">
+              {isTa ? '🛒 உழவர் சந்தை' : '🛒 Fresh Agricultural Marketplace'}
+            </h1>
+            <p className="text-muted small mb-0">
+              {isTa
+                ? 'நேரடியாக விவசாயிகளிடமிருந்து புதிய விளைபொருட்கள்'
+                : 'Direct farm-fresh produce directly from verified farmers'}
+            </p>
+          </div>
+
+          {/* Language Switch Option */}
+          <div className="buyer-lang-box">
+            <span className="buyer-lang-title">🌐 {isTa ? 'மொழி' : 'Language'}:</span>
+            <div className="lang-switch-box">
+              <button
+                type="button"
+                className={`lang-switch-btn ${language === 'en' ? 'active' : ''}`}
+                onClick={() => toggleLanguage('en')}
+              >
+                English
+              </button>
+              <button
+                type="button"
+                className={`lang-switch-btn ${language === 'ta' ? 'active' : ''}`}
+                onClick={() => toggleLanguage('ta')}
+              >
+                தமிழ்
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Filter & Search Toolbar */}
         <div className="buyer-controls-panel">
-          <div className="row g-3 align-items-center mb-3">
+          <div className="row g-3 align-items-center mb-2">
             <div className="col-lg-8 col-md-7">
               <div className="buyer-search-input-wrap">
                 <span className="buyer-search-icon">🔍</span>
                 <input
                   type="text"
                   className="buyer-search-input"
-                  placeholder="Search organic rice, country tomatoes, coconuts, turmeric..."
+                  placeholder={
+                    isTa
+                      ? 'தேடுங்கள்: தக்காளி, அரிசி, கேரட், மஞ்சள், மாம்பழம்...'
+                      : 'Search organic rice, country tomatoes, carrots, turmeric...'
+                  }
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -203,7 +371,7 @@ export default function BuyerMarketplace() {
                   <button
                     className="buyer-search-clear"
                     onClick={() => setSearch('')}
-                    title="Clear search"
+                    title={isTa ? 'அழி' : 'Clear search'}
                   >
                     ✕
                   </button>
@@ -212,18 +380,38 @@ export default function BuyerMarketplace() {
             </div>
 
             <div className="col-lg-4 col-md-5 d-flex justify-content-md-end align-items-center gap-2">
-              <label className="text-muted small fw-bold text-nowrap mb-0">Sort By:</label>
+              <label className="text-muted small fw-bold text-nowrap mb-0">
+                {isTa ? 'வரிசைப்படுத்து:' : 'Sort By:'}
+              </label>
               <select
                 className="form-select form-select-sm buyer-sort-select"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
               >
-                <option value="featured">✨ Recommended</option>
-                <option value="price-low">💰 Price: Low to High</option>
-                <option value="price-high">💎 Price: High to Low</option>
-                <option value="stock">📦 Highest Stock Available</option>
+                <option value="featured">{isTa ? '✨ பரிந்துரைக்கப்பட்டவை' : '✨ Recommended'}</option>
+                <option value="price-low">{isTa ? '💰 விலை: குறைந்தது முதல்' : '💰 Price: Low to High'}</option>
+                <option value="price-high">{isTa ? '💎 விலை: அதிகம் முதல்' : '💎 Price: High to Low'}</option>
+                <option value="stock">{isTa ? '📦 அதிக கையிருப்பு' : '📦 Highest Stock Available'}</option>
               </select>
             </div>
+          </div>
+
+          {/* Quick Search Suggestion Chips */}
+          <div className="buyer-search-suggestions">
+            <span className="buyer-suggestion-label">{isTa ? 'விரைவு தேடல்:' : 'Popular:'}</span>
+            {(isTa
+              ? ['தக்காளி', 'அரிசி', 'கேரட்', 'மஞ்சள்', 'மாம்பழம்', 'வெங்காயம்', 'மிளகு']
+              : ['Tomatoes', 'Rice', 'Carrots', 'Turmeric', 'Mangoes', 'Shallots', 'Black Pepper']
+            ).map((chip) => (
+              <button
+                key={chip}
+                type="button"
+                className="buyer-suggestion-chip"
+                onClick={() => setSearch(chip)}
+              >
+                {chip}
+              </button>
+            ))}
           </div>
 
           {/* Category Filter Pills */}
@@ -239,7 +427,7 @@ export default function BuyerMarketplace() {
                   onClick={() => setSelectedCategory(cat.id)}
                 >
                   <span>{cat.icon}</span>
-                  <span>{cat.label}</span>
+                  <span>{isTa ? cat.labelTa : cat.labelEn}</span>
                   <span className="buyer-cat-count">{count}</span>
                 </button>
               );
@@ -250,9 +438,19 @@ export default function BuyerMarketplace() {
         {/* Results Meta Info */}
         <div className="buyer-results-row">
           <span className="buyer-results-count">
-            Showing <b>{filteredProducts.length}</b> fresh farm items
-            {selectedCategory !== 'all' && ` in "${selectedCategory}"`}
-            {search && ` matching "${search}"`}
+            {isTa ? (
+              <>
+                காண்பிக்கப்படுகிறது: <b>{filteredProducts.length}</b> விளைபொருட்கள்
+                {selectedCategory !== 'all' && ` ("${CATEGORIES.find((c) => c.id === selectedCategory)?.labelTa || selectedCategory}")`}
+                {search && ` ("${search}" உடன் பொருந்தும்)`}
+              </>
+            ) : (
+              <>
+                Showing <b>{filteredProducts.length}</b> fresh farm items
+                {selectedCategory !== 'all' && ` in "${selectedCategory}"`}
+                {search && ` matching "${search}"`}
+              </>
+            )}
           </span>
 
           {(selectedCategory !== 'all' || search) && (
@@ -263,7 +461,7 @@ export default function BuyerMarketplace() {
                 setSearch('');
               }}
             >
-              ↺ Reset Filters
+              {isTa ? '↺ மீட்டமை' : '↺ Reset Filters'}
             </button>
           )}
         </div>
@@ -272,7 +470,9 @@ export default function BuyerMarketplace() {
         {loading && (
           <div className="text-center py-5">
             <div className="spinner-border text-success" role="status" />
-            <p className="mt-3 text-muted fw-semibold">Gathering farm-fresh produce...</p>
+            <p className="mt-3 text-muted fw-semibold">
+              {isTa ? 'விளைபொருட்கள் ஏற்றப்படுகின்றன...' : 'Gathering farm-fresh produce...'}
+            </p>
           </div>
         )}
 
@@ -281,7 +481,7 @@ export default function BuyerMarketplace() {
           <div className="alert alert-danger d-flex justify-content-between align-items-center my-3">
             <span>⚠️ {error}</span>
             <button className="btn btn-sm btn-outline-danger" onClick={loadProducts}>
-              Retry
+              {isTa ? 'மீண்டும் முயற்சிக்கவும்' : 'Retry'}
             </button>
           </div>
         )}
@@ -292,6 +492,7 @@ export default function BuyerMarketplace() {
             {filteredProducts.map((product) => {
               const isAdded = addedIds.has(product._id);
               const isLowStock = product.quantity <= 15;
+              const displayName = getDisplayName(product, isTa);
 
               return (
                 <article className="buyer-product-card" key={product._id}>
@@ -299,7 +500,7 @@ export default function BuyerMarketplace() {
                   <div className="buyer-card-img-wrap">
                     <img
                       src={imageUrl(product.image, DEFAULT_PRODUCT_IMAGE)}
-                      alt={product.productName}
+                      alt={displayName}
                       className="buyer-card-img"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
@@ -307,14 +508,16 @@ export default function BuyerMarketplace() {
                       }}
                     />
                     <span className="buyer-card-cat-pill">
-                      {product.category || 'Produce'}
+                      {isTa
+                        ? CATEGORIES.find((c) => c.id.toLowerCase() === (product.category || '').toLowerCase())?.labelTa || product.category || 'பொருட்கள்'
+                        : product.category || 'Produce'}
                     </span>
                     <span
                       className={`buyer-card-stock-pill ${isLowStock ? 'low-stock' : ''}`}
                     >
                       {product.quantity > 0
-                        ? `${product.quantity} units left`
-                        : 'Out of Stock'}
+                        ? `${product.quantity} ${isTa ? 'கையிருப்பு' : 'units left'}`
+                        : (isTa ? 'கையிருப்பு இல்லை' : 'Out of Stock')}
                     </span>
                   </div>
 
@@ -323,31 +526,36 @@ export default function BuyerMarketplace() {
                     {/* Farmer Attribution */}
                     <div className="buyer-farmer-chip">
                       <span className="farmer-icon">🧑‍🌾</span>
-                      <span>By {product.farmer?.name || 'Verified Farmer'}</span>
+                      <span>{isTa ? 'விவசாயி:' : 'By'} {product.farmer?.name || (isTa ? 'சரிபார்க்கப்பட்ட விவசாயி' : 'Verified Farmer')}</span>
+                      {product.farmer?.location && (
+                        <span className="badge text-bg-light border text-success fw-semibold ms-1" style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '12px' }}>
+                          📍 {product.farmer.location}
+                        </span>
+                      )}
                       {product.farmer?.phone && (
                         <a
                           href={`tel:${product.farmer.phone}`}
                           className="buyer-farmer-phone-link"
-                          title="Call Farmer"
+                          title={isTa ? 'விவசாயியை அழைக்கவும்' : 'Call Farmer'}
                           onClick={(e) => e.stopPropagation()}
                         >
-                          📞 Call
+                          📞 {isTa ? 'அழைக்க' : 'Call'}
                         </a>
                       )}
                     </div>
 
-                    <h3 className="buyer-card-title" title={product.productName}>
-                      {product.productName}
+                    <h3 className="buyer-card-title" title={displayName}>
+                      {displayName}
                     </h3>
 
                     <p className="buyer-card-desc" title={product.description}>
-                      {product.description || 'Direct farm harvest packed fresh for delivery.'}
+                      {product.description || (isTa ? 'பண்ணையிலிருந்து நேரடியாக புதிய அறுவடை.' : 'Direct farm harvest packed fresh for delivery.')}
                     </p>
 
                     {/* Price Row */}
                     <div className="buyer-card-price-row">
                       <span className="buyer-card-price">₹{product.price}</span>
-                      <span className="buyer-card-unit">/ kg or unit</span>
+                      <span className="buyer-card-unit">/ {isTa ? 'கிலோ அல்லது அலகு' : 'kg or unit'}</span>
                     </div>
 
                     {/* Action Buttons */}
@@ -358,7 +566,9 @@ export default function BuyerMarketplace() {
                         onClick={() => handleAddToCart(product)}
                         disabled={product.quantity === 0}
                       >
-                        {isAdded ? '✓ Added' : '🛒 Add'}
+                        {isAdded
+                          ? (isTa ? '✓ சேர்க்கப்பட்டது' : '✓ Added')
+                          : (isTa ? '🛒 சேர்' : '🛒 Add')}
                       </button>
 
                       <button
@@ -367,13 +577,13 @@ export default function BuyerMarketplace() {
                         onClick={() => handleOpenBuyModal(product)}
                         disabled={product.quantity === 0}
                       >
-                        ⚡ Buy Now
+                        {isTa ? '⚡ உடனே வாங்கு' : '⚡ Buy Now'}
                       </button>
 
                       <Link
                         to={`/products/${product._id}`}
                         className="buyer-btn-details"
-                        title="View Full Details"
+                        title={isTa ? 'முழு விவரங்கள்' : 'View Full Details'}
                       >
                         👁️
                       </Link>
@@ -435,19 +645,21 @@ export default function BuyerMarketplace() {
                 <div className="buyer-modal-product-summary">
                   <img
                     src={imageUrl(buyModalItem.image, DEFAULT_PRODUCT_IMAGE)}
-                    alt={buyModalItem.productName}
+                    alt={getDisplayName(buyModalItem, isTa)}
                     className="buyer-modal-thumb"
                   />
                   <div className="buyer-modal-info">
-                    <h4>{buyModalItem.productName}</h4>
-                    <p className="text-success fw-bold">₹{buyModalItem.price} / unit</p>
-                    <p>🧑‍🌾 Farmer: {buyModalItem.farmer?.name || 'Local Farmer'}</p>
+                    <h4>{getDisplayName(buyModalItem, isTa)}</h4>
+                    <p className="text-success fw-bold">₹{buyModalItem.price} / {isTa ? 'அலகு' : 'unit'}</p>
+                    <p>🧑‍🌾 {isTa ? 'விவசாயி' : 'Farmer'}: {buyModalItem.farmer?.name || (isTa ? 'உள்ளூர் விவசாயி' : 'Local Farmer')}</p>
                   </div>
                 </div>
 
                 <form onSubmit={handleConfirmDirectBuy}>
                   <label className="form-label fw-bold text-dark small mb-1">
-                    Select Quantity (Max: {buyModalItem.quantity} units)
+                    {isTa
+                      ? `அளவைத் தேர்ந்தெடுக்கவும் (அதிகபட்சம்: ${buyModalItem.quantity})`
+                      : `Select Quantity (Max: ${buyModalItem.quantity} units)`}
                   </label>
                   <div className="buyer-qty-controls">
                     <button
@@ -481,11 +693,15 @@ export default function BuyerMarketplace() {
                     >
                       +
                     </button>
-                    <span className="text-muted small fw-semibold">units / kg</span>
+                    <span className="text-muted small fw-semibold">
+                      {isTa ? 'அளவுகள் / கிலோ' : 'units / kg'}
+                    </span>
                   </div>
 
                   <div className="buyer-modal-total-row">
-                    <span className="buyer-modal-total-label">Total Payable:</span>
+                    <span className="buyer-modal-total-label">
+                      {isTa ? 'மொத்த தொகை:' : 'Total Payable:'}
+                    </span>
                     <span className="buyer-modal-total-val">
                       ₹{buyModalItem.price * buyQuantity}
                     </span>
@@ -497,14 +713,16 @@ export default function BuyerMarketplace() {
                       className="btn btn-outline-secondary w-50 py-2 fw-semibold rounded-pill"
                       onClick={() => setBuyModalItem(null)}
                     >
-                      Cancel
+                      {isTa ? 'ரத்து' : 'Cancel'}
                     </button>
                     <button
                       type="submit"
                       className="btn btn-success w-50 py-2 fw-bold rounded-pill"
                       disabled={isSubmittingOrder}
                     >
-                      {isSubmittingOrder ? 'Placing Order...' : 'Confirm Order →'}
+                      {isSubmittingOrder
+                        ? (isTa ? 'ஆர்டர் செய்யப்படுகிறது...' : 'Placing Order...')
+                        : (isTa ? 'ஆர்டரை உறுதிசெய் →' : 'Confirm Order →')}
                     </button>
                   </div>
                 </form>

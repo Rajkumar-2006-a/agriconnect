@@ -12,13 +12,41 @@ if (!farmer) {
   process.exit(1);
 }
 
+// Remove tender coconut completely
+await Product.deleteMany({
+  $or: [
+    { productName: { $regex: /tender coconut|இளநீர்/i } },
+    { description: { $regex: /tender coconut/i } }
+  ]
+});
+
+// Remove any old product names that had brackets or place names
+await Product.deleteMany({
+  productName: {
+    $regex: /\(|\)/
+  }
+});
+
 // Reset any existing sold test product if present
-await Product.updateMany({ productName: 'Tomato' }, { $set: { isSold: false, price: 40, quantity: 150, description: 'Fresh, juicy, pesticide-free country tomatoes directly harvested from our farm in Salem.' } });
+await Product.updateMany(
+  { productName: 'Tomato' },
+  {
+    $set: {
+      productName: 'Country Tomatoes',
+      productNameTa: 'நாட்டு தக்காளி',
+      isSold: false,
+      price: 40,
+      quantity: 150,
+      description: 'Fresh, juicy, pesticide-free country tomatoes directly harvested from our farm.'
+    }
+  }
+);
 
 const sampleProducts = [
   {
-    productName: 'Fresh Country Tomatoes (நாட்டு தக்காளி)',
-    description: 'Farm-fresh, naturally ripened country tomatoes harvested daily from Salem farms. Rich in flavor and vitamins.',
+    productName: 'Fresh Country Tomatoes',
+    productNameTa: 'நாட்டு தக்காளி',
+    description: 'Farm-fresh, naturally ripened country tomatoes harvested daily from local farms. Rich in flavor and vitamins.',
     category: 'Vegetables',
     price: 40,
     quantity: 180,
@@ -27,8 +55,9 @@ const sampleProducts = [
     farmer: farmer._id
   },
   {
-    productName: 'Organic Ponni Raw Rice (பொன்னி அரிசி)',
-    description: 'Pesticide-free organic Ponni rice, traditional Cauvery delta harvest from Thanjavur. Aromatic and high-fiber.',
+    productName: 'Organic Ponni Raw Rice',
+    productNameTa: 'பொன்னி அரிசி',
+    description: 'Pesticide-free organic Ponni rice, traditional river delta harvest. Aromatic and high-fiber.',
     category: 'Grains & Cereals',
     price: 68,
     quantity: 450,
@@ -37,18 +66,9 @@ const sampleProducts = [
     farmer: farmer._id
   },
   {
-    productName: 'Pollachi Tender Coconuts (இளநீர்)',
-    description: 'Fresh and sweet Pollachi tender coconuts with refreshing, nutrient-rich coconut water and tender pulp.',
-    category: 'Fruits',
-    price: 45,
-    quantity: 220,
-    isSold: false,
-    image: 'https://images.unsplash.com/photo-1525385133512-2f3bdd039054?auto=format&fit=crop&w=800&q=80',
-    farmer: farmer._id
-  },
-  {
-    productName: 'Ooty Fresh Red Carrots (ஊட்டி கேரட்)',
-    description: 'Crisp, naturally sweet hill carrots grown in the cool climate of Nilgiris. Washed and packed directly on farm.',
+    productName: 'Fresh Red Carrots',
+    productNameTa: 'கேரட்',
+    description: 'Crisp, naturally sweet hill carrots grown in cool climate. Washed and packed directly on farm.',
     category: 'Vegetables',
     price: 55,
     quantity: 130,
@@ -57,8 +77,9 @@ const sampleProducts = [
     farmer: farmer._id
   },
   {
-    productName: 'Erode Pure Organic Turmeric (ஈரோடு மஞ்சள்)',
-    description: 'High-curcumin farm-processed pure organic turmeric fingers and powder from Erode. Traditional sunlight curing.',
+    productName: 'Pure Organic Turmeric',
+    productNameTa: 'மஞ்சள்',
+    description: 'High-curcumin farm-processed pure organic turmeric fingers and powder. Traditional sunlight curing.',
     category: 'Spices',
     price: 160,
     quantity: 90,
@@ -67,8 +88,9 @@ const sampleProducts = [
     farmer: farmer._id
   },
   {
-    productName: 'Salem Malgova Mangoes (சேலம் மாம்பழம்)',
-    description: 'Naturally carbide-free tree-ripened juicy Salem Malgova mangoes. Rich golden pulp with heavenly fragrance.',
+    productName: 'Malgova Mangoes',
+    productNameTa: 'மாம்பழம்',
+    description: 'Naturally carbide-free tree-ripened juicy Malgova mangoes. Rich golden pulp with heavenly fragrance.',
     category: 'Fruits',
     price: 120,
     quantity: 95,
@@ -77,8 +99,9 @@ const sampleProducts = [
     farmer: farmer._id
   },
   {
-    productName: 'Small Shallots / Sambar Onion (சின்ன வெங்காயம்)',
-    description: 'High-pungency Perambalur small onions (shallots), cleaned, cured and sun-dried for long kitchen shelf life.',
+    productName: 'Small Shallots / Sambar Onion',
+    productNameTa: 'சின்ன வெங்காயம்',
+    description: 'High-pungency small onions (shallots), cleaned, cured and sun-dried for long kitchen shelf life.',
     category: 'Vegetables',
     price: 70,
     quantity: 300,
@@ -87,8 +110,9 @@ const sampleProducts = [
     farmer: farmer._id
   },
   {
-    productName: 'Kolli Hills Black Pepper (கருப்பு மிளகு)',
-    description: 'Bold-grade mountain shade dried whole black pepper from Kolli Hills tribal farmers cooperative.',
+    productName: 'Black Pepper',
+    productNameTa: 'கருப்பு மிளகு',
+    description: 'Bold-grade mountain shade dried whole black pepper from tribal farmers cooperative.',
     category: 'Spices',
     price: 480,
     quantity: 60,
@@ -101,16 +125,17 @@ const sampleProducts = [
 for (const p of sampleProducts) {
   const existing = await Product.findOne({ productName: p.productName });
   if (existing) {
+    existing.productNameTa = p.productNameTa;
     existing.isSold = false;
     existing.price = p.price;
     existing.quantity = p.quantity;
     existing.image = p.image;
     existing.description = p.description;
     await existing.save();
-    console.log(`Updated product: ${p.productName}`);
+    console.log(`Updated product: ${p.productName} (Ta: ${p.productNameTa})`);
   } else {
     await Product.create(p);
-    console.log(`Created product: ${p.productName}`);
+    console.log(`Created product: ${p.productName} (Ta: ${p.productNameTa})`);
   }
 }
 

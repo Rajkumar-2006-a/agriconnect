@@ -38,6 +38,7 @@ const CATEGORIES = [
 
 const emptyFormData = {
   productName: '',
+  productNameTa: '',
   category: 'Fruits',
   description: '',
   price: '',
@@ -228,6 +229,7 @@ export default function MyProductsSection({
     setEditingId(prod._id);
     setFormData({
       productName: prod.productName || '',
+      productNameTa: prod.productNameTa || '',
       category: prod.category || 'Fruits',
       description: prod.description || '',
       price: prod.price !== undefined ? String(prod.price) : '',
@@ -313,6 +315,9 @@ export default function MyProductsSection({
     try {
       const payload = new FormData();
       payload.append('productName', formData.productName.trim());
+      if (formData.productNameTa?.trim()) {
+        payload.append('productNameTa', formData.productNameTa.trim());
+      }
       payload.append('category', formData.category);
       payload.append('description', formData.description.trim());
       payload.append('price', formData.price);
@@ -935,7 +940,7 @@ export default function MyProductsSection({
                 <input
                   type="text"
                   className="form-input-text"
-                  placeholder="Enter product name (e.g. Transformer)"
+                  placeholder="Enter product name (e.g. Fresh Tomatoes)"
                   value={formData.productName}
                   onChange={(e) => setFormData({ ...formData, productName: e.target.value })}
                   required
@@ -943,6 +948,22 @@ export default function MyProductsSection({
                 {formErrors.productName && (
                   <p className="form-field-error">{formErrors.productName}</p>
                 )}
+              </div>
+
+              <div className="form-field-group">
+                <label className="form-field-label">
+                  Tamil Name (தமிழ் பெயர்) <span className="text-muted small fw-normal">(Optional / விருப்பத்தேர்வு)</span>
+                </label>
+                <input
+                  type="text"
+                  className="form-input-text"
+                  placeholder="உதா: நாட்டு தக்காளி (Leave empty to auto-translate)"
+                  value={formData.productNameTa}
+                  onChange={(e) => setFormData({ ...formData, productNameTa: e.target.value })}
+                />
+                <span className="small text-muted">
+                  💡 Automatic: If left blank, AgriConnect will auto-translate it to Tamil for buyers!
+                </span>
               </div>
 
               <div className="form-field-group">

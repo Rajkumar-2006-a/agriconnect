@@ -14,14 +14,15 @@ const safe = (u) => ({
   email: u.email,
   phone: u.phone,
   role: u.role,
+  location: u.location || '',
   profileImage: u.profileImage,
 });
 
 export const register = async (req, res, next) => {
   try {
-    const { name, email, phone, password, role } = req.body;
-    if (!name || !email || !phone || !password) {
-      return res.status(400).json({ message: 'Name, email, phone number and password are required' });
+    const { name, email, phone, password, role, location } = req.body;
+    if (!name || !email || !phone || !password || !location) {
+      return res.status(400).json({ message: 'Name, email, phone number, location and password are required' });
     }
     if (!['farmer', 'buyer', 'rentalOwner'].includes(role)) {
       return res.status(400).json({ message: 'Choose a valid account role' });
@@ -29,7 +30,7 @@ export const register = async (req, res, next) => {
     if (await User.findOne({ email })) {
       return res.status(409).json({ message: 'Email is already registered' });
     }
-    const user = await User.create({ name, email, phone, password, role });
+    const user = await User.create({ name, email, phone, password, role, location });
     res.status(201).json({ token: token(user._id), user: safe(user) });
   } catch (e) {
     next(e);
@@ -52,9 +53,10 @@ export const me = async (req, res) => res.json({ user: safe(req.user) });
 
 export const updateProfile = async (req, res, next) => {
   try {
-    const { name, phone } = req.body;
+    const { name, phone, location } = req.body;
     if (name) req.user.name = name;
     if (phone) req.user.phone = phone;
+    if (location) req.user.location = location;
     if (req.file) {
       req.user.profileImage =
         req.file.secure_url ||

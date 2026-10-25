@@ -37,7 +37,7 @@ export const users = async (req, res, next) => {
 
 export const products = async (req, res, next) => {
   try {
-    const list = await Product.find().populate('farmer', 'name phone').sort('-createdAt');
+    const list = await Product.find().populate('farmer', 'name phone location').sort('-createdAt');
     res.json(list);
   } catch (e) {
     next(e);

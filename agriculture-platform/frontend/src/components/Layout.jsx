@@ -95,6 +95,11 @@ export default function Layout({ children }) {
                       {user.name ? user.name.charAt(0).toUpperCase() : 'B'}
                     </span>
                     <span className="user-name-text">{user.name}</span>
+                    {user.location && (
+                      <span className="badge text-bg-light border text-success fw-normal me-1" style={{ fontSize: '11px', padding: '1px 6px', borderRadius: '10px' }}>
+                        📍 {user.location}
+                      </span>
+                    )}
                     <span className="user-role-badge">Buyer</span>
                   </div>
                   <button className="btn btn-sm btn-logout-nav ms-lg-2" onClick={leave}>
@@ -112,6 +117,11 @@ export default function Layout({ children }) {
                       {user.name ? user.name.charAt(0).toUpperCase() : 'O'}
                     </span>
                     <span className="user-name-text">{user.name}</span>
+                    {user.location && (
+                      <span className="badge text-bg-light border text-success fw-normal me-1" style={{ fontSize: '11px', padding: '1px 6px', borderRadius: '10px' }}>
+                        📍 {user.location}
+                      </span>
+                    )}
                     <span className="user-role-badge">Rental Owner</span>
                   </div>
                   <button className="btn btn-sm btn-logout-nav ms-lg-2" onClick={leave}>
@@ -130,6 +140,11 @@ export default function Layout({ children }) {
                   <div className="nav-user-pill">
                     <span className="user-avatar-circle">A</span>
                     <span className="user-name-text">{user.name}</span>
+                    {user.location && (
+                      <span className="badge text-bg-light border text-success fw-normal me-1" style={{ fontSize: '11px', padding: '1px 6px', borderRadius: '10px' }}>
+                        📍 {user.location}
+                      </span>
+                    )}
                     <span className="user-role-badge">Admin</span>
                   </div>
                   <button className="btn btn-sm btn-logout-nav ms-lg-2" onClick={leave}>
@@ -147,6 +162,11 @@ export default function Layout({ children }) {
                       {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
                     </span>
                     <span className="user-name-text">{user.name}</span>
+                    {user.location && (
+                      <span className="badge text-bg-light border text-success fw-normal me-1" style={{ fontSize: '11px', padding: '1px 6px', borderRadius: '10px' }}>
+                        📍 {user.location}
+                      </span>
+                    )}
                   </div>
                   <button className="btn btn-sm btn-logout-nav ms-lg-2" onClick={leave}>
                     Log out

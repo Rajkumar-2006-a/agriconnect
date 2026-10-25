@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { TAMIL_NADU_DISTRICTS } from '../constants/tamilNaduLocations';
 import './SimpleAuth.css';
 
 const roles = [
@@ -13,7 +14,8 @@ const roles = [
 export default function SimpleAuth({ mode }) {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: '', email: '', phone: '', password: '', role: 'farmer' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', location: '', password: '', role: 'farmer' });
+  const [customLocation, setCustomLocation] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -26,7 +28,18 @@ export default function SimpleAuth({ mode }) {
     setError('');
     setLoading(true);
     try {
-      const response = await api.post(`/auth/${mode}`, form);
+      const payload = { ...form };
+      if (registering) {
+        if (form.location === 'Other') {
+          payload.location = customLocation.trim() || 'Other';
+        }
+        if (!payload.location) {
+          setError('Please select or enter your location / district');
+          setLoading(false);
+          return;
+        }
+      }
+      const response = await api.post(`/auth/${mode}`, payload);
       login(response.data);
       navigate(response.data.user.role === 'buyer' ? '/products' : '/dashboard');
     } catch (err) {
@@ -121,6 +134,35 @@ export default function SimpleAuth({ mode }) {
                     value={form.phone}
                     onChange={set('phone')}
                   />
+                </div>
+
+                <div className="mb-3">
+                  <label className="auth-form-label">
+                    District / Location {form.role === 'farmer' ? '(Farm location)' : form.role === 'rentalOwner' ? '(Machinery base)' : '(Delivery district)'}
+                  </label>
+                  <select
+                    className="auth-input-control"
+                    required
+                    value={form.location}
+                    onChange={set('location')}
+                  >
+                    <option value="" disabled>Select your Tamil Nadu district</option>
+                    {TAMIL_NADU_DISTRICTS.map((dist) => (
+                      <option key={dist} value={dist}>
+                        📍 {dist}
+                      </option>
+                    ))}
+                    <option value="Other">Other (Custom Location)</option>
+                  </select>
+                  {form.location === 'Other' && (
+                    <input
+                      className="auth-input-control mt-2"
+                      required
+                      placeholder="Type your town or district"
+                      value={customLocation}
+                      onChange={(e) => setCustomLocation(e.target.value)}
+                    />
+                  )}
                 </div>
               </>
             )}

@@ -11,6 +11,7 @@
     "seed:products": "node seed_marketplace_products.mjs"
   },
   "dependencies": {
+    "@emailjs/nodejs": "^5.0.2",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.11.0",
     "cors": "^2.8.5",

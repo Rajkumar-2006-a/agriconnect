@@ -112,6 +112,11 @@ export function ProductDetailPage() {
                       <h4 className="detail-contact-name">{product.farmer?.name || 'Verified Farmer'}</h4>
                     </div>
                   </div>
+                  {product.farmer?.location && (
+                    <div className="mb-2 text-success fw-semibold small">
+                      📍 Farm Location: {product.farmer.location}
+                    </div>
+                  )}
                   {product.farmer?.phone && (
                     <a className="detail-phone-link" href={`tel:${product.farmer.phone}`}>
                       📞 Contact: {product.farmer.phone}
@@ -243,6 +248,11 @@ export function EquipmentDetailPage() {
                       <h4 className="detail-contact-name">{equipment.owner?.name || 'Verified Owner'}</h4>
                     </div>
                   </div>
+                  {equipment.owner?.location && (
+                    <div className="mb-2 text-success fw-semibold small">
+                      📍 Owner Base: {equipment.owner.location}
+                    </div>
+                  )}
                   {equipment.owner?.phone ? (
                     <a className="detail-phone-link" href={`tel:${equipment.owner.phone}`}>
                       📞 Call Owner: {equipment.owner.phone}

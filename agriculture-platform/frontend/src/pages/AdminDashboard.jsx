@@ -144,6 +144,7 @@ export default function AdminDashboard() {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <th>District / Location</th>
                     <th>Role</th>
                     <th />
                   </tr>
@@ -151,9 +152,16 @@ export default function AdminDashboard() {
                 <tbody>
                   {users.map((item) => (
                     <tr key={item._id}>
-                      <td>{item.name}</td>
+                      <td><b>{item.name}</b></td>
                       <td>{item.email}</td>
                       <td>{item.phone}</td>
+                      <td>
+                        {item.location ? (
+                          <span className="badge text-bg-light border text-dark">📍 {item.location}</span>
+                        ) : (
+                          <span className="text-muted small">—</span>
+                        )}
+                      </td>
                       <td><span className="badge text-bg-secondary">{item.role}</span></td>
                       <td>
                         {item.role !== 'admin' && (
@@ -183,7 +191,7 @@ export default function AdminDashboard() {
                 <thead>
                   <tr>
                     <th>Product</th>
-                    <th>Farmer</th>
+                    <th>Farmer &amp; Location</th>
                     <th>Price</th>
                     <th>Status</th>
                     <th />
@@ -192,8 +200,13 @@ export default function AdminDashboard() {
                 <tbody>
                   {products.map((item) => (
                     <tr key={item._id}>
-                      <td>{item.productName}</td>
-                      <td>{item.farmer?.name}</td>
+                      <td><b>{item.productName}</b></td>
+                      <td>
+                        <div>{item.farmer?.name || 'Unknown Farmer'}</div>
+                        {item.farmer?.location && (
+                          <small className="text-muted d-block">📍 {item.farmer.location}</small>
+                        )}
+                      </td>
                       <td>Rs. {item.price}</td>
                       <td>{item.isSold ? 'Sold' : 'Available'}</td>
                       <td>
