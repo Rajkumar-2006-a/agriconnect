@@ -55,15 +55,20 @@ export function ProductDetailPage() {
   }
 
   const addToCart = () => {
+    if (user && user.role !== 'buyer') {
+      alert('Only Buyer accounts can purchase produce. Please log in with a Buyer account.');
+      return;
+    }
     const cart = JSON.parse(localStorage.cart || '[]');
     const existing = cart.find((item) => item._id === product._id);
     if (existing) {
-      existing.cartQuantity += 1;
+      existing.cartQuantity = (existing.cartQuantity || 50) + 10;
     } else {
-      cart.push({ ...product, cartQuantity: 1 });
+      cart.push({ ...product, cartQuantity: 50 });
     }
     localStorage.cart = JSON.stringify(cart);
-    alert('Added to cart');
+    window.dispatchEvent(new Event('cartUpdated'));
+    alert(`Added 50 kg of "${product.productName}" to your cart (Minimum order is 50 kg)`);
   };
 
   return (

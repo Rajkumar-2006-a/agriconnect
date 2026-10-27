@@ -296,8 +296,8 @@ export default function MyProductsSection({
     if (formData.price === '' || isNaN(formData.price) || Number(formData.price) < 0) {
       errs.price = 'Enter a valid price (>= 0).';
     }
-    if (formData.quantity === '' || isNaN(formData.quantity) || Number(formData.quantity) < 0) {
-      errs.quantity = 'Enter a valid quantity (>= 0).';
+    if (formData.quantity === '' || isNaN(formData.quantity) || Number(formData.quantity) < 50) {
+      errs.quantity = 'Minimum listing quantity must be at least 50 kg.';
     }
     if (!formData.sellerPhone.trim()) {
       errs.sellerPhone = 'Seller phone number is required.';
@@ -1020,13 +1020,14 @@ export default function MyProductsSection({
 
                 <div>
                   <label className="form-field-label">
-                    Quantity<span className="label-req">*</span>
+                    Quantity (kg)<span className="label-req">*</span>
+                    <span className="text-muted fw-normal ms-1" style={{ fontSize: '11px' }}>(Min 50 kg)</span>
                   </label>
                   <input
                     type="number"
-                    min="0"
+                    min="50"
                     className="form-input-text"
-                    placeholder="Enter quantity"
+                    placeholder="Min 50 kg"
                     value={formData.quantity}
                     onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
                     required

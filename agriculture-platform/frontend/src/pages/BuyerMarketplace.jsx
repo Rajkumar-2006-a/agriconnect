@@ -146,7 +146,7 @@ export default function BuyerMarketplace() {
 
   // Quick Direct Buy Modal State
   const [buyModalItem, setBuyModalItem] = useState(null);
-  const [buyQuantity, setBuyQuantity] = useState(1);
+  const [buyQuantity, setBuyQuantity] = useState(50);
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
 
   const showToast = (message, type = 'success') => {
@@ -253,9 +253,9 @@ export default function BuyerMarketplace() {
       const item = cart.find((cartItem) => cartItem._id === product._id);
 
       if (item) {
-        item.cartQuantity = (item.cartQuantity || 1) + 1;
+        item.cartQuantity = (item.cartQuantity || 50) + 10;
       } else {
-        cart.push({ ...product, cartQuantity: 1 });
+        cart.push({ ...product, cartQuantity: 50 });
       }
 
       localStorage.setItem('cart', JSON.stringify(cart));
@@ -294,13 +294,18 @@ export default function BuyerMarketplace() {
       return;
     }
     setBuyModalItem(product);
-    setBuyQuantity(1);
+    setBuyQuantity(50);
   };
 
   // Confirm Direct Buy
   const handleConfirmDirectBuy = async (e) => {
     e.preventDefault();
     if (!buyModalItem) return;
+
+    if (buyQuantity < 50) {
+      showToast('Minimum order quantity is 50 kg.', 'error');
+      return;
+    }
 
     setIsSubmittingOrder(true);
     try {
@@ -677,28 +682,29 @@ export default function BuyerMarketplace() {
                 <form onSubmit={handleConfirmDirectBuy}>
                   <label className="form-label fw-bold text-dark small mb-1">
                     {isTa
-                      ? `அளவைத் தேர்ந்தெடுக்கவும் (அதிகபட்சம்: ${buyModalItem.quantity})`
-                      : `Select Quantity (Max: ${buyModalItem.quantity} units)`}
+                      ? `அளவைத் தேர்ந்தெடுக்கவும் (குறைந்தபட்சம்: 50 kg, அதிகபட்சம்: ${buyModalItem.quantity} kg)`
+                      : `Select Quantity (Min: 50 kg, Max: ${buyModalItem.quantity} kg)`}
                   </label>
                   <div className="buyer-qty-controls">
                     <button
                       type="button"
                       className="buyer-qty-btn"
-                      onClick={() => setBuyQuantity((q) => Math.max(1, q - 1))}
+                      onClick={() => setBuyQuantity((q) => Math.max(50, q - 5))}
                     >
                       −
                     </button>
                     <input
                       type="number"
                       className="buyer-qty-input"
-                      min="1"
+                      min="50"
+                      step="5"
                       max={buyModalItem.quantity}
                       value={buyQuantity}
                       onChange={(e) =>
                         setBuyQuantity(
                           Math.max(
-                            1,
-                            Math.min(buyModalItem.quantity, Number(e.target.value) || 1)
+                            50,
+                            Math.min(buyModalItem.quantity, Number(e.target.value) || 50)
                           )
                         )
                       }
@@ -707,13 +713,13 @@ export default function BuyerMarketplace() {
                       type="button"
                       className="buyer-qty-btn"
                       onClick={() =>
-                        setBuyQuantity((q) => Math.min(buyModalItem.quantity, q + 1))
+                        setBuyQuantity((q) => Math.min(buyModalItem.quantity, q + 5))
                       }
                     >
                       +
                     </button>
                     <span className="text-muted small fw-semibold">
-                      {isTa ? 'அளவுகள் / கிலோ' : 'units / kg'}
+                      {isTa ? 'கிலோ (kg)' : 'kg'}
                     </span>
                   </div>
 

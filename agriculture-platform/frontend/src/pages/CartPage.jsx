@@ -13,7 +13,11 @@ export default function CartPage() {
   const loadCart = () => {
     try {
       const items = JSON.parse(localStorage.getItem('cart') || '[]');
-      setCart(items);
+      const sanitized = items.map((item) => ({
+        ...item,
+        cartQuantity: Math.max(50, item.cartQuantity || 50)
+      }));
+      setCart(sanitized);
     } catch {
       setCart([]);
     }
@@ -31,11 +35,13 @@ export default function CartPage() {
 
   const updateQuantity = (index, delta) => {
     const updated = [...cart];
-    const current = updated[index].cartQuantity || 1;
-    const nextVal = current + delta;
+    const current = updated[index].cartQuantity || 50;
+    const nextVal = current + (delta * 5);
 
-    if (nextVal <= 0) {
-      removeFromCart(index);
+    if (nextVal < 50) {
+      if (window.confirm('Minimum order is 50 kg. Do you want to remove this item from your cart?')) {
+        removeFromCart(index);
+      }
     } else {
       updated[index].cartQuantity = nextVal;
       saveCart(updated);
@@ -52,7 +58,7 @@ export default function CartPage() {
   };
 
   const totalAmount = cart.reduce(
-    (sum, item) => sum + (item.price || 0) * (item.cartQuantity || 1),
+    (sum, item) => sum + (item.price || 0) * (item.cartQuantity || 50),
     0
   );
 
@@ -61,12 +67,20 @@ export default function CartPage() {
     setIsSubmitting(true);
     setError('');
 
+    for (const item of cart) {
+      if ((item.cartQuantity || 0) < 50) {
+        setError(`Minimum order quantity is 50 kg for ${item.productName}`);
+        setIsSubmitting(false);
+        return;
+      }
+    }
+
     try {
       await api.post('/orders', {
         products: cart.map((item) => ({
           product: item._id,
           productName: item.productName,
-          quantity: item.cartQuantity || 1,
+          quantity: item.cartQuantity || 50,
           price: item.price
         })),
         totalAmount
@@ -135,7 +149,7 @@ export default function CartPage() {
                       <p className="cart-item-farmer">
                         🧑‍🌾 {item.farmer?.name || 'Local Farmer'}
                       </p>
-                      <div className="cart-item-unit-price">₹{item.price} per unit</div>
+                      <div className="cart-item-unit-price">₹{item.price} / kg (Min 50 kg)</div>
                     </div>
 
                     <div className="cart-qty-wrapper">
@@ -146,7 +160,7 @@ export default function CartPage() {
                       >
                         −
                       </button>
-                      <span className="cart-qty-val">{item.cartQuantity || 1}</span>
+                      <span className="cart-qty-val">{item.cartQuantity || 50} kg</span>
                       <button
                         type="button"
                         className="cart-qty-btn"
@@ -157,7 +171,7 @@ export default function CartPage() {
                     </div>
 
                     <div className="cart-item-subtotal">
-                      ₹{(item.price || 0) * (item.cartQuantity || 1)}
+                      ₹{(item.price || 0) * (item.cartQuantity || 50)}
                     </div>
 
                     <button
