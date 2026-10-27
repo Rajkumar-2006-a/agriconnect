@@ -12,7 +12,7 @@ export default function BuyerOrders() {
     setLoading(true);
     setError('');
     try {
-      const response = await api.get('/orders');
+      const response = await api.get('/orders', { params: { asBuyer: 'true' } });
       setOrders(response.data || []);
     } catch (requestError) {
       setError(

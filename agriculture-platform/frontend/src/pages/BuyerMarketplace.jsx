@@ -238,6 +238,16 @@ export default function BuyerMarketplace() {
 
   // Add to cart with feedback & notification
   const handleAddToCart = (product) => {
+    if (user && user.role !== 'buyer') {
+      showToast(
+        isTa
+          ? 'வாங்குபவர்கள் (Buyers) மட்டுமே விளைபொருட்களை வாங்க முடியும். தயவுசெய்து வாங்குபவர் கணக்கில் உள்நுழையவும்.'
+          : 'Only Buyer accounts can purchase produce. Please log in with a Buyer account.',
+        'error'
+      );
+      return;
+    }
+
     try {
       const cart = JSON.parse(localStorage.getItem('cart') || '[]');
       const item = cart.find((cartItem) => cartItem._id === product._id);
@@ -274,6 +284,15 @@ export default function BuyerMarketplace() {
 
   // Open Direct Buy Modal
   const handleOpenBuyModal = (product) => {
+    if (user && user.role !== 'buyer') {
+      showToast(
+        isTa
+          ? 'வாங்குபவர்கள் (Buyers) மட்டுமே ஆர்டர் செய்ய முடியும். தயவுசெய்து வாங்குபவர் கணக்கில் உள்நுழையவும்.'
+          : 'Only Buyer accounts can place orders. Please log in with a Buyer account.',
+        'error'
+      );
+      return;
+    }
     setBuyModalItem(product);
     setBuyQuantity(1);
   };

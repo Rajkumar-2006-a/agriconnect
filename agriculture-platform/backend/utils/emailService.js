@@ -9,8 +9,8 @@ dotenv.config();
  * @param {Object} params.farmer - Farmer User document (name, phone)
  */
 export async function sendOrderConfirmedEmail({ buyer, order, farmer }) {
-  const serviceId = process.env.EMAILJS_SERVICE_ID || 'service_agriconnect';
-  const templateId = process.env.EMAILJS_TEMPLATE_ID || 'template_order_confirmed';
+  const serviceId = process.env.EMAILJS_SERVICE_ID || 'service_tv19xmt';
+  const templateId = process.env.EMAILJS_TEMPLATE_ID || 'template_zsj3qqw';
   const publicKey = process.env.EMAILJS_PUBLIC_KEY || 'i-VNI8CT5Q83Z-oOg';
   const privateKey = process.env.EMAILJS_PRIVATE_KEY || 'U6y1swFyZn97Q-sXjuQIj';
 
@@ -35,11 +35,33 @@ export async function sendOrderConfirmedEmail({ buyer, order, farmer }) {
     year: 'numeric'
   });
 
+  let clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+  if (!clientUrl.startsWith('http://') && !clientUrl.startsWith('https://')) {
+    clientUrl = `https://${clientUrl}`;
+  }
+
   const templateParams = {
-    to_name: buyer.name || 'Valued Customer',
+    // Recipient email aliases (ensures whatever variable is in the EmailJS "To Email" field receives buyer's email)
     to_email: buyer.email,
+    toEmail: buyer.email,
+    email: buyer.email,
+    buyer_email: buyer.email,
+    buyerEmail: buyer.email,
+    user_email: buyer.email,
+    userEmail: buyer.email,
+    recipient_email: buyer.email,
+    recipientEmail: buyer.email,
+    reply_to: farmer?.email || buyer.email,
+
+    // Recipient name aliases
+    to_name: buyer.name || 'Valued Customer',
+    toName: buyer.name || 'Valued Customer',
+    buyer_name: buyer.name || 'Valued Customer',
+    buyerName: buyer.name || 'Valued Customer',
     customer_name: buyer.name || 'Valued Customer',
     customerName: buyer.name || 'Valued Customer',
+
+    // Order and produce details
     order_id: formattedOrderId,
     orderId: formattedOrderId,
     order_date: formattedDate,
@@ -53,23 +75,23 @@ export async function sendOrderConfirmedEmail({ buyer, order, farmer }) {
     items_summary: itemsSummary,
     total_amount: order.totalAmount || 0,
     totalAmount: order.totalAmount || 0,
-    dashboard_url: `${process.env.CLIENT_URL || 'http://localhost:5173'}/buyer/orders`,
-    dashboardUrl: `${process.env.CLIENT_URL || 'http://localhost:5173'}/buyer/orders`
+    dashboard_url: `${clientUrl}/buyer/orders`,
+    dashboardUrl: `${clientUrl}/buyer/orders`
   };
 
   try {
-    const origin = process.env.CLIENT_URL || 'http://localhost:5173';
     const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Origin': origin,
+        'Origin': clientUrl,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
       },
       body: JSON.stringify({
         service_id: serviceId,
         template_id: templateId,
         user_id: publicKey,
+        accessToken: privateKey,
         template_params: templateParams
       })
     });
