@@ -28,6 +28,23 @@ export async function sendOrderConfirmedEmail({ buyer, order, farmer }) {
   const itemsSummary = itemsList.join('\n');
 
   const firstProduct = order.products?.[0];
+  const qty = Number(firstProduct?.quantity) || 1;
+  const unitPrice = Number(firstProduct?.price) || 0;
+  const itemTotal = unitPrice * qty;
+
+  // Extract and optimize product image for email clients
+  let rawImage = firstProduct?.product?.image || firstProduct?.image || '';
+  let productImage = '';
+  if (rawImage && rawImage.startsWith('http')) {
+    if (rawImage.includes('cloudinary.com') && rawImage.endsWith('.webp')) {
+      productImage = rawImage.replace(/\.webp($|\?)/i, '.jpg$1');
+    } else {
+      productImage = rawImage;
+    }
+  } else {
+    productImage = 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=200&h=200&fit=crop&q=80';
+  }
+
   const formattedOrderId = String(order._id || '').slice(-6).toUpperCase();
   const formattedDate = new Date(order.createdAt || Date.now()).toLocaleDateString('en-IN', {
     day: 'numeric',
@@ -61,7 +78,7 @@ export async function sendOrderConfirmedEmail({ buyer, order, farmer }) {
     customer_name: buyer.name || 'Valued Customer',
     customerName: buyer.name || 'Valued Customer',
 
-    // Order and produce details
+    // Order Meta
     order_id: formattedOrderId,
     orderId: formattedOrderId,
     order_date: formattedDate,
@@ -70,13 +87,24 @@ export async function sendOrderConfirmedEmail({ buyer, order, farmer }) {
     farmerName: farmer?.name || 'Local Farmer',
     farmer_phone: farmer?.phone || 'Available in dashboard',
     farmerPhone: farmer?.phone || 'Available in dashboard',
-    product_name: firstProduct ? `${firstProduct.productName} (x${firstProduct.quantity})` : 'Farm Fresh Harvest',
-    productName: firstProduct ? `${firstProduct.productName} (x${firstProduct.quantity})` : 'Farm Fresh Harvest',
+
+    // Item details matching EmailJS template placeholders exactly:
+    productName: firstProduct?.productName || 'Farm Fresh Produce',
+    product_name: firstProduct?.productName || 'Farm Fresh Produce',
+    productImage: productImage,
+    product_image: productImage,
+    image: productImage,
+    quantity: qty,
+    unitPrice: unitPrice,
+    unit_price: unitPrice,
+    price: unitPrice,
+    itemTotal: itemTotal,
+    item_total: itemTotal,
     items_summary: itemsSummary,
-    total_amount: order.totalAmount || 0,
-    totalAmount: order.totalAmount || 0,
-    dashboard_url: `${clientUrl}/buyer/orders`,
-    dashboardUrl: `${clientUrl}/buyer/orders`
+    totalAmount: order.totalAmount || itemTotal,
+    total_amount: order.totalAmount || itemTotal,
+    dashboardUrl: `${clientUrl}/purchases`,
+    dashboard_url: `${clientUrl}/purchases`
   };
 
   try {
