@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
+import BinaryOrbits from '../components/BinaryOrbits';
 import './BuyerOrders.css';
 
 export default function BuyerOrders() {
@@ -47,9 +48,12 @@ export default function BuyerOrders() {
     }
   };
 
+  const isAuthError = error && (error.toLowerCase().includes('token') || error.toLowerCase().includes('authorized') || error.toLowerCase().includes('auth'));
+
   return (
     <div className="buyer-orders-page py-4">
-      <div className="container-fluid px-3 px-md-4">
+      <BinaryOrbits className="binary-orbits-fixed-bg" />
+      <div className="container-fluid px-3 px-md-4 buyer-orders-content">
         {/* Page Header */}
         <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
           <div>
@@ -72,12 +76,32 @@ export default function BuyerOrders() {
         )}
 
         {/* Error Alert */}
-        {error && (
-          <div className="alert alert-danger d-flex justify-content-between align-items-center mb-4">
-            <span>⚠️ {error}</span>
-            <button className="btn btn-sm btn-outline-danger" onClick={loadOrders}>
-              Retry
-            </button>
+        {error && !loading && (
+          <div className="buyer-order-alert-card mb-4">
+            <div className="d-flex align-items-center gap-3">
+              <span style={{ fontSize: '24px' }}>{isAuthError ? '🔒' : '⚠️'}</span>
+              <div>
+                <h5 className="mb-1 text-white fw-bold">
+                  {isAuthError ? 'Session Expired' : 'Unable to Load Purchases'}
+                </h5>
+                <p className="mb-0 text-silver small">
+                  {isAuthError
+                    ? 'Your login session has expired. Please log in again to securely view your purchases.'
+                    : error}
+                </p>
+              </div>
+            </div>
+            <div className="d-flex gap-2 mt-3 mt-md-0">
+              {isAuthError ? (
+                <Link to="/login" className="btn btn-sm btn-success px-4 fw-bold">
+                  Log in again
+                </Link>
+              ) : (
+                <button className="btn btn-sm btn-outline-success px-3" onClick={loadOrders}>
+                  Retry
+                </button>
+              )}
+            </div>
           </div>
         )}
 

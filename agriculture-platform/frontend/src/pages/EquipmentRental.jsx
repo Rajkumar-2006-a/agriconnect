@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { TAMIL_NADU_DISTRICTS } from '../constants/tamilNaduLocations';
+import BinaryOrbits from '../components/BinaryOrbits';
 import './EquipmentRental.css';
 
 const fallbackImage = 'https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=900&q=80';
@@ -66,6 +67,7 @@ export default function EquipmentRental() {
 
   return (
     <main className="equipment-rental-page">
+      <BinaryOrbits className="binary-orbits-fixed-bg" />
       <section className="equipment-intro">
         <div className="container">
           <span>AGRICULTURAL EQUIPMENT</span>

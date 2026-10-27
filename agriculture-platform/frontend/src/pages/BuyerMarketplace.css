@@ -4,7 +4,19 @@
 
 .buyer-marketplace-page {
   padding-bottom: 3.5rem;
-  background-color: #f7faf8;
+  background-color: transparent !important;
+  min-height: 100vh;
+  position: relative;
+  color: #F1F5F2;
+}
+
+.buyer-marketplace-page h1 {
+  color: #F1F5F2 !important;
+  text-shadow: none;
+}
+
+.buyer-marketplace-page p.text-muted {
+  color: #B7C8BE !important;
 }
 
 /* Language Switcher */
@@ -12,24 +24,25 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
   padding: 4px 10px;
   border-radius: 24px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
 .buyer-lang-title {
   font-size: 13px;
   font-weight: 700;
-  color: #334155;
+  color: #24352B;
 }
 
 .lang-switch-box {
   display: flex;
   align-items: center;
   background: #f1f5f9;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #D1DDD5;
   border-radius: 20px;
   padding: 2px;
   gap: 2px;
@@ -41,20 +54,20 @@
   padding: 0.35rem 0.85rem;
   font-size: 0.82rem;
   font-weight: 600;
-  color: #475569;
+  color: #5A6E63;
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .lang-switch-btn:hover {
-  color: #0f172a;
+  color: #24352B;
 }
 
 .lang-switch-btn.active {
-  background: #166534;
+  background: #168348;
   color: #ffffff;
-  box-shadow: 0 1px 4px rgba(22, 101, 52, 0.25);
+  box-shadow: 0 1px 4px rgba(22, 131, 72, 0.25);
 }
 
 /* Quick Search Suggestions */
@@ -69,14 +82,14 @@
 
 .buyer-suggestion-label {
   font-size: 12px;
-  color: #64748b;
+  color: #B7C8BE;
   font-weight: 600;
 }
 
 .buyer-suggestion-chip {
-  border: 1px solid #e2e8f0;
-  background: #f8fafc;
-  color: #334155;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.15);
+  color: #F1F5F2;
   font-size: 12px;
   font-weight: 500;
   padding: 3px 10px;
@@ -86,18 +99,20 @@
 }
 
 .buyer-suggestion-chip:hover {
-  background: #dcfce7;
-  color: #166534;
-  border-color: #86efac;
+  background: #168348;
+  color: #FFFFFF;
+  border-color: #168348;
 }
 
 /* Filter & Search Bar */
 .buyer-controls-panel {
-  background: #ffffff;
+  background: rgba(18, 52, 36, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 16px;
   padding: 1.25rem 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(167, 243, 208, 0.22);
   margin-bottom: 1.75rem;
 }
 
@@ -111,25 +126,26 @@
   position: absolute;
   left: 14px;
   font-size: 16px;
-  color: #94a3b8;
+  color: #8CA094;
   pointer-events: none;
 }
 
 .buyer-search-input {
   width: 100%;
   padding: 0.65rem 2.6rem 0.65rem 2.6rem;
-  border: 1.5px solid #e2e8f0;
+  border: 1.5px solid rgba(167, 243, 208, 0.25);
   border-radius: 12px;
   font-size: 14.5px;
   transition: all 0.2s ease;
-  background-color: #f8fafc;
+  background-color: rgba(10, 30, 20, 0.75);
+  color: #F1F5F2;
 }
 
 .buyer-search-input:focus {
   outline: none;
-  background-color: #ffffff;
-  border-color: #10b981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  background-color: rgba(10, 30, 20, 0.95);
+  border-color: #168348;
+  box-shadow: 0 0 0 3px rgba(167, 243, 208, 0.3);
 }
 
 .buyer-search-clear {
@@ -137,14 +153,14 @@
   right: 12px;
   background: transparent;
   border: none;
-  color: #94a3b8;
+  color: #B7C8BE;
   font-size: 14px;
   cursor: pointer;
   padding: 4px;
 }
 
 .buyer-search-clear:hover {
-  color: #334155;
+  color: #FFFFFF;
 }
 
 /* Category Filter Pills */
@@ -157,9 +173,9 @@
 }
 
 .buyer-cat-btn {
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  color: #334155;
+  background: rgba(10, 32, 22, 0.7);
+  border: 1px solid rgba(167, 243, 208, 0.2);
+  color: #B7C8BE;
   font-size: 13.5px;
   font-weight: 600;
   padding: 6px 14px;
@@ -173,19 +189,20 @@
 }
 
 .buyer-cat-btn:hover {
-  background: #e2e8f0;
-  color: #0f172a;
+  background: rgba(22, 131, 72, 0.3);
+  color: #FFFFFF;
+  border-color: #A7F3D0;
 }
 
 .buyer-cat-btn.active {
-  background: #166534;
+  background: #168348;
   color: #ffffff;
-  border-color: #166534;
-  box-shadow: 0 3px 10px rgba(22, 101, 52, 0.25);
+  border-color: #A7F3D0;
+  box-shadow: 0 3px 12px rgba(22, 131, 72, 0.45);
 }
 
 .buyer-cat-count {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.25);
   padding: 1px 6px;
   border-radius: 10px;
   font-size: 11px;
@@ -239,21 +256,24 @@
 }
 
 .buyer-product-card {
-  background: #ffffff;
+  background: #1B221E;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border-radius: 16px;
-  border: 1px solid #e6ede8;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.18);
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
   position: relative;
+  color: #F1F5F2;
 }
 
 .buyer-product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 25px rgba(18, 64, 36, 0.09);
-  border-color: #86efac;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 /* Card Visual */
@@ -344,7 +364,7 @@
 .buyer-card-title {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #FFFFFF;
   margin-bottom: 6px;
   line-height: 1.35;
   display: -webkit-box;
@@ -355,7 +375,7 @@
 
 .buyer-card-desc {
   font-size: 13px;
-  color: #64748b;
+  color: #B7C8BE;
   margin-bottom: 12px;
   line-height: 1.45;
   display: -webkit-box;
@@ -371,19 +391,19 @@
   align-items: baseline;
   gap: 4px;
   margin-bottom: 14px;
-  padding-top: 8px;
-  border-top: 1px dashed #e2e8f0;
+  padding-top: 10px;
+  border-top: 1px solid rgba(167, 243, 208, 0.15);
 }
 
 .buyer-card-price {
   font-size: 1.45rem;
   font-weight: 800;
-  color: #166534;
+  color: #A7F3D0;
 }
 
 .buyer-card-unit {
   font-size: 12.5px;
-  color: #64748b;
+  color: #B7C8BE;
   font-weight: 600;
 }
 
@@ -395,9 +415,9 @@
 
 .buyer-btn-cart {
   flex: 1;
-  background: #f0fdf4;
-  color: #166534;
-  border: 1.5px solid #bbf7d0;
+  background: rgba(0, 220, 130, 0.12);
+  color: #00DC82;
+  border: 1.5px solid rgba(0, 220, 130, 0.35);
   font-size: 13.5px;
   font-weight: 700;
   padding: 8px 10px;
@@ -411,20 +431,20 @@
 }
 
 .buyer-btn-cart:hover {
-  background: #166534;
-  color: #ffffff;
-  border-color: #166534;
+  background: #00DC82;
+  color: #090C0B;
+  border-color: #00DC82;
 }
 
 .buyer-btn-cart.added {
-  background: #22c55e;
+  background: #059669;
   color: #ffffff;
-  border-color: #22c55e;
+  border-color: #059669;
 }
 
 .buyer-btn-buy {
-  background: #15803d;
-  color: #ffffff;
+  background: #00DC82;
+  color: #090C0B;
   border: none;
   font-size: 13.5px;
   font-weight: 700;
@@ -439,8 +459,9 @@
 }
 
 .buyer-btn-buy:hover {
-  background: #166534;
-  box-shadow: 0 4px 12px rgba(22, 101, 52, 0.25);
+  background: #059669;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .buyer-btn-details {
@@ -648,11 +669,12 @@
 }
 
 .buyer-toast {
-  background: #0f172a;
+  background: #1B221E;
   color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   padding: 12px 18px;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.16);
   display: flex;
   align-items: center;
   gap: 10px;

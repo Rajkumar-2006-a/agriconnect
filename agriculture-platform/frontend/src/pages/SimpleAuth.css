@@ -24,30 +24,12 @@
   justify-content: space-between;
   padding: 30px clamp(20px, 4vw, 50px);
   gap: 24px;
-  background: 
-    linear-gradient(135deg, rgba(14, 56, 34, 0.78) 0%, rgba(8, 35, 21, 0.88) 100%),
-    url('../assets/farm-bg.jpg') center/cover no-repeat;
-  background-attachment: fixed;
+  background: #0A0A0A;
   overflow-x: hidden;
   overflow-y: auto;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #173B2A;
   position: relative;
-}
-
-/* Subtle atmospheric overlay glow */
-.auth-page::before {
-  content: '';
-  position: absolute;
-  top: -15%;
-  right: 0;
-  width: 500px;
-  height: 500px;
-  max-width: 35vw;
-  border-radius: 50%;
-  background: rgba(74, 222, 128, 0.12);
-  filter: blur(120px);
-  pointer-events: none;
 }
 
 /* ========================================================
@@ -96,7 +78,7 @@
   color: #FFFFFF;
   margin: 0 0 16px;
   letter-spacing: -0.03em;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+  text-shadow: none;
 }
 
 .auth-left-statement {
@@ -105,7 +87,7 @@
   color: rgba(235, 245, 238, 0.94);
   max-width: 460px;
   margin: 0;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  text-shadow: none;
 }
 
 .auth-left-spacer {
@@ -132,10 +114,10 @@
   max-width: 620px;
   min-height: 480px;
   box-sizing: border-box;
-  background: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(18, 19, 24, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 24px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(107, 60, 255, 0.16);
   padding: 42px 42px;
   display: flex;
   flex-direction: column;
@@ -151,14 +133,14 @@
   font-family: 'Inter', sans-serif;
   font-size: 26px;
   font-weight: 700;
-  color: #173B2A;
+  color: #FFFFFF;
   margin: 0 0 8px;
   letter-spacing: -0.02em;
 }
 
 .auth-heading p {
   font-size: 13.5px;
-  color: #6B7C72;
+  color: #94A3B8;
   margin: 0;
   line-height: 1.5;
 }
@@ -172,8 +154,8 @@
 }
 
 .role-option-btn {
-  background: #F8FAF8;
-  border: 1px solid #DCE7DE;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   padding: 12px 6px;
   display: flex;
@@ -187,15 +169,15 @@
 }
 
 .role-option-btn:hover {
-  border-color: #16803C;
-  background: #FFFFFF;
+  border-color: #D46BFF;
+  background: rgba(255, 255, 255, 0.08);
   transform: translateY(-1px);
 }
 
 .role-option-btn.selected {
-  background: #E8F5E9;
-  border-color: #16803C;
-  box-shadow: 0 2px 10px rgba(22, 128, 60, 0.15);
+  background: rgba(168, 85, 247, 0.18);
+  border-color: #D46BFF;
+  box-shadow: 0 2px 12px rgba(168, 85, 247, 0.25);
 }
 
 .role-btn-icon {
@@ -205,12 +187,12 @@
 .role-btn-label {
   font-size: 12px;
   font-weight: 700;
-  color: #173B2A;
+  color: #FFFFFF;
 }
 
 .role-btn-sub {
   font-size: 9.5px;
-  color: #6B7C72;
+  color: #94A3B8;
   line-height: 1.15;
 }
 
@@ -226,27 +208,33 @@
   display: block;
   font-size: 13px;
   font-weight: 600;
-  color: #173B2A;
+  color: #E2E8F0;
   margin-bottom: 7px;
 }
 
 .auth-input-control {
   width: 100%;
   height: 48px;
-  background: #FFFFFF;
-  border: 1px solid #D1DCD3;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 12px;
   padding: 0 16px;
   font-size: 14.5px;
-  color: #173B2A;
+  color: #FFFFFF;
   font-family: inherit;
   transition: all 0.2s ease;
 }
 
+.auth-input-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
 .auth-input-control:focus {
   outline: none;
-  border-color: #16803C;
-  box-shadow: 0 0 0 3px rgba(22, 128, 60, 0.14);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: #A855F7;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.22);
+  color: #FFFFFF;
 }
 
 .auth-password-wrapper {
@@ -271,7 +259,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6B7C72;
+  color: #94A3B8;
   cursor: pointer;
   border-radius: 8px;
   transition: color 0.2s ease, background-color 0.2s ease;
@@ -279,18 +267,18 @@
 }
 
 .auth-password-toggle-btn:hover {
-  color: #16803C;
-  background-color: #E8F5E9;
+  color: #D46BFF;
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .auth-password-toggle-btn:focus-visible {
-  outline: 2px solid #16803C;
+  outline: 2px solid #A855F7;
   outline-offset: 1px;
 }
 
 .auth-help-note {
   font-size: 12px;
-  color: #6B7C72;
+  color: #94A3B8;
   margin: 0 0 18px;
   line-height: 1.45;
 }
@@ -335,14 +323,14 @@
 .auth-switch-text {
   text-align: center;
   font-size: 13px;
-  color: #6B7C72;
+  color: #94A3B8;
   margin-top: 24px;
   padding-top: 18px;
-  border-top: 1px solid #EDF2EE;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .auth-switch-text a {
-  color: #16803C;
+  color: #D46BFF;
   font-weight: 700;
   text-decoration: none;
   margin-left: 4px;
@@ -350,7 +338,7 @@
 }
 
 .auth-switch-text a:hover {
-  color: #126A31;
+  color: #E99BFF;
   text-decoration: underline;
 }
 

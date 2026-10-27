@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import api, { imageUrl, DEFAULT_PRODUCT_IMAGE } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
+import BinaryOrbits from '../components/BinaryOrbits';
 import './BuyerMarketplace.css';
 
 const CATEGORIES = [
@@ -332,39 +333,19 @@ export default function BuyerMarketplace() {
 
   return (
     <div className="buyer-marketplace-page">
-      <div className="container-fluid px-3 px-md-4 pt-3">
-        {/* Sleek Page Header with Language Switch */}
+      <BinaryOrbits className="binary-orbits-fixed-bg" />
+      <div className="container-fluid px-3 px-md-4 pt-3 position-relative" style={{ zIndex: 1 }}>
+        {/* Sleek Page Header */}
         <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
           <div>
-            <h1 className="h4 fw-bold text-dark mb-1">
+            <h1 className="h4 fw-bold text-white mb-1">
               {isTa ? '🛒 உழவர் சந்தை' : '🛒 Fresh Agricultural Marketplace'}
             </h1>
-            <p className="text-muted small mb-0">
+            <p className="small mb-0" style={{ color: '#E2E8F0' }}>
               {isTa
                 ? 'நேரடியாக விவசாயிகளிடமிருந்து புதிய விளைபொருட்கள்'
                 : 'Direct farm-fresh produce directly from verified farmers'}
             </p>
-          </div>
-
-          {/* Language Switch Option */}
-          <div className="buyer-lang-box">
-            <span className="buyer-lang-title">🌐 {isTa ? 'மொழி' : 'Language'}:</span>
-            <div className="lang-switch-box">
-              <button
-                type="button"
-                className={`lang-switch-btn ${language === 'en' ? 'active' : ''}`}
-                onClick={() => toggleLanguage('en')}
-              >
-                English
-              </button>
-              <button
-                type="button"
-                className={`lang-switch-btn ${language === 'ta' ? 'active' : ''}`}
-                onClick={() => toggleLanguage('ta')}
-              >
-                தமிழ்
-              </button>
-            </div>
           </div>
         </div>
 

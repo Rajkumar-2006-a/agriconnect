@@ -2,6 +2,7 @@ import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import FarmerDashboardMain from './FarmerDashboardMain';
 import FarmerCollaborationSection from '../components/FarmerCollaborationSection';
+import BinaryOrbits from '../components/BinaryOrbits';
 import { Link } from 'react-router-dom';
 
 /**
@@ -18,7 +19,8 @@ export default function FarmerCommunity() {
   }
 
   return (
-    <div className="container py-4">
+    <div className="container py-4 position-relative" style={{ zIndex: 1 }}>
+      <BinaryOrbits className="binary-orbits-fixed-bg" />
       <div className="alert alert-success d-flex justify-content-between align-items-center mb-4" style={{ borderRadius: 12 }}>
         <span>🌱 Welcome to AgriConnect Farmer Collaboration. Please sign in to post questions and share experiences with fellow farmers.</span>
         <Link to="/login" className="btn btn-sm btn-success">Sign In</Link>

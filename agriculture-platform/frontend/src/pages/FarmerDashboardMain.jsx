@@ -7,6 +7,7 @@ import LanguageSwitch from '../components/LanguageSwitch';
 import { TAMIL_NADU_DISTRICTS } from '../constants/tamilNaduLocations';
 import MyProductsSection from '../components/MyProductsSection';
 import FarmerCollaborationSection from '../components/FarmerCollaborationSection';
+import BinaryOrbits from '../components/BinaryOrbits';
 import ErrorBoundary from '../components/ErrorBoundary';
 import {
   LeafIcon,
@@ -31,22 +32,22 @@ const emptyProduct = { productName: '', category: '', description: '', price: ''
 
 const THEMES = [
   {
-    id: 'forest',
-    name: 'Forest Emerald',
-    label: 'Rich Forest Navbar & Deep Pine Sidebar',
-    icon: '🌲',
-    topbar: '#184D31',
-    sidebar: '#1A5336',
-    bg: '#F4F8F3'
+    id: 'cyan',
+    name: 'Fresh Aurora Mint',
+    label: 'Clean Obsidian & Electric Aurora Mint',
+    icon: '🌿',
+    topbar: '#0C0F0E',
+    sidebar: '#090C0B',
+    bg: '#00DC82'
   },
   {
     id: 'midnight',
-    name: 'Midnight Slate',
-    label: 'Rich Slate Navbar & Deep Modern Navy Sidebar',
-    icon: '🌌',
-    topbar: '#223247',
-    sidebar: '#1B2738',
-    bg: '#F8FAFC'
+    name: 'Botanical Onyx',
+    label: 'Deep Graphite Onyx & Fresh Emerald Accent',
+    icon: '🍃',
+    topbar: '#0C0F0E',
+    sidebar: '#090C0B',
+    bg: '#059669'
   }
 ];
 
@@ -65,7 +66,8 @@ export default function FarmerDashboardMain({ initialSection }) {
   });
   const [activeTheme, setActiveTheme] = useState(() => {
     const saved = localStorage.getItem('farmer_theme');
-    return saved === 'midnight' ? 'midnight' : 'forest';
+    if (saved === 'midnight') return 'midnight';
+    return 'cyan';
   });
   const [showThemePicker, setShowThemePicker] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -201,7 +203,11 @@ export default function FarmerDashboardMain({ initialSection }) {
       setEquipment((equipmentData.data || []).filter((item) => item.availability));
       setDoctors(doctorData.data || []);
     } catch (error) {
-      setNotice(error.response?.data?.message || 'Unable to load dashboard data.');
+      const errMsg = error.response?.data?.message || 'Unable to load dashboard data.';
+      if (errMsg.toLowerCase().includes('token') || errMsg.toLowerCase().includes('expire')) {
+        localStorage.removeItem('token');
+      }
+      setNotice(errMsg);
     }
   };
 
@@ -315,6 +321,7 @@ export default function FarmerDashboardMain({ initialSection }) {
 
   return (
     <div className={`agri-farmer-app theme-${activeTheme}`}>
+      <BinaryOrbits className="binary-orbits-fixed-bg" />
       {/* 1. Global Modern Full-width Topbar */}
       <header className="farmer-topbar-clean">
         <div className="topbar-left-controls">
@@ -366,9 +373,9 @@ export default function FarmerDashboardMain({ initialSection }) {
                   setShowThemePicker(!showThemePicker);
                   setShowAtmospherePicker(false);
                 }}
-                title="Switch between Forest Emerald and Midnight Slate"
+                title="Switch between Cosmic Azure and Midnight Slate"
               >
-                <span>{activeTheme === 'forest' ? '🌲 Forest Emerald' : '🌌 Midnight Slate'}</span>
+                <span>{activeTheme === 'midnight' ? '🌌 Midnight Slate' : '⚡ Cosmic Azure'}</span>
                 <span style={{ fontSize: 10 }}>▼</span>
               </button>
 
@@ -526,13 +533,32 @@ export default function FarmerDashboardMain({ initialSection }) {
         {/* Scrollable Content Area */}
         <main className="farmer-scroll-content">
           {notice && (
-            <div className="alert alert-success alert-dismissible mb-4">
-              <span>{notice}</span>
+            <div className={`farmer-notice-banner mb-4 ${notice.toLowerCase().includes('token') || notice.toLowerCase().includes('unable') || notice.toLowerCase().includes('fail') ? 'is-error' : 'is-success'}`}>
+              <div className="d-flex align-items-center gap-2">
+                <span>{notice.toLowerCase().includes('token') ? '🔒' : notice.toLowerCase().includes('unable') || notice.toLowerCase().includes('fail') ? '⚠️' : '✅'}</span>
+                <span className="fw-medium">{notice}</span>
+                {notice.toLowerCase().includes('token') && (
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-outline-light ms-2 py-0 px-2 fw-semibold"
+                    style={{ fontSize: '12px' }}
+                    onClick={() => {
+                      logout();
+                      navigate('/login');
+                    }}
+                  >
+                    Log in again
+                  </button>
+                )}
+              </div>
               <button
                 type="button"
-                className="btn-close"
+                className="farmer-notice-close"
                 onClick={() => setNotice('')}
-              />
+                aria-label="Close"
+              >
+                ✕
+              </button>
             </div>
           )}
 
@@ -612,7 +638,11 @@ export default function FarmerDashboardMain({ initialSection }) {
                 </div>
               ))
             ) : (
-              <p className="text-muted">No orders received yet.</p>
+              <div className="text-center py-4">
+                <div style={{ fontSize: 32, marginBottom: 8 }}>📦</div>
+                <p className="mb-1" style={{ color: '#FFFFFF', fontWeight: 600, fontSize: 16 }}>No orders received yet.</p>
+                <p className="mb-0" style={{ color: '#CBD5E1', fontSize: 13.5 }}>When customers purchase your listed produce, their orders will appear here for you to manage.</p>
+              </div>
             )}
           </div>
         )}
@@ -972,7 +1002,7 @@ export default function FarmerDashboardMain({ initialSection }) {
                     <article className="border rounded p-3 h-100 doctor-card d-flex flex-column justify-content-between">
                       <div>
                         <div className="d-flex justify-content-between align-items-start mb-2">
-                          <b className="fs-6 text-dark">{doc.name}</b>
+                          <b className="fs-6 text-white">{doc.name}</b>
                           <span className="badge-tn-location">📍 {doc.location}</span>
                         </div>
                         <p className="text-muted small mb-3">
@@ -1154,7 +1184,7 @@ export default function FarmerDashboardMain({ initialSection }) {
                   </span>
                 </div>
 
-                <h3 className="fw-bold mb-1 text-dark" style={{ fontSize: '1.4rem' }}>
+                <h3 className="fw-bold mb-1 text-white" style={{ fontSize: '1.4rem' }}>
                   {bookingEquip.equipmentName}
                 </h3>
 
@@ -1170,11 +1200,11 @@ export default function FarmerDashboardMain({ initialSection }) {
                 )}
 
                 {/* Owner Info Box */}
-                <div className="p-3 rounded-3 mb-3" style={{ background: '#f8faf9', border: '1px solid #e2e8f0' }}>
+                <div className="p-3 rounded-3 mb-3" style={{ background: '#151B18', border: '1px solid rgba(255, 255, 255, 0.14)' }}>
                   <div className="d-flex justify-content-between align-items-center">
                     <div>
                       <small className="text-muted text-uppercase fw-bold" style={{ fontSize: '10.5px' }}>Equipment Owner</small>
-                      <div className="fw-bold text-dark">{bookingEquip.owner?.name || 'Verified Owner'}</div>
+                      <div className="fw-bold text-white">{bookingEquip.owner?.name || 'Verified Owner'}</div>
                     </div>
                     {bookingEquip.owner?.phone && (
                       <a
@@ -1195,7 +1225,7 @@ export default function FarmerDashboardMain({ initialSection }) {
                 ) : (
                   <form onSubmit={handleSubmitBooking}>
                     <div className="mb-3">
-                      <label className="form-label fw-bold text-dark small">
+                      <label className="form-label fw-bold text-white small">
                         🌾 Farm Area to Work (Acres) <span className="text-danger">*</span>
                       </label>
                       <div className="input-group">

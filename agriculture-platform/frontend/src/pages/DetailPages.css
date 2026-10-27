@@ -1,16 +1,17 @@
 .detail-page-wrapper {
-  background-color: #ffffff;
+  background-color: transparent !important;
   min-height: 100vh;
   padding: 30px 0 60px;
+  color: #F1F5F2;
 }
 
 .detail-back-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #166534;
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
+  color: #FFFFFF;
+  background: #168348;
+  border: 1px solid #168348;
   border-radius: 24px;
   padding: 8px 18px;
   font-size: 13px;
@@ -20,17 +21,20 @@
 }
 
 .detail-back-btn:hover {
-  background: #dcfce7;
-  color: #14532d;
+  background: #116B3A;
+  color: #ffffff;
   transform: translateX(-2px);
 }
 
 .detail-card-container {
-  background: #ffffff;
-  border: 1px solid #e2ece4;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 20px;
   padding: 32px;
-  box-shadow: 0 8px 26px rgba(18, 63, 42, 0.05);
+  box-shadow: 0 8px 26px rgba(18, 63, 42, 0.12);
+  color: #24352B;
 }
 
 .detail-image-box {

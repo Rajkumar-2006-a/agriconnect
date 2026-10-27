@@ -32,119 +32,126 @@ body:has(.agri-farmer-app) footer {
 }
 
 :root {
-  --sidebar-bg: #1A5336;
-  --sidebar-active: #1E7B49;
-  --topbar-bg: #184D31;
+  --sidebar-bg: #0F1412;
+  --sidebar-active: #00DC82;
+  --topbar-bg: #131816;
   --topbar-text: #FFFFFF;
-  --topbar-text-muted: rgba(255, 255, 255, 0.75);
-  --topbar-border: rgba(255, 255, 255, 0.1);
-  --topbar-search-bg: rgba(255, 255, 255, 0.12);
-  --topbar-search-border: rgba(255, 255, 255, 0.2);
+  --topbar-text-muted: #E2E8F0;
+  --topbar-border: rgba(255, 255, 255, 0.15);
+  --topbar-search-bg: #232B27;
+  --topbar-search-border: rgba(255, 255, 255, 0.16);
   --topbar-search-text: #FFFFFF;
-  --topbar-search-placeholder: rgba(255, 255, 255, 0.65);
-  --topbar-pill-bg: rgba(255, 255, 255, 0.15);
-  --topbar-pill-border: rgba(255, 255, 255, 0.25);
-  --topbar-pill-text: #FFFFFF;
-  --topbar-logout-bg: rgba(255, 255, 255, 0.16);
-  --topbar-logout-text: #FFFFFF;
-  --topbar-logout-border: rgba(255, 255, 255, 0.28);
-  --primary-btn: #16803C;
-  --primary-btn-hover: #126A31;
-  --primary-glow: rgba(22, 128, 60, 0.38);
-  --primary-glow-subtle: rgba(74, 222, 128, 0.22);
-  --accent-glow: #4ADE80;
-  --card-glow-hover: rgba(74, 222, 128, 0.08);
-  --card-border-glow: rgba(74, 222, 128, 0.35);
-  --ambient-orb-1: rgba(74, 222, 128, 0.08);
-  --ambient-orb-2: rgba(245, 158, 11, 0.05);
-  --ambient-orb-3: rgba(34, 197, 94, 0.06);
-  --page-bg: #F4F8F3;
-  --card-bg: #FFFFFF;
-  --main-text: #173B2A;
-  --secondary-text: #6B7C72;
-  --border-color: #DCE7DE;
-  --color-available: #16803C;
-  --color-low-stock: #D97706;
-  --color-out-of-stock: #DC2626;
-  --radius-card: 14px;
+  --topbar-search-placeholder: #A0AEC0;
+  --topbar-pill-bg: rgba(0, 220, 130, 0.16);
+  --topbar-pill-border: rgba(0, 220, 130, 0.35);
+  --topbar-pill-text: #00DC82;
+  --topbar-logout-bg: rgba(239, 68, 68, 0.20);
+  --topbar-logout-text: #FCA5A5;
+  --topbar-logout-border: rgba(239, 68, 68, 0.35);
+  --primary-btn: #00DC82;
+  --primary-btn-hover: #059669;
+  --primary-glow: rgba(0, 0, 0, 0.20);
+  --primary-glow-subtle: transparent;
+  --accent-glow: transparent;
+  --card-glow-hover: transparent;
+  --card-border-glow: rgba(255, 255, 255, 0.20);
+  --ambient-orb-1: transparent;
+  --ambient-orb-2: transparent;
+  --ambient-orb-3: transparent;
+  --page-bg: transparent;
+  --card-bg: #1B221E; /* Elevated Softened Botanical Graphite - Brightened & Crisp */
+  --card-border: rgba(255, 255, 255, 0.15); /* Clean White Rim Highlight */
+  --main-text: #FFFFFF;
+  --secondary-text: #E2E8F0;
+  --card-text: #FFFFFF;
+  --card-text-muted: #CBD5E1;
+  --border-color: rgba(255, 255, 255, 0.14);
+  --color-available: #10B981;
+  --color-low-stock: #F59E0B;
+  --color-out-of-stock: #EF4444;
+  --radius-card: 16px;
   --radius-sm: 8px;
   --radius-pill: 9999px;
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --card-shadow: 0 4px 14px rgba(20, 83, 45, 0.04);
-  --card-shadow-hover: 0 6px 18px rgba(20, 83, 45, 0.06);
+  --card-shadow: 0 6px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  --card-shadow-hover: 0 12px 34px rgba(0, 0, 0, 0.60), inset 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 
-/* Theme 1: Forest Emerald (Rich Forest Navbar & Deep Pine Sidebar) */
-.theme-forest {
-  --sidebar-bg: #1A5336;
-  --sidebar-active: #1E7B49;
-  --topbar-bg: #184D31;
+/* Theme 1: Fresh Aurora Mint (Elevated Botanical Graphite & Electric Aurora Mint) */
+.theme-forest,
+.theme-cyan {
+  --sidebar-bg: #0F1412;
+  --sidebar-active: #00DC82;
+  --topbar-bg: #131816;
   --topbar-text: #FFFFFF;
-  --topbar-text-muted: rgba(255, 255, 255, 0.75);
-  --topbar-border: rgba(255, 255, 255, 0.1);
-  --topbar-search-bg: rgba(255, 255, 255, 0.12);
-  --topbar-search-border: rgba(255, 255, 255, 0.2);
-  --topbar-search-text: #FFFFFF;
-  --topbar-search-placeholder: rgba(255, 255, 255, 0.65);
-  --topbar-pill-bg: rgba(255, 255, 255, 0.15);
-  --topbar-pill-border: rgba(255, 255, 255, 0.25);
-  --topbar-pill-text: #FFFFFF;
-  --topbar-logout-bg: rgba(255, 255, 255, 0.16);
-  --topbar-logout-text: #FFFFFF;
-  --topbar-logout-border: rgba(255, 255, 255, 0.28);
-  --primary-btn: #16803C;
-  --primary-btn-hover: #126A31;
-  --primary-glow: rgba(22, 128, 60, 0.38);
-  --primary-glow-subtle: rgba(74, 222, 128, 0.22);
-  --accent-glow: #4ADE80;
-  --card-glow-hover: rgba(74, 222, 128, 0.12);
-  --card-border-glow: rgba(74, 222, 128, 0.35);
-  --ambient-orb-1: rgba(74, 222, 128, 0.1);
-  --ambient-orb-2: rgba(245, 158, 11, 0.06);
-  --ambient-orb-3: rgba(34, 197, 94, 0.08);
-  --page-bg: #F4F8F3;
-  --card-bg: #FFFFFF;
-  --main-text: #173B2A;
-  --secondary-text: #6B7C72;
-  --border-color: #DCE7DE;
-  --color-available: #16803C;
-  --color-low-stock: #D97706;
-  --color-out-of-stock: #DC2626;
-}
-
-/* Theme 2: Midnight Slate & Agritech Blue (Rich Slate Navbar & Deep Modern Navy Sidebar) */
-.theme-midnight {
-  --sidebar-bg: #1B2738;
-  --sidebar-active: #10B981;
-  --topbar-bg: #223247;
-  --topbar-text: #FFFFFF;
-  --topbar-text-muted: #94A3B8;
-  --topbar-border: rgba(255, 255, 255, 0.1);
-  --topbar-search-bg: rgba(255, 255, 255, 0.08);
+  --topbar-text-muted: #E2E8F0;
+  --topbar-border: rgba(255, 255, 255, 0.15);
+  --topbar-search-bg: #232B27;
   --topbar-search-border: rgba(255, 255, 255, 0.16);
   --topbar-search-text: #FFFFFF;
-  --topbar-search-placeholder: rgba(255, 255, 255, 0.55);
-  --topbar-pill-bg: rgba(255, 255, 255, 0.12);
-  --topbar-pill-border: rgba(255, 255, 255, 0.22);
-  --topbar-pill-text: #E2E8F0;
-  --topbar-logout-bg: rgba(255, 255, 255, 0.16);
-  --topbar-logout-text: #FFFFFF;
-  --topbar-logout-border: rgba(255, 255, 255, 0.28);
-  --primary-btn: #10B981;
+  --topbar-search-placeholder: #A0AEC0;
+  --topbar-pill-bg: rgba(0, 220, 130, 0.16);
+  --topbar-pill-border: rgba(0, 220, 130, 0.35);
+  --topbar-pill-text: #00DC82;
+  --topbar-logout-bg: rgba(239, 68, 68, 0.20);
+  --topbar-logout-text: #FCA5A5;
+  --topbar-logout-border: rgba(239, 68, 68, 0.35);
+  --primary-btn: #00DC82;
   --primary-btn-hover: #059669;
-  --primary-glow: rgba(16, 185, 129, 0.45);
-  --primary-glow-subtle: rgba(52, 211, 153, 0.28);
-  --accent-glow: #34D399;
-  --card-glow-hover: rgba(16, 185, 129, 0.08);
-  --card-border-glow: rgba(16, 185, 129, 0.35);
-  --ambient-orb-1: rgba(16, 185, 129, 0.12);
-  --ambient-orb-2: rgba(99, 102, 241, 0.08);
-  --ambient-orb-3: rgba(59, 130, 246, 0.07);
-  --page-bg: #F8FAFC;
-  --card-bg: #FFFFFF;
-  --main-text: #0F172A;
-  --secondary-text: #64748B;
-  --border-color: #E2E8F0;
+  --primary-glow: rgba(0, 0, 0, 0.20);
+  --primary-glow-subtle: transparent;
+  --accent-glow: transparent;
+  --card-glow-hover: transparent;
+  --card-border-glow: rgba(255, 255, 255, 0.20);
+  --ambient-orb-1: transparent;
+  --ambient-orb-2: transparent;
+  --ambient-orb-3: transparent;
+  --page-bg: transparent;
+  --card-bg: #1B221E;
+  --card-border: rgba(255, 255, 255, 0.15);
+  --main-text: #FFFFFF;
+  --secondary-text: #E2E8F0;
+  --card-text: #FFFFFF;
+  --card-text-muted: #CBD5E1;
+  --border-color: rgba(255, 255, 255, 0.14);
+  --color-available: #10B981;
+  --color-low-stock: #F59E0B;
+  --color-out-of-stock: #EF4444;
+}
+
+/* Theme 2: Botanical Onyx */
+.theme-midnight {
+  --sidebar-bg: #0F1412;
+  --sidebar-active: #00DC82;
+  --topbar-bg: #131816;
+  --topbar-text: #FFFFFF;
+  --topbar-text-muted: #E2E8F0;
+  --topbar-border: rgba(255, 255, 255, 0.15);
+  --topbar-search-bg: #232B27;
+  --topbar-search-border: rgba(255, 255, 255, 0.16);
+  --topbar-search-text: #FFFFFF;
+  --topbar-search-placeholder: #A0AEC0;
+  --topbar-pill-bg: rgba(0, 220, 130, 0.16);
+  --topbar-pill-border: rgba(0, 220, 130, 0.35);
+  --topbar-pill-text: #00DC82;
+  --topbar-logout-bg: rgba(255, 255, 255, 0.14);
+  --topbar-logout-text: #FFFFFF;
+  --topbar-logout-border: rgba(255, 255, 255, 0.22);
+  --primary-btn: #00DC82;
+  --primary-btn-hover: #059669;
+  --primary-glow: rgba(0, 0, 0, 0.20);
+  --primary-glow-subtle: transparent;
+  --accent-glow: transparent;
+  --card-glow-hover: transparent;
+  --card-border-glow: rgba(255, 255, 255, 0.20);
+  --ambient-orb-1: transparent;
+  --ambient-orb-2: transparent;
+  --ambient-orb-3: transparent;
+  --page-bg: transparent;
+  --card-bg: #1B221E;
+  --main-text: #FFFFFF;
+  --secondary-text: #E2E8F0;
+  --border-color: rgba(255, 255, 255, 0.14);
   --color-available: #10B981;
   --color-low-stock: #F59E0B;
   --color-out-of-stock: #EF4444;
@@ -265,7 +272,7 @@ body:has(.agri-farmer-app) footer {
 /* Base Wrapper */
 .agri-farmer-app {
   font-family: var(--font-family);
-  background-color: var(--page-bg);
+  background-color: transparent !important;
   min-height: 100vh;
   color: var(--main-text);
   display: flex;
@@ -670,8 +677,8 @@ body:has(.agri-farmer-app) footer {
 .topbar-global-search-input:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.24);
-  border-color: var(--accent-glow);
-  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.25), 0 0 16px rgba(74, 222, 128, 0.22);
+  border-color: rgba(0, 220, 130, 0.6);
+  box-shadow: 0 0 0 2px rgba(0, 220, 130, 0.25);
 }
 
 .topbar-right-controls {
@@ -701,9 +708,9 @@ body:has(.agri-farmer-app) footer {
 }
 
 .topbar-theme-toggle-btn:hover {
-  filter: brightness(1.15);
+  filter: brightness(1.08);
   transform: translateY(-1px);
-  box-shadow: 0 0 14px var(--primary-glow-subtle);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.20);
 }
 
 .theme-switcher-dropdown {
@@ -895,34 +902,9 @@ body:has(.agri-farmer-app) footer {
   background: transparent;
 }
 
-.farmer-scroll-content::before {
-  content: '';
-  position: absolute;
-  top: -120px;
-  right: -80px;
-  width: 450px;
-  height: 450px;
-  border-radius: 50%;
-  background: var(--ambient-orb-1);
-  filter: blur(85px);
-  pointer-events: none;
-  z-index: 0;
-  animation: ambientFloat 16s ease-in-out infinite alternate;
-}
-
+.farmer-scroll-content::before,
 .farmer-scroll-content::after {
-  content: '';
-  position: absolute;
-  bottom: 80px;
-  left: 15%;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: var(--ambient-orb-2);
-  filter: blur(95px);
-  pointer-events: none;
-  z-index: 0;
-  animation: ambientFloatRev 20s ease-in-out infinite alternate;
+  display: none !important;
 }
 
 .farmer-scroll-content > * {
@@ -969,7 +951,7 @@ body:has(.agri-farmer-app) footer {
   margin: 2px 0 0;
 }
 
-/* Primary Button with Luminous Glow & Shimmer Sweep */
+/* Primary Button without Glow */
 .btn-primary-green {
   background: linear-gradient(135deg, var(--primary-btn) 0%, var(--primary-btn-hover) 100%);
   color: #FFFFFF;
@@ -984,26 +966,17 @@ body:has(.agri-farmer-app) footer {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px var(--primary-glow), 0 0 16px var(--primary-glow-subtle);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .btn-primary-green::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -80%;
-  width: 45%;
-  height: 200%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-  transform: rotate(25deg);
-  animation: shimmerSweep 4.5s ease-in-out infinite;
-  pointer-events: none;
+  display: none;
 }
 
 .btn-primary-green:hover {
-  filter: brightness(0.95);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  filter: brightness(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.30);
 }
 
 .btn-primary-green:active {
@@ -1022,18 +995,18 @@ body:has(.agri-farmer-app) footer {
 
 .marketplace-stat-card {
   background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--card-border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border-radius: var(--radius-card);
   padding: 18px 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 8px 24px rgba(18, 55, 34, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
+  box-shadow: var(--card-shadow);
   position: relative;
   overflow: hidden;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.22s ease;
   animation: cardFadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -1171,21 +1144,21 @@ body:has(.agri-farmer-app) footer {
 
 .search-filter-input {
   width: 100%;
-  background: #FFFFFF;
-  border: 1px solid var(--border-color);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.14);
   border-radius: var(--radius-sm);
   padding: 9px 36px 9px 38px;
   font-size: 13px;
-  color: var(--main-text);
+  color: #FFFFFF;
   font-family: inherit;
   transition: all 0.2s ease;
 }
 
 .search-filter-input:focus {
   outline: none;
-  background: #FFFFFF;
+  background: rgba(15, 23, 42, 0.95);
   border-color: var(--primary-btn);
-  box-shadow: 0 0 0 3px rgba(22, 128, 60, 0.12);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.22);
 }
 
 .search-filter-clear {
@@ -1205,12 +1178,12 @@ body:has(.agri-farmer-app) footer {
 
 .select-filter-input {
   width: 100%;
-  background: #FFFFFF;
-  border: 1px solid var(--border-color);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.14);
   border-radius: var(--radius-sm);
   padding: 9px 12px;
   font-size: 13px;
-  color: var(--main-text);
+  color: #FFFFFF;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -1218,17 +1191,17 @@ body:has(.agri-farmer-app) footer {
 
 .select-filter-input:focus {
   outline: none;
-  background: #FFFFFF;
+  background: rgba(15, 23, 42, 0.95);
   border-color: var(--primary-btn);
-  box-shadow: 0 0 0 3px rgba(22, 128, 60, 0.12);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.22);
 }
 
 /* View Mode Toggle Group (Grid vs List) */
 .view-mode-toggle-group {
   display: flex;
   align-items: center;
-  background: #FFFFFF;
-  border: 1px solid var(--border-color);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.14);
   border-radius: var(--radius-sm);
   padding: 3px;
   gap: 3px;
@@ -1392,8 +1365,8 @@ body:has(.agri-farmer-app) footer {
 }
 
 .grid-card-meta-box {
-  background: #F8FAF8;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: rgba(6, 16, 10, 0.50);
+  border: 1px solid rgba(110, 231, 183, 0.08);
   border-radius: 8px;
   padding: 10px 12px;
   margin-bottom: 14px;
@@ -1446,17 +1419,17 @@ body:has(.agri-farmer-app) footer {
 
 .flipkart-product-card {
   background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--card-border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border-radius: var(--radius-card);
   padding: 16px 18px;
   display: flex;
   gap: 18px;
-  box-shadow: 0 8px 24px rgba(18, 55, 34, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
+  box-shadow: var(--card-shadow);
   position: relative;
   overflow: hidden;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.22s ease;
   animation: cardFadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -1770,12 +1743,12 @@ body:has(.agri-farmer-app) footer {
 /* Quick Actions Card */
 .quick-actions-card {
   background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--card-border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border-radius: var(--radius-card);
   padding: 20px;
-  box-shadow: 0 4px 16px rgba(18, 55, 34, 0.05);
+  box-shadow: var(--card-shadow);
   animation: cardSlideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
 }
 
@@ -1837,13 +1810,13 @@ body:has(.agri-farmer-app) footer {
 }
 
 .quick-action-item-btn {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--border-color);
+  background: rgba(110, 231, 183, 0.08);
+  border: 1px solid rgba(110, 231, 183, 0.16);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--main-text);
+  color: #6EE7B7;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1853,9 +1826,9 @@ body:has(.agri-farmer-app) footer {
 }
 
 .quick-action-item-btn:hover {
-  background: #F8FAFC;
-  border-color: #CBD5E1;
-  color: var(--main-text);
+  background: var(--primary-btn);
+  border-color: transparent;
+  color: #fff;
 }
 
 .action-btn-left {
@@ -1866,21 +1839,23 @@ body:has(.agri-farmer-app) footer {
 
 /* "Better Farming Better Tomorrow" Promo Banner with Breathing Glow */
 .farming-promo-banner-card {
-  background: linear-gradient(180deg, #E8F5EC 0%, #D8EDE0 100%);
-  border: 1px solid #D1EADE;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border-radius: var(--radius-card);
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(20, 83, 45, 0.06);
+  box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: all 0.2s ease;
+  transition: all 0.22s ease;
   animation: cardSlideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.42s both;
 }
 
 .farming-promo-banner-card:hover {
-  box-shadow: 0 6px 20px rgba(20, 83, 45, 0.1);
-  border-color: rgba(22, 128, 60, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.60);
+  border-color: rgba(56, 189, 248, 0.28);
 }
 
 .promo-banner-text-box {
@@ -1890,14 +1865,14 @@ body:has(.agri-farmer-app) footer {
 .promo-banner-title {
   font-size: 16px;
   font-weight: 700;
-  color: #173B2A;
+  color: #FFFFFF;
   margin: 0 0 4px;
   line-height: 1.25;
 }
 
 .promo-banner-sub {
   font-size: 12px;
-  color: #4A6E58;
+  color: #94A3B8;
   font-weight: 500;
   margin: 0;
 }
@@ -1911,21 +1886,22 @@ body:has(.agri-farmer-app) footer {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(15, 45, 25, 0.55);
-  backdrop-filter: blur(2px);
+  background: rgba(5, 10, 18, 0.65);
+  backdrop-filter: blur(4px);
   z-index: 2000;
   animation: fadeInScrim 0.25s ease-out forwards;
 }
 
 .slideover-panel {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 400px;
+  top: 0; right: 0; bottom: 0;
+  width: 420px;
   max-width: 100vw;
-  background: #FFFFFF;
-  box-shadow: -6px 0 26px rgba(0, 0, 0, 0.2);
+  background: rgba(10, 16, 28, 0.96);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-left: 1px solid rgba(56, 189, 248, 0.16);
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.60);
   z-index: 2001;
   display: flex;
   flex-direction: column;
@@ -1937,28 +1913,24 @@ body:has(.agri-farmer-app) footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.12);
 }
 
 .slideover-header h2 {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--main-text);
-  margin: 0;
+  font-size: 17px; font-weight: 700;
+  color: #FFFFFF; margin: 0;
 }
 
 .slideover-close-btn {
-  background: none;
-  border: none;
-  color: var(--secondary-text);
-  cursor: pointer;
-  padding: 6px;
+  background: none; border: none;
+  color: #8DBBAB;
+  cursor: pointer; padding: 6px;
   border-radius: 6px;
 }
 
 .slideover-close-btn:hover {
-  background: #F3F7F4;
-  color: var(--main-text);
+  background: rgba(110, 231, 183, 0.10);
+  color: #FFFFFF;
 }
 
 .slideover-body {
@@ -1973,37 +1945,34 @@ body:has(.agri-farmer-app) footer {
 
 .form-field-label {
   display: block;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--main-text);
+  font-size: 12.5px; font-weight: 600;
+  color: #8DBBAB;
   margin-bottom: 5px;
 }
 
-.label-req {
-  color: #DC2626;
-  margin-left: 2px;
-}
+.label-req { color: #F87171; margin-left: 2px; }
 
 .form-input-text,
 .form-select-control,
 .form-textarea {
   width: 100%;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(56, 189, 248, 0.14);
   border-radius: 8px;
   padding: 9px 12px;
   font-size: 13px;
-  color: var(--main-text);
+  color: #FFFFFF;
   font-family: inherit;
   transition: all 0.2s ease;
-  background: #FFFFFF;
+  background: rgba(15, 23, 42, 0.85);
 }
 
 .form-input-text:focus,
 .form-select-control:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: var(--primary-btn);
-  box-shadow: 0 0 0 3px rgba(22, 128, 60, 0.12);
+  border-color: #00DC82;
+  box-shadow: 0 0 0 3px rgba(0, 220, 130, 0.22);
+  background: #171B19;
 }
 
 .form-field-error {
@@ -2020,9 +1989,9 @@ body:has(.agri-farmer-app) footer {
 
 /* Image Upload Dropzone */
 .image-upload-dropzone {
-  border: 2px dashed #C8DEC9;
+  border: 1px dashed rgba(56, 189, 248, 0.28);
   border-radius: 10px;
-  background: #F8FBF8;
+  background: rgba(15, 23, 42, 0.70);
   padding: 20px 16px;
   text-align: center;
   cursor: pointer;
@@ -2030,8 +1999,8 @@ body:has(.agri-farmer-app) footer {
 }
 
 .image-upload-dropzone:hover {
-  border-color: var(--primary-btn);
-  background: #F0F8F2;
+  border-color: rgba(56, 189, 248, 0.50);
+  background: rgba(56, 189, 248, 0.08);
 }
 
 .dropzone-preview-wrap {
@@ -2123,20 +2092,37 @@ body:has(.agri-farmer-app) footer {
 }
 
 .details-modal-card {
-  background: #FFFFFF;
+  background: #1B221E !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
   border-radius: var(--radius-card);
   width: 500px;
   max-width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  color: #FFFFFF !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
   animation: popInCard 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.details-modal-card .text-dark,
+.details-modal-card h3 {
+  color: #FFFFFF !important;
+}
+
+.details-modal-card .text-muted {
+  color: #CBD5E1 !important;
+}
+
+.details-modal-card div[style*="background: #f8faf9"],
+.details-modal-card div[style*="background: rgb(248, 250, 249)"] {
+  background: #151B18 !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
 }
 
 .details-modal-image-wrap {
   width: 100%;
   height: 220px;
-  background: #EDF5EE;
+  background: #151B18;
   position: relative;
   overflow: hidden;
   border-top-left-radius: var(--radius-card);
@@ -2153,9 +2139,9 @@ body:has(.agri-farmer-app) footer {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   color: #FFFFFF;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -2163,18 +2149,24 @@ body:has(.agri-farmer-app) footer {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.details-modal-close-btn:hover {
+  background: rgba(239, 68, 68, 0.8);
 }
 
 .details-modal-body {
   padding: 22px;
+  color: #FFFFFF;
 }
 
 .details-meta-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  background: #F8FBF8;
-  border: 1px solid var(--border-color);
+  background: #151B18;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 10px;
   padding: 12px 16px;
   margin: 16px 0;
@@ -2183,7 +2175,7 @@ body:has(.agri-farmer-app) footer {
 .details-meta-item small {
   display: block;
   font-size: 11px;
-  color: var(--secondary-text);
+  color: #94A3B8;
   text-transform: uppercase;
   font-weight: 600;
   margin-bottom: 2px;
@@ -2443,16 +2435,29 @@ body:has(.agri-farmer-app) footer {
    ======================================================== */
 .farm-panel {
   background: var(--card-bg);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-card);
   padding: 24px;
   box-shadow: var(--card-shadow);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   margin-bottom: 24px;
   width: 100%;
   max-width: 100%;
+  color: #FFFFFF;
   animation: cardFadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.farm-panel h2 {
+  color: #FFFFFF !important;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.farm-panel p,
+.farm-panel .text-muted {
+  color: #CBD5E1 !important;
+  font-size: 14.5px !important;
 }
 
 .full-width-panel {
@@ -2677,87 +2682,169 @@ body:has(.agri-farmer-app) footer {
   animation: cardFadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.dashboard-filter-box {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid var(--border-color);
+/* Farmer Notice Banner */
+.farmer-notice-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
   border-radius: 12px;
-  padding: 16px 20px;
-  margin-bottom: 20px;
-  backdrop-filter: blur(8px);
-  animation: contentFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  font-size: 14px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  animation: contentFadeUp 0.35s ease both;
+}
+
+.farmer-notice-banner.is-error {
+  background: rgba(239, 68, 68, 0.14) !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  border-left: 4px solid #EF4444 !important;
+  color: #FCA5A5 !important;
+}
+
+.farmer-notice-banner.is-success {
+  background: rgba(0, 220, 130, 0.12) !important;
+  border: 1px solid rgba(0, 220, 130, 0.32) !important;
+  border-left: 4px solid #00DC82 !important;
+  color: #A7F3D0 !important;
+}
+
+.farmer-notice-close {
+  background: transparent;
+  border: none;
+  color: inherit;
+  opacity: 0.75;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  border-radius: 6px;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.farmer-notice-close:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dashboard-filter-box {
+  background: #1B221E !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 14px !important;
+  padding: 18px 22px !important;
+  margin-bottom: 22px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(12px);
+  animation: contentFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.filter-subheading {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #00DC82 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
 }
 
 .dashboard-filter-box .form-control,
-.dashboard-filter-box .form-select {
-  height: 38px !important;
-  padding: 6px 12px !important;
-  font-size: 13.5px !important;
-  border-radius: 8px !important;
-  border: 1px solid #cbd5e1 !important;
-  background-color: #ffffff !important;
-  box-shadow: none !important;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+.dashboard-filter-box .form-select,
+.agri-farmer-app select.form-select {
+  height: 42px !important;
+  padding: 8px 14px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border-radius: 9px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  background-color: #232B27 !important;
+  color: #FFFFFF !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.dashboard-filter-box .form-control::placeholder {
+  color: #94A3B8 !important;
 }
 
 .dashboard-filter-box .form-control:focus,
-.dashboard-filter-box .form-select:focus {
-  border-color: #10B981 !important;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
+.dashboard-filter-box .form-select:focus,
+.agri-farmer-app select.form-select:focus {
+  background-color: #28332D !important;
+  border-color: #00DC82 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(0, 220, 130, 0.20) !important;
+}
+
+/* Fix dropdown options dark background so native select popup is sleek */
+.dashboard-filter-box select.form-select option,
+.agri-farmer-app select option,
+select.form-select option {
+  background-color: #1B221E !important;
+  color: #FFFFFF !important;
+  padding: 10px 14px !important;
 }
 
 .dashboard-filter-box .btn-clear-filter {
-  font-size: 12.5px;
-  font-weight: 600;
-  padding: 5px 14px;
-  border-radius: 7px;
-  border: 1px solid #cbd5e1;
-  color: #475569;
-  background: #ffffff;
-  transition: all 0.2s ease;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  padding: 6px 14px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  color: #E2E8F0 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  transition: all 0.2s ease !important;
 }
 
 .dashboard-filter-box .btn-clear-filter:hover {
-  background: #f1f5f9;
-  border-color: #94a3b8;
-  color: #0f172a;
+  background: rgba(239, 68, 68, 0.20) !important;
+  border-color: rgba(239, 68, 68, 0.40) !important;
+  color: #FCA5A5 !important;
 }
 
 .dashboard-empty-state {
   text-align: center;
-  padding: 32px 20px;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  background: rgba(248, 250, 252, 0.7);
-  backdrop-filter: blur(8px);
+  padding: 48px 24px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.20) !important;
+  border-radius: 16px !important;
+  background: #1B221E !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(12px);
   animation: cardFadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.filter-subheading {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--main-text);
-  margin-bottom: 6px;
-  display: block;
+.dashboard-empty-state p,
+.dashboard-empty-state .text-muted {
+  color: #E2E8F0 !important;
+  font-size: 14.5px !important;
+  margin-bottom: 14px !important;
 }
 
 .doctor-card {
   transition: all 0.2s ease;
-  background: var(--card-bg);
-  border-radius: 12px;
+  background: #1B221E !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
   backdrop-filter: blur(8px);
   animation: cardFadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.doctor-card:nth-child(1), .farmer-equipment-card:nth-child(1) { animation-delay: 0.1s; }
-.doctor-card:nth-child(2), .farmer-equipment-card:nth-child(2) { animation-delay: 0.16s; }
-.doctor-card:nth-child(3), .farmer-equipment-card:nth-child(3) { animation-delay: 0.22s; }
-.doctor-card:nth-child(4), .farmer-equipment-card:nth-child(4) { animation-delay: 0.28s; }
-.doctor-card:nth-child(5), .farmer-equipment-card:nth-child(5) { animation-delay: 0.34s; }
-.doctor-card:nth-child(n+6), .farmer-equipment-card:nth-child(n+6) { animation-delay: 0.40s; }
+.doctor-card b,
+.doctor-card .text-dark {
+  color: #FFFFFF !important;
+}
+
+.doctor-card p,
+.doctor-card .text-muted {
+  color: #CBD5E1 !important;
+}
 
 .doctor-card:hover {
-  box-shadow: var(--card-shadow-hover);
-  border-color: rgba(22, 128, 60, 0.3) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+  border-color: rgba(0, 220, 130, 0.4) !important;
 }
 
 .farmer-equipment-grid {
@@ -2783,11 +2870,11 @@ body:has(.agri-farmer-app) footer {
 .farmer-equipment-card {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  border: 1px solid var(--border-color, #e1ede3);
+  background: #1B221E !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 18px rgba(18, 63, 42, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
   position: relative;
   animation: cardFadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -2795,15 +2882,15 @@ body:has(.agri-farmer-app) footer {
 
 .farmer-equipment-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(18, 63, 42, 0.12);
-  border-color: #86efac;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  border-color: rgba(0, 220, 130, 0.5) !important;
 }
 
 .farmer-equipment-img-wrap {
   position: relative;
   width: 100%;
   height: 195px;
-  background: #edf5ee;
+  background: #151B18;
   overflow: hidden;
 }
 
@@ -2826,8 +2913,8 @@ body:has(.agri-farmer-app) footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #718777;
-  background: linear-gradient(135deg, #eef7f0 0%, #d8ecdd 100%);
+  color: #94A3B8;
+  background: #151B18;
   gap: 6px;
 }
 
@@ -2841,28 +2928,29 @@ body:has(.agri-farmer-app) footer {
   border-radius: 20px;
   letter-spacing: 0.02em;
   backdrop-filter: blur(6px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   z-index: 2;
 }
 
 .farmer-equipment-badge.avail {
-  background: rgba(240, 253, 244, 0.95);
-  color: #15803d;
-  border: 1px solid rgba(134, 239, 172, 0.8);
+  background: rgba(0, 220, 130, 0.16);
+  color: #00DC82;
+  border: 1px solid rgba(0, 220, 130, 0.38);
 }
 
 .farmer-equipment-badge.rented {
-  background: rgba(254, 242, 242, 0.95);
-  color: #b91c1c;
-  border: 1px solid rgba(254, 202, 202, 0.8);
+  background: rgba(239, 68, 68, 0.20);
+  color: #FCA5A5;
+  border: 1px solid rgba(239, 68, 68, 0.40);
 }
 
 .farmer-equipment-cat-pill {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: rgba(20, 83, 45, 0.88);
-  color: #ffffff;
+  background: rgba(15, 20, 18, 0.85);
+  color: #00DC82;
+  border: 1px solid rgba(0, 220, 130, 0.3);
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -2883,14 +2971,14 @@ body:has(.agri-farmer-app) footer {
 .farmer-equipment-title {
   font-size: 17px;
   font-weight: 700;
-  color: #173d29;
+  color: #FFFFFF;
   margin: 0 0 6px;
   line-height: 1.3;
 }
 
 .farmer-equipment-desc {
   font-size: 13px;
-  color: #617367;
+  color: #CBD5E1;
   line-height: 1.45;
   margin: 0 0 14px;
   display: -webkit-box;
@@ -2912,22 +3000,22 @@ body:has(.agri-farmer-app) footer {
 .farmer-equipment-price {
   font-size: 21px;
   font-weight: 800;
-  color: #15803d;
+  color: #00DC82;
 }
 
 .farmer-equipment-unit {
   font-size: 13px;
   font-weight: 600;
-  color: #718376;
+  color: #94A3B8;
 }
 
 .badge-tn-location {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: #f0fdf4;
-  color: #166534;
-  border: 1px solid #bbf7d0;
+  background: rgba(0, 220, 130, 0.12);
+  color: #00DC82;
+  border: 1px solid rgba(0, 220, 130, 0.30);
   font-size: 11px;
   font-weight: 700;
   padding: 3px 8px;
@@ -2944,19 +3032,19 @@ body:has(.agri-farmer-app) footer {
   border-radius: 10px;
   font-size: 13px;
   font-weight: 700;
-  color: #ffffff;
-  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #08110D !important;
+  background: #00DC82;
   border: none;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
 .farmer-equipment-book-btn:hover {
-  background: linear-gradient(135deg, #15803d, #166534);
-  color: #ffffff;
+  background: #059669;
+  color: #FFFFFF !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
 /* ========================================================
@@ -3030,13 +3118,13 @@ body:has(.agri-farmer-app) footer {
 }
 
 .collab-topic-chip {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid var(--border-color);
+  background: #232B27 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   padding: 7px 16px;
   border-radius: var(--radius-pill);
   font-size: 12.5px;
   font-weight: 500;
-  color: var(--main-text);
+  color: #E2E8F0 !important;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -3045,23 +3133,24 @@ body:has(.agri-farmer-app) footer {
 }
 
 .collab-topic-chip:hover {
-  border-color: var(--primary-btn);
-  background: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.30) !important;
+  background: #2D3732 !important;
+  color: #FFFFFF !important;
 }
 
 .collab-topic-chip.active {
-  background: #E8F5E9;
-  border-color: #16803C;
-  color: #16803C;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(22, 128, 60, 0.15);
+  background: #00DC82 !important;
+  border-color: #00DC82 !important;
+  color: #08110D !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
 }
 
 .collab-upload-box {
-  border: 2px dashed var(--border-color);
+  border: 2px dashed rgba(255, 255, 255, 0.18) !important;
   border-radius: 10px;
   padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.6);
+  background: #151B18 !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3118,46 +3207,48 @@ body:has(.agri-farmer-app) footer {
 }
 
 .collab-pill-btn {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid var(--border-color);
+  background: #232B27 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: var(--radius-pill);
-  padding: 6px 14px;
-  font-size: 12.5px;
+  padding: 7px 15px;
+  font-size: 13px;
   font-weight: 500;
-  color: var(--secondary-text);
+  color: #E2E8F0 !important;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  transition: all 0.18s ease;
+  gap: 7px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .collab-pill-btn:hover {
-  border-color: #CBD5E1;
-  color: var(--main-text);
-  background: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.30) !important;
+  color: #FFFFFF !important;
+  background: #2D3732 !important;
+  transform: translateY(-1px);
 }
 
 .collab-pill-btn.active {
-  background: #16803C;
-  border-color: #16803C;
-  color: #FFFFFF;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(22, 128, 60, 0.25);
-}
-
-.collab-pill-btn.active .collab-pill-count {
-  background: rgba(255, 255, 255, 0.25);
-  color: #FFFFFF;
+  background: #00DC82 !important;
+  border-color: #00DC82 !important;
+  color: #08110D !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 10px rgba(0, 220, 130, 0.30) !important;
 }
 
 .collab-pill-count {
-  background: #E2E8F0;
-  color: #475569;
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #E2E8F0 !important;
   font-size: 11px;
   font-weight: 700;
-  padding: 1px 6px;
+  padding: 2px 7px;
   border-radius: 10px;
+}
+
+.collab-pill-btn.active .collab-pill-count {
+  background: rgba(8, 17, 13, 0.25) !important;
+  color: #08110D !important;
 }
 
 .collab-feed-list {
@@ -3168,19 +3259,19 @@ body:has(.agri-farmer-app) footer {
 
 .collab-post-card {
   background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--card-border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border-radius: var(--radius-card);
   padding: 20px 22px;
-  box-shadow: 0 8px 24px rgba(18, 55, 34, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
+  box-shadow: var(--card-shadow);
   animation: cardFadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .collab-post-card:hover {
-  border-color: rgba(22, 128, 60, 0.25);
-  box-shadow: 0 6px 20px rgba(18, 55, 34, 0.08);
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.65);
 }
 
 .collab-post-top {
@@ -3200,26 +3291,27 @@ body:has(.agri-farmer-app) footer {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #16803C 0%, #15803D 100%);
+  background: linear-gradient(135deg, #00DC82 0%, #059669 100%);
   color: #FFFFFF;
   font-size: 15px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(22, 128, 60, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 220, 130, 0.35);
   flex-shrink: 0;
 }
 
 .collab-author-name {
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 700;
-  color: var(--main-text);
+  color: #FFFFFF !important;
 }
 
 .collab-verified-pill {
-  background: #DCFCE7;
-  color: #15803D;
+  background: rgba(0, 220, 130, 0.15);
+  color: #00DC82;
+  border: 1px solid rgba(0, 220, 130, 0.30);
   font-size: 11px;
   font-weight: 600;
   padding: 2px 8px;
@@ -3231,7 +3323,7 @@ body:has(.agri-farmer-app) footer {
 
 .collab-post-date {
   font-size: 11.5px;
-  color: var(--secondary-text);
+  color: #94A3B8 !important;
   display: block;
 }
 
@@ -3247,17 +3339,17 @@ body:has(.agri-farmer-app) footer {
 }
 
 .collab-post-title {
-  font-size: 16.5px;
+  font-size: 17px;
   font-weight: 700;
-  color: var(--main-text);
+  color: #FFFFFF !important;
   margin: 0 0 8px;
   line-height: 1.3;
 }
 
 .collab-post-body {
-  font-size: 13.5px;
-  color: #374151;
-  line-height: 1.55;
+  font-size: 14.5px;
+  color: #F8FAFC !important;
+  line-height: 1.6;
   margin: 0 0 14px;
   white-space: pre-wrap;
 }
@@ -3308,7 +3400,7 @@ body:has(.agri-farmer-app) footer {
 .collab-replies-toggle-btn {
   background: none;
   border: none;
-  color: #16803C;
+  color: #00DC82 !important;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -3320,12 +3412,12 @@ body:has(.agri-farmer-app) footer {
 }
 
 .collab-replies-toggle-btn:hover {
-  color: #126A31;
+  color: #059669 !important;
 }
 
 .collab-comments-thread {
-  background: #F8FAF9;
-  border: 1px solid var(--border-color);
+  background: #171B19;
+  border: 1px solid #2B332E;
   border-radius: 10px;
   padding: 14px 16px;
   margin-top: 12px;
@@ -3342,9 +3434,9 @@ body:has(.agri-farmer-app) footer {
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  padding: 8px 12px;
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  padding: 10px 14px;
+  background: #232B27;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 8px;
 }
 
@@ -3352,8 +3444,8 @@ body:has(.agri-farmer-app) footer {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #E2E8F0;
-  color: #334155;
+  background: #334155;
+  color: #FFFFFF;
   font-size: 12px;
   font-weight: 700;
   display: flex;
@@ -3370,19 +3462,19 @@ body:has(.agri-farmer-app) footer {
 .collab-comment-author {
   font-size: 12.5px;
   font-weight: 600;
-  color: var(--main-text);
+  color: #FFFFFF !important;
 }
 
 .collab-comment-text {
   font-size: 13px;
-  color: #374151;
+  color: #F8FAFC !important;
   margin: 0;
   line-height: 1.4;
 }
 
 .collab-empty-replies {
   font-size: 12.5px;
-  color: var(--secondary-text);
+  color: #CBD5E1 !important;
   margin: 0;
   font-style: italic;
 }
@@ -3394,15 +3486,30 @@ body:has(.agri-farmer-app) footer {
 }
 
 .collab-advisory-box {
-  background: #F8FAF9;
+  background: #1E293B !important;
+  border: 1px solid #334155 !important;
   border-radius: 10px;
-  padding: 12px;
+  padding: 14px 16px;
+}
+
+.collab-advisory-box b,
+.collab-advisory-box .text-dark {
+  color: #FFFFFF !important;
+}
+
+.collab-advisory-box p,
+.collab-advisory-box .text-muted {
+  color: #CBD5E1 !important;
 }
 
 .collab-advisory-list {
   margin: 0;
   padding-left: 18px;
-  font-size: 12.5px;
-  color: #374151;
-  line-height: 1.5;
+  font-size: 13px;
+  color: #E2E8F0 !important;
+  line-height: 1.55;
+}
+
+.collab-advisory-list b {
+  color: #00DC82 !important;
 }

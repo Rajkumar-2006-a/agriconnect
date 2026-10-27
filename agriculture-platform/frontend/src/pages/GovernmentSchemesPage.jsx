@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import { useLanguage } from '../context/LanguageContext';
+import BinaryOrbits from '../components/BinaryOrbits';
 import './GovernmentSchemes.css';
 
 // Default verified schemes fallback in case of offline or initial DB setup
@@ -379,6 +380,7 @@ export default function GovernmentSchemesPage({ embedded = false }) {
 
   return (
     <div className={`schemes-page-wrapper ${embedded ? 'embedded-view' : ''}`}>
+      {!embedded && <BinaryOrbits className="binary-orbits-fixed-bg" />}
       {/* Standalone navigation if visited directly via /schemes */}
       {!embedded && (
         <div className="schemes-standalone-nav">
@@ -390,30 +392,6 @@ export default function GovernmentSchemesPage({ embedded = false }) {
         </div>
       )}
 
-      {/* Top Toolbar with language switch */}
-      <div className="schemes-toolbar-row">
-        <div>
-          <span className="text-muted small">
-            {isTa ? 'அரசு விவசாய திட்ட வழிகாட்டி' : 'Agricultural Welfare & Subsidy Portal'}
-          </span>
-        </div>
-        <div className="lang-switch-box">
-          <button
-            type="button"
-            className={`lang-switch-btn ${!isTa ? 'active' : ''}`}
-            onClick={() => toggleLanguage('en')}
-          >
-            English
-          </button>
-          <button
-            type="button"
-            className={`lang-switch-btn ${isTa ? 'active' : ''}`}
-            onClick={() => toggleLanguage('ta')}
-          >
-            தமிழ்
-          </button>
-        </div>
-      </div>
 
       {/* Hero Banner */}
       <header className="schemes-hero-card">
