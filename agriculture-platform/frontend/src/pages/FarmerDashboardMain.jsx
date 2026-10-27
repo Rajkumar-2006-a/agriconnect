@@ -241,11 +241,19 @@ export default function FarmerDashboardMain({ initialSection }) {
 
   const updateOrder = async (id, orderStatus) => {
     try {
-      await api.put(`/orders/${id}/status`, { orderStatus });
-      setNotice(`Order ${orderStatus}.`);
+      const response = await api.put(`/orders/${id}/status`, { orderStatus });
+      if (orderStatus === 'confirmed') {
+        const buyerEmail = response.data?.buyerEmail || response.data?.buyer?.email;
+        const msg = buyerEmail
+          ? `✅ Order Accepted! Confirmation email sent to the buyer (${buyerEmail}).`
+          : `✅ Order Accepted! Confirmation email sent to the buyer.`;
+        setNotice(msg);
+      } else {
+        setNotice('❌ Order rejected / cancelled.');
+      }
       load();
-    } catch {
-      setNotice('Unable to update order.');
+    } catch (err) {
+      setNotice(err.response?.data?.message || 'Unable to update order.');
     }
   };
 
@@ -584,7 +592,16 @@ export default function FarmerDashboardMain({ initialSection }) {
                       </button>
                     </div>
                   ) : (
-                    <span className="status-pill">{order.orderStatus}</span>
+                    <div className="text-end">
+                      <span className="status-pill text-capitalize">{order.orderStatus}</span>
+                      {order.orderStatus === 'confirmed' && (
+                        <div className="mt-1">
+                          <small className="text-success fw-semibold d-inline-flex align-items-center gap-1" style={{ fontSize: '11px' }}>
+                            ✉️ Mail sent to {order.buyer?.email || 'buyer'}
+                          </small>
+                        </div>
+                      )}
+                    </div>
                   )}
                 </div>
               ))
