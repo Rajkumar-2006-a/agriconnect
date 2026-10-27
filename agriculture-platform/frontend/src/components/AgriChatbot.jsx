@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import api from '../services/api';
+import { useLanguage } from '../context/LanguageContext';
 import './AgriChatbot.css';
 
 // Pre-defined quick suggestion prompt chips
@@ -23,8 +24,7 @@ const QUICK_CHIPS_TA = [
 
 export default function AgriChatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [language, setLanguage] = useState(() => localStorage.getItem('agribot_lang') || 'en');
-  const isTa = language === 'ta';
+  const { language, isTa, toggleLanguage: setGlobalLanguage } = useLanguage();
 
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -102,8 +102,7 @@ export default function AgriChatbot() {
 
   const toggleLanguage = (lang) => {
     const switchingToTamil = lang === 'ta';
-    setLanguage(lang);
-    localStorage.setItem('agribot_lang', lang);
+    setGlobalLanguage(lang);
 
     const switchNotice = switchingToTamil
       ? '🌐 **மொழி தமிழாக மாற்றப்பட்டுள்ளது.**\n\nவணக்கம்! நான் உங்கள் **AgriBot** — வேளாண் AI உதவியாளர்.🌾\n\nஅரசு மானியங்கள், டிராக்டர் வாடகை, விளைபொருள் விற்பனை, உரம் அல்லது பயிர் நோய் மேலாண்மை குறித்து எதையும் தமிழில் கேளுங்கள்!'

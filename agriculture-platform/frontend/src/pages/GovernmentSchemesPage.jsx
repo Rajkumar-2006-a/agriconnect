@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
+import { useLanguage } from '../context/LanguageContext';
 import './GovernmentSchemes.css';
 
 // Default verified schemes fallback in case of offline or initial DB setup
@@ -286,15 +287,7 @@ const CATEGORIES = [
 ];
 
 export default function GovernmentSchemesPage({ embedded = false }) {
-  const [language, setLanguage] = useState(() => {
-    return localStorage.getItem('scheme_lang') || 'en';
-  });
-  const isTa = language === 'ta';
-
-  const toggleLanguage = (lang) => {
-    setLanguage(lang);
-    localStorage.setItem('scheme_lang', lang);
-  };
+  const { language, isTa, toggleLanguage } = useLanguage();
 
   const [schemes, setSchemes] = useState(FALLBACK_SCHEMES);
   const [loading, setLoading] = useState(true);

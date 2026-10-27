@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api, { imageUrl, DEFAULT_PRODUCT_IMAGE } from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import './BuyerMarketplace.css';
 
 const CATEGORIES = [
@@ -124,14 +125,7 @@ const getDisplayName = (product, isTa) => {
 export default function BuyerMarketplace() {
   const { user } = useAuth();
   const navigate = useNavigate();
-
-  const [language, setLanguage] = useState(() => localStorage.getItem('marketplace_lang') || 'en');
-  const isTa = language === 'ta';
-
-  const toggleLanguage = (lang) => {
-    setLanguage(lang);
-    localStorage.setItem('marketplace_lang', lang);
-  };
+  const { language, isTa, toggleLanguage } = useLanguage();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);

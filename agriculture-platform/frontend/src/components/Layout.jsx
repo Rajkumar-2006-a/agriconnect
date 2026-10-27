@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSwitch from './LanguageSwitch';
 import './Layout.css';
 
 export default function Layout({ children }) {
   const { user, logout } = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -77,17 +80,20 @@ export default function Layout({ children }) {
 
           <div className={`collapse navbar-collapse ${menuOpen ? 'show' : ''}`}>
             <div className="navbar-nav ms-auto align-items-lg-center">
+              {/* Global Bilingual Language Switcher */}
+              <LanguageSwitch className="my-2 my-lg-0" />
+
               {/* Buyer Navigation Links */}
               {user?.role === 'buyer' ? (
                 <>
                   <NavLink className="nav-link nav-link-custom" to="/products" onClick={closeMenu}>
-                    <span className="me-1">🛒</span> Fresh Marketplace
+                    <span className="me-1">🛒</span> {t('freshMarketplace', 'Fresh Marketplace')}
                   </NavLink>
                   <NavLink className="nav-link nav-link-custom" to="/purchases" onClick={closeMenu}>
-                    <span className="me-1">📦</span> My Purchases
+                    <span className="me-1">📦</span> {t('myPurchases', 'My Purchases')}
                   </NavLink>
                   <NavLink className="nav-link nav-link-custom nav-link-cart" to="/cart" onClick={closeMenu}>
-                    <span className="me-1">🛍️</span> Cart
+                    <span className="me-1">🛍️</span> {t('cart', 'Cart')}
                     {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
                   </NavLink>
                   <div className="nav-user-pill">
@@ -100,17 +106,17 @@ export default function Layout({ children }) {
                         📍 {user.location}
                       </span>
                     )}
-                    <span className="user-role-badge">Buyer</span>
+                    <span className="user-role-badge">{t('buyer', 'Buyer')}</span>
                   </div>
                   <button className="btn btn-sm btn-logout-nav ms-lg-2" onClick={leave}>
-                    Log out
+                    {t('logout', 'Log out')}
                   </button>
                 </>
               ) : user?.role === 'rentalOwner' ? (
                 /* Rental Owner Navigation */
                 <>
                   <NavLink className="nav-link nav-link-custom" to="/dashboard" onClick={closeMenu}>
-                    🚜 Machinery Dashboard
+                    🚜 {t('machineryDashboard', 'Machinery Dashboard')}
                   </NavLink>
                   <div className="nav-user-pill">
                     <span className="user-avatar-circle">
@@ -122,20 +128,20 @@ export default function Layout({ children }) {
                         📍 {user.location}
                       </span>
                     )}
-                    <span className="user-role-badge">Rental Owner</span>
+                    <span className="user-role-badge">{t('rentalOwner', 'Rental Owner')}</span>
                   </div>
                   <button className="btn btn-sm btn-logout-nav ms-lg-2" onClick={leave}>
-                    Log out
+                    {t('logout', 'Log out')}
                   </button>
                 </>
               ) : user?.role === 'admin' ? (
                 /* Admin Navigation */
                 <>
                   <NavLink className="nav-link nav-link-custom" to="/admin" onClick={closeMenu}>
-                    🛡️ Admin Panel
+                    🛡️ {t('adminPanel', 'Admin Panel')}
                   </NavLink>
                   <NavLink className="nav-link nav-link-custom" to="/products" onClick={closeMenu}>
-                    🌾 Marketplace
+                    🌾 {t('marketplace', 'Marketplace')}
                   </NavLink>
                   <div className="nav-user-pill">
                     <span className="user-avatar-circle">A</span>
@@ -145,17 +151,17 @@ export default function Layout({ children }) {
                         📍 {user.location}
                       </span>
                     )}
-                    <span className="user-role-badge">Admin</span>
+                    <span className="user-role-badge">{t('admin', 'Admin')}</span>
                   </div>
                   <button className="btn btn-sm btn-logout-nav ms-lg-2" onClick={leave}>
-                    Log out
+                    {t('logout', 'Log out')}
                   </button>
                 </>
               ) : user ? (
                 /* Farmer or other logged in user */
                 <>
                   <NavLink className="nav-link nav-link-custom" to="/dashboard" onClick={closeMenu}>
-                    🌱 Farmer Dashboard
+                    🌱 {t('farmerDashboard', 'Farmer Dashboard')}
                   </NavLink>
                   <div className="nav-user-pill">
                     <span className="user-avatar-circle">
@@ -169,20 +175,20 @@ export default function Layout({ children }) {
                     )}
                   </div>
                   <button className="btn btn-sm btn-logout-nav ms-lg-2" onClick={leave}>
-                    Log out
+                    {t('logout', 'Log out')}
                   </button>
                 </>
               ) : (
                 /* Non-logged in public visitor */
                 <>
                   <NavLink className="nav-link nav-link-custom" to="/products" onClick={closeMenu}>
-                    🌾 Marketplace
+                    🌾 {t('marketplace', 'Marketplace')}
                   </NavLink>
                   <NavLink className="nav-link nav-link-custom" to="/login" onClick={closeMenu}>
-                    Sign in
+                    {t('signIn', 'Sign in')}
                   </NavLink>
                   <NavLink className="btn btn-sm btn-warning ms-lg-2 fw-bold" to="/register" onClick={closeMenu}>
-                    Get started
+                    {t('getStarted', 'Get started')}
                   </NavLink>
                 </>
               )}
@@ -204,10 +210,10 @@ export default function Layout({ children }) {
             </span>
           </div>
           <div className="app-footer-tagline">
-            Empowering Farmers &amp; Buyers across Tamil Nadu with Direct Fair-Price Agriculture
+            {t('tagline', 'Empowering Farmers & Buyers across Tamil Nadu with Direct Fair-Price Agriculture')}
           </div>
           <p className="app-footer-copy">
-            &copy; {new Date().getFullYear()} AgriConnect Platform. All rights reserved.
+            &copy; {new Date().getFullYear()} AgriConnect Platform. {t('rights', 'All rights reserved.')}
           </p>
         </div>
       </footer>

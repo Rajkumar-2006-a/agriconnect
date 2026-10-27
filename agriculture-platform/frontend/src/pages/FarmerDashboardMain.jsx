@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api, { imageUrl, DEFAULT_EQUIPMENT_IMAGE } from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSwitch from '../components/LanguageSwitch';
 import { TAMIL_NADU_DISTRICTS } from '../constants/tamilNaduLocations';
 import MyProductsSection from '../components/MyProductsSection';
 import FarmerCollaborationSection from '../components/FarmerCollaborationSection';
@@ -50,6 +52,7 @@ const THEMES = [
 
 export default function FarmerDashboardMain({ initialSection }) {
   const { user, logout, setUser } = useAuth();
+  const { t, isTa } = useLanguage();
   const navigate = useNavigate();
   const [section, setSection] = useState(() => {
     if (initialSection) return initialSection;
@@ -300,14 +303,14 @@ export default function FarmerDashboardMain({ initialSection }) {
   }[section];
 
   const NAV_ITEMS = [
-    { key: 'products', label: 'My Products', icon: LeafIcon },
-    { key: 'orders', label: 'Orders', icon: ClipboardIcon },
-    { key: 'equipment', label: 'Rent Equipment', icon: TractorIcon },
-    { key: 'rentals', label: 'Rental Status', icon: CalendarIcon },
-    { key: 'doctors', label: 'Agri Doctors', icon: StethoscopeIcon },
-    { key: 'collaboration', label: 'Farmer Collaboration', icon: UsersIcon },
-    { key: 'fertilizers', label: 'Fertilizer Prices', icon: FertilizerIcon },
-    { key: 'schemes', label: 'Govt Schemes', icon: GovtSchemeIcon }
+    { key: 'products', label: t('tab_products', 'My Products'), icon: LeafIcon },
+    { key: 'orders', label: t('tab_orders', 'Orders'), icon: ClipboardIcon },
+    { key: 'equipment', label: t('tab_equipment', 'Rent Equipment'), icon: TractorIcon },
+    { key: 'rentals', label: t('rentals', 'Rental Status'), icon: CalendarIcon },
+    { key: 'doctors', label: t('tab_doctors', 'Agri Doctors'), icon: StethoscopeIcon },
+    { key: 'collaboration', label: t('tab_collaboration', 'Farmer Collaboration'), icon: UsersIcon },
+    { key: 'fertilizers', label: t('tab_fertilizers', 'Fertilizer Prices'), icon: FertilizerIcon },
+    { key: 'schemes', label: t('tab_schemes', 'Govt Schemes'), icon: GovtSchemeIcon }
   ];
 
   return (
@@ -345,12 +348,15 @@ export default function FarmerDashboardMain({ initialSection }) {
           <div className="topbar-current-tab-pill">
             <span className="tab-pill-dot">●</span>
             <span className="tab-pill-text">
-              {NAV_ITEMS.find((n) => n.key === section)?.label || 'Farmer Dashboard'}
+              {NAV_ITEMS.find((n) => n.key === section)?.label || (isTa ? 'விவசாயி கட்டுப்பாட்டு அறை' : 'Farmer Dashboard')}
             </span>
           </div>
         </div>
 
         <div className="topbar-right-controls">
+            {/* Global Language Switcher */}
+            <LanguageSwitch />
+
             {/* Live Theme Switcher */}
             <div className="theme-switcher-wrapper">
               <button

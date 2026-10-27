@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import api from '../services/api';
+import { useLanguage } from '../context/LanguageContext';
 import FertilizerPriceTable from '../components/FertilizerPriceTable';
 import './FertilizerPrices.css';
 
@@ -143,15 +144,7 @@ const FALLBACK_PRICES = {
 };
 
 export default function FertilizerPricePage() {
-  const [language, setLanguage] = useState(() => {
-    return localStorage.getItem('fert_lang') || 'en';
-  });
-  const isTa = language === 'ta';
-
-  const toggleLanguage = (lang) => {
-    setLanguage(lang);
-    localStorage.setItem('fert_lang', lang);
-  };
+  const { language, isTa, toggleLanguage } = useLanguage();
 
   const [fertilizers, setFertilizers] = useState(DEFAULT_FERTILIZERS);
   const [loadingList, setLoadingList] = useState(false);
