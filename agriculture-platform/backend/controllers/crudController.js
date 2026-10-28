@@ -7,15 +7,34 @@ const resolveImageUrl = (file) => {
   if (file.path && (file.path.startsWith('http://') || file.path.startsWith('https://'))) return file.path;
   return file.filename ? `/uploads/${file.filename}` : undefined;
 };
-const image = req => resolveImageUrl(req.file);
-const attachmentData = req => {
+const image = req => resolveImageUrl(req.file || req.files?.image?.[0]);
+const attachmentData = (req, existingAttachments = []) => {
+  const files = req.files?.attachmentImages || [];
+  let fileIndex = 0;
+
+  if (req.body.attachmentMeta) {
+    try {
+      const meta = JSON.parse(req.body.attachmentMeta);
+      return meta.map((item) => {
+        let img = item.existingImage || undefined;
+        if (item.hasNewFile && files[fileIndex]) {
+          img = resolveImageUrl(files[fileIndex]);
+          fileIndex++;
+        }
+        return { name: item.name, image: img };
+      }).filter((item) => item.name);
+    } catch {}
+  }
+
   let names = [];
   try { names = JSON.parse(req.body.attachmentNames || '[]'); } catch {}
-  const files = req.files?.attachmentImages || [];
-  return names.map((name, index) => ({
-    name,
-    image: resolveImageUrl(files[index])
-  })).filter(item => item.name);
+  return names.map((name, index) => {
+    const existing = existingAttachments.find((a) => a.name === name);
+    return {
+      name,
+      image: files[index] ? resolveImageUrl(files[index]) : (existing?.image || undefined)
+    };
+  }).filter((item) => item.name);
 };
 const can = (doc, user, field) => user.role === 'admin' || String(doc[field]) === String(user._id);
 export const products=async(req,res,next)=>{try{const q={};if(req.query.category)q.category=req.query.category;if(req.query.search){const searchRegex={$regex:req.query.search,$options:'i'};q.$or=[{productName:searchRegex},{productNameTa:searchRegex},{category:searchRegex},{description:searchRegex}];}if(req.query.includeSold!=='true'){q.isSold={$ne:true};q.quantity={$gte:50};}res.json(await Product.find(q).populate('farmer','name email phone location').sort('-createdAt'));}catch(e){next(e);}};
@@ -26,7 +45,7 @@ export const deleteProduct=async(req,res,next)=>{try{const p=await Product.findB
 export const equipment=async(req,res,next)=>{try{const q={};if(req.query.category)q.category=req.query.category;if(req.query.location)q.location={$regex:req.query.location,$options:'i'};if(req.query.search){const searchRegex={$regex:req.query.search,$options:'i'};q.$or=[{equipmentName:searchRegex},{category:searchRegex},{description:searchRegex},{location:searchRegex}];}res.json(await Equipment.find(q).populate('owner','name email phone location').sort('-createdAt'));}catch(e){next(e);}};
 export const equipmentById=async(req,res,next)=>{try{const d=await Equipment.findById(req.params.id).populate('owner','name email phone location');if(!d)return res.status(404).json({message:'Equipment not found'});res.json(d);}catch(e){next(e);}};
 export const createEquipment=async(req,res,next)=>{try{if(req.body.ownerPhone){req.user.phone=req.body.ownerPhone;await req.user.save();}if(!req.user.phone)return res.status(400).json({message:'Add the equipment owner phone number before publishing a listing'});const attachments=attachmentData(req);res.status(201).json(await Equipment.create({...req.body,image:resolveImageUrl(req.files?.image?.[0]),attachments,owner:req.user._id}));}catch(e){next(e);}};
-export const updateEquipment=async(req,res,next)=>{try{const d=await Equipment.findById(req.params.id);if(!d)return res.status(404).json({message:'Equipment not found'});if(!can(d,req.user,'owner'))return res.status(403).json({message:'Forbidden'});Object.assign(d,req.body);if(image(req))d.image=image(req);await d.save();res.json(d);}catch(e){next(e);}};
+export const updateEquipment=async(req,res,next)=>{try{const d=await Equipment.findById(req.params.id);if(!d)return res.status(404).json({message:'Equipment not found'});if(!can(d,req.user,'owner'))return res.status(403).json({message:'Forbidden'});if(req.body.ownerPhone){req.user.phone=req.body.ownerPhone;await req.user.save();}Object.assign(d,req.body);const newImage=resolveImageUrl(req.file||req.files?.image?.[0]);if(newImage)d.image=newImage;if(req.body.attachmentMeta||req.body.attachmentNames){d.attachments=attachmentData(req,d.attachments);}await d.save();res.json(d);}catch(e){next(e);}};
 export const deleteEquipment=async(req,res,next)=>{try{const d=await Equipment.findById(req.params.id);if(!d)return res.status(404).json({message:'Equipment not found'});if(!can(d,req.user,'owner'))return res.status(403).json({message:'Forbidden'});await d.deleteOne();res.json({message:'Equipment deleted'});}catch(e){next(e);}};
 export const createOrder=async(req,res,next)=>{try{const {products}=req.body;if(!products?.length)return res.status(400).json({message:'Cart is empty'});const listings=await Product.find({_id:{$in:products.map(item=>item.product)},isSold:{$ne:true},quantity:{$gte:50}});if(listings.length!==products.length)return res.status(400).json({message:'One or more products are unavailable or have less than 50 kg available'});const safeProducts=products.map(item=>{const listing=listings.find(product=>String(product._id)===String(item.product));const quantity=Number(item.quantity);if(!listing||!Number.isInteger(quantity))throw new Error(`Invalid quantity for ${listing?.productName||'product'}`);if(quantity<50)throw new Error(`Minimum purchase quantity is 50 kg for ${listing.productName}`);if(quantity>listing.quantity)throw new Error(`Insufficient quantity for ${listing.productName} (only ${listing.quantity} kg available)`);return {product:listing._id,productName:listing.productName,quantity,price:listing.price,image:listing.image};});const totalAmount=safeProducts.reduce((total,item)=>total+item.price*item.quantity,0);res.status(201).json(await Order.create({buyer:req.user._id,products:safeProducts,totalAmount}));}catch(e){if(e.message?.startsWith('Minimum purchase')||e.message?.startsWith('Insufficient quantity')||e.message?.startsWith('Invalid quantity'))return res.status(400).json({message:e.message});next(e);}};
 export const orders=async(req,res,next)=>{try{let q={};if(req.query.asBuyer==='true'||req.query.type==='purchases'){q={buyer:req.user._id};}else if(req.user.role==='buyer'){q={buyer:req.user._id};}else if(req.user.role==='farmer'){q={'products.product':{$in:await Product.find({farmer:req.user._id}).distinct('_id')}};}res.json(await Order.find(q).populate('buyer','name email phone location').populate('products.product').sort('-createdAt'));}catch(e){next(e);}};

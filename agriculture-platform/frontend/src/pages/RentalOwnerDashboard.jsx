@@ -95,6 +95,12 @@ export default function RentalOwnerDashboard() {
         data.append('image', form.image);
       }
       const attachments = (form.attachments || []).filter((item) => item.name && item.name.trim());
+      const attachmentMeta = attachments.map((item) => ({
+        name: item.name.trim(),
+        existingImage: typeof item.image === 'string' ? item.image : null,
+        hasNewFile: Boolean(item.image && typeof item.image !== 'string')
+      }));
+      data.append('attachmentMeta', JSON.stringify(attachmentMeta));
       data.append('attachmentNames', JSON.stringify(attachments.map((item) => item.name.trim())));
       attachments.forEach((item) => {
         if (item.image && typeof item.image !== 'string') {
@@ -612,6 +618,11 @@ function EquipmentForm({ form, change, publish, editingId, cancelEdit }) {
                         updateAttachment(index, 'image', event.target.files[0] || null)
                       }
                     />
+                    {typeof attachment.image === 'string' && attachment.image && (
+                      <small className="text-muted d-block mt-1">
+                        Current image saved. Uploading a new file will replace it.
+                      </small>
+                    )}
                   </div>
                   <div className="col-md-2">
                     <button

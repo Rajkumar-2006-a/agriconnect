@@ -33,7 +33,7 @@ r.route('/equipment')
   .post(protect, authorize('rentalOwner'), upload.fields([{ name: 'image', maxCount: 1 }, { name: 'attachmentImages', maxCount: 8 }]), c.createEquipment);
 r.route('/equipment/:id')
   .get(c.equipmentById)
-  .put(protect, authorize('rentalOwner', 'admin'), upload.single('image'), c.updateEquipment)
+  .put(protect, authorize('rentalOwner', 'admin'), upload.fields([{ name: 'image', maxCount: 1 }, { name: 'attachmentImages', maxCount: 8 }]), c.updateEquipment)
   .delete(protect, authorize('rentalOwner', 'admin'), c.deleteEquipment);
 
 // Orders & Rentals
