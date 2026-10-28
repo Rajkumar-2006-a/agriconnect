@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import api, { imageUrl, DEFAULT_EQUIPMENT_IMAGE } from '../services/api';
+import api, { imageUrl, DEFAULT_EQUIPMENT_IMAGE, DEFAULT_PRODUCT_IMAGE } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSwitch from '../components/LanguageSwitch';
@@ -569,50 +569,188 @@ export default function FarmerDashboardMain({ initialSection }) {
 
         {section === 'orders' && (
           <div className="farm-panel">
-            <h2>Customer orders</h2>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <h2 className="mb-1">{isTa ? 'வாடிக்கையாளர் ஆர்டர்கள்' : 'Customer Orders'}</h2>
+                <small className="text-muted">
+                  {orders.length} {isTa ? 'ஆர்டர்கள் பெறப்பட்டுள்ளன' : `order${orders.length === 1 ? '' : 's'} received for your farm produce`}
+                </small>
+              </div>
+            </div>
+
             {orders.length ? (
-              orders.map((order) => (
-                <div className="order-row" key={order._id}>
-                  <div>
-                    <b>Order #{order._id.slice(-6)}</b>
-                    <small>
-                      Buyer: {order.buyer?.name} · Phone: {order.buyer?.phone || 'Not provided'}
-                      {order.buyer?.location && (
-                        <span className="ms-1 text-success fw-semibold">· 📍 {order.buyer.location}</span>
-                      )}
-                    </small>
-                  </div>
-                  {order.orderStatus === 'pending' ? (
-                    <div>
-                      <button
-                        className="btn btn-sm btn-success me-2"
-                        onClick={() => updateOrder(order._id, 'confirmed')}
-                      >
-                        Accept
-                      </button>
-                      <button
-                        className="btn btn-sm btn-outline-danger"
-                        onClick={() => updateOrder(order._id, 'cancelled')}
-                      >
-                        Reject
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="text-end">
-                      <span className="status-pill text-capitalize">{order.orderStatus}</span>
-                      {order.orderStatus === 'confirmed' && (
-                        <div className="mt-1">
-                          <small className="text-success fw-semibold d-inline-flex align-items-center gap-1" style={{ fontSize: '11px' }}>
-                            ✉️ Mail sent to {order.buyer?.email || 'buyer'}
-                          </small>
+              <div className="farmer-orders-list">
+                {orders.map((order) => {
+                  const orderDate = order.createdAt
+                    ? new Date(order.createdAt).toLocaleDateString('en-IN', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })
+                    : 'Recent';
+
+                  const calculatedTotal = (order.products || []).reduce(
+                    (sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 0),
+                    0
+                  );
+                  const displayTotal = order.totalAmount || calculatedTotal;
+
+                  return (
+                    <article className="farmer-order-card" key={order._id}>
+                      {/* 1. Order Header */}
+                      <div className="farmer-order-header">
+                        <div className="farmer-order-meta">
+                          <div className="d-flex align-items-center gap-2 flex-wrap mb-1">
+                            <span className="farmer-order-id">
+                              Order #{order._id.slice(-6).toUpperCase()}
+                            </span>
+                            <span className="farmer-order-date">
+                              📅 {orderDate}
+                            </span>
+                          </div>
+                          <div className="farmer-order-buyer-info">
+                            <span>
+                              🧑‍💼 {isTa ? 'வாங்குபவர்' : 'Buyer'}: <strong>{order.buyer?.name || 'Customer'}</strong>
+                            </span>
+                            {order.buyer?.phone && (
+                              <a href={`tel:${order.buyer.phone}`} className="farmer-order-phone-link">
+                                📞 {order.buyer.phone}
+                              </a>
+                            )}
+                            {order.buyer?.location && (
+                              <span className="farmer-order-location-tag">
+                                📍 {order.buyer.location}
+                              </span>
+                            )}
+                          </div>
                         </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              ))
+
+                        {/* Status / Actions */}
+                        <div className="farmer-order-actions-wrap">
+                          {order.orderStatus === 'pending' ? (
+                            <div className="d-flex align-items-center gap-2">
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-success px-3 fw-bold"
+                                onClick={() => updateOrder(order._id, 'confirmed')}
+                              >
+                                ✓ {isTa ? 'ஏற்கவும்' : 'Accept'}
+                              </button>
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-outline-danger px-3 fw-semibold"
+                                onClick={() => updateOrder(order._id, 'cancelled')}
+                              >
+                                ✕ {isTa ? 'நிராகரி' : 'Reject'}
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="text-end">
+                              <span className={`status-pill status-${order.orderStatus} text-capitalize`}>
+                                {order.orderStatus === 'confirmed' ? (isTa ? '✓ உறுதி செய்யப்பட்டது' : '✓ Confirmed') : order.orderStatus}
+                              </span>
+                              {order.orderStatus === 'confirmed' && (
+                                <div className="mt-1">
+                                  <small className="text-success fw-semibold d-inline-flex align-items-center gap-1" style={{ fontSize: '11.5px' }}>
+                                    ✉️ {isTa ? 'மின்னஞ்சல் அனுப்பப்பட்டது' : 'Mail sent to'} {order.buyer?.email || 'buyer'}
+                                  </small>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* 2. Products List with Images */}
+                      <div className="farmer-order-products-wrap">
+                        <div className="farmer-order-products-title">
+                          {isTa ? 'ஆர்டர் செய்யப்பட்ட பொருட்கள்:' : 'Ordered Produce:'}
+                        </div>
+                        <div className="farmer-order-products-grid">
+                          {(order.products || []).map((item, idx) => {
+                            const prodImage = item.image || item.product?.image;
+                            const prodName = (isTa && item.product?.productNameTa)
+                              ? item.product.productNameTa
+                              : (item.productName || item.product?.productName || 'Agricultural Produce');
+                            const prodCategory = item.product?.category;
+                            const itemPrice = Number(item.price) || 0;
+                            const itemQty = Number(item.quantity) || 1;
+                            const itemTotal = itemPrice * itemQty;
+
+                            return (
+                              <div className="farmer-order-item" key={item._id || idx}>
+                                <div className="farmer-order-thumb-box">
+                                  <img
+                                    src={imageUrl(prodImage, DEFAULT_PRODUCT_IMAGE)}
+                                    alt={prodName}
+                                    className="farmer-order-thumb"
+                                    onError={(e) => {
+                                      e.currentTarget.onerror = null;
+                                      e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
+                                    }}
+                                  />
+                                </div>
+                                <div className="farmer-order-item-details">
+                                  <h4 className="farmer-order-item-name">{prodName}</h4>
+                                  <div className="d-flex align-items-center gap-2 flex-wrap">
+                                    {prodCategory && (
+                                      <span className="farmer-order-category-tag">{prodCategory}</span>
+                                    )}
+                                    <span className="farmer-order-rate-tag">
+                                      ₹{itemPrice} / kg
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="farmer-order-item-qty-price text-end">
+                                  <div className="farmer-order-qty-val">
+                                    {isTa ? 'அளவு:' : 'Quantity:'} <strong>{itemQty} kg</strong>
+                                  </div>
+                                  <div className="farmer-order-item-subtotal">
+                                    ₹{itemTotal.toLocaleString('en-IN')}
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* 3. Order Footer with Total Price */}
+                      <div className="farmer-order-footer">
+                        <div className="farmer-order-footer-items">
+                          <span>
+                            {isTa ? 'மொத்த பொருட்கள்:' : 'Total Items:'}{' '}
+                            <strong>{(order.products || []).length}</strong>
+                          </span>
+                          <span>
+                            {isTa ? 'மொத்த எடை:' : 'Total Weight:'}{' '}
+                            <strong>
+                              {(order.products || []).reduce((acc, p) => acc + (Number(p.quantity) || 0), 0)} kg
+                            </strong>
+                          </span>
+                        </div>
+                        <div className="farmer-order-total-price-box">
+                          <span className="farmer-order-total-label">
+                            {isTa ? 'மொத்த தொகை:' : 'Total Price:'}
+                          </span>
+                          <span className="farmer-order-total-val">
+                            ₹{displayTotal.toLocaleString('en-IN')}
+                          </span>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
             ) : (
-              <p className="text-muted">No orders received yet.</p>
+              <div className="text-center py-5">
+                <div style={{ fontSize: 36, marginBottom: 8 }}>📦</div>
+                <p className="text-muted mb-0">
+                  {isTa ? 'இன்னும் ஆர்டர்கள் பெறப்படவில்லை.' : 'No orders received yet.'}
+                </p>
+              </div>
             )}
           </div>
         )}

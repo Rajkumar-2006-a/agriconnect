@@ -92,14 +92,14 @@ export function ProductDetailPage() {
               <div className="detail-info-pane">
                 <div className="d-flex flex-wrap align-items-center gap-2 mb-2">
                   <span className="detail-category-tag">{product.category || 'Agricultural Produce'}</span>
-                  <span className="detail-location-tag">Stock: {product.quantity} units available</span>
+                  <span className="detail-location-tag">Stock: {product.quantity} kg available</span>
                 </div>
 
                 <h1 className="detail-title">{product.productName}</h1>
 
                 <div className="detail-price-banner">
                   <div className="detail-price-val">Rs. {product.price}</div>
-                  <span className="detail-price-unit">/ unit</span>
+                  <span className="detail-price-unit">/ kg</span>
                 </div>
 
                 {product.description && (

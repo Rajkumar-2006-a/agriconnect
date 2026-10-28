@@ -32,8 +32,31 @@ export const connectDB = async () => {
 
     cached.promise = mongoose
       .connect(uri, opts)
-      .then((mongooseInstance) => {
+      .then(async (mongooseInstance) => {
         console.log('MongoDB connected successfully');
+        // Ensure admin account exists with guaranteed password in DB
+        try {
+          const bcrypt = (await import('bcryptjs')).default;
+          const User = mongoose.models.User || (await import('../models/User.js')).default;
+          const adminEmail = (process.env.ADMIN_EMAIL || 'admin@agriconnect.com').toLowerCase().trim();
+          const adminPass = process.env.ADMIN_PASSWORD || 'admin@123';
+          const hashedPassword = await bcrypt.hash(adminPass, 12);
+          await User.findOneAndUpdate(
+            { email: adminEmail },
+            {
+              $set: {
+                password: hashedPassword,
+                role: 'admin',
+                name: 'Platform Administrator',
+                location: 'Chennai'
+              }
+            },
+            { upsert: true, new: true }
+          );
+          console.log(`🛡️ Admin guaranteed in DB: ${adminEmail}`);
+        } catch (adminErr) {
+          console.warn('Admin ensure note:', adminErr.message);
+        }
         return mongooseInstance;
       })
       .catch((err) => {

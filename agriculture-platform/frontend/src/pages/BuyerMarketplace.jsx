@@ -534,7 +534,7 @@ export default function BuyerMarketplace() {
                       className={`buyer-card-stock-pill ${isLowStock ? 'low-stock' : ''}`}
                     >
                       {product.quantity > 0
-                        ? `${product.quantity} ${isTa ? 'கையிருப்பு' : 'units left'}`
+                        ? `${product.quantity} ${isTa ? 'கிலோ கையிருப்பு' : 'kg left'}`
                         : (isTa ? 'கையிருப்பு இல்லை' : 'Out of Stock')}
                     </span>
                   </div>
@@ -573,7 +573,7 @@ export default function BuyerMarketplace() {
                     {/* Price Row */}
                     <div className="buyer-card-price-row">
                       <span className="buyer-card-price">₹{product.price}</span>
-                      <span className="buyer-card-unit">/ {isTa ? 'கிலோ அல்லது அலகு' : 'kg or unit'}</span>
+                      <span className="buyer-card-unit">/ {isTa ? 'கிலோ' : 'kg'}</span>
                     </div>
 
                     {/* Action Buttons */}
@@ -668,7 +668,7 @@ export default function BuyerMarketplace() {
                   />
                   <div className="buyer-modal-info">
                     <h4>{getDisplayName(buyModalItem, isTa)}</h4>
-                    <p className="text-success fw-bold">₹{buyModalItem.price} / {isTa ? 'அலகு' : 'unit'}</p>
+                    <p className="text-success fw-bold">₹{buyModalItem.price} / {isTa ? 'கிலோ' : 'kg'}</p>
                     <p>🧑‍🌾 {isTa ? 'விவசாயி' : 'Farmer'}: {buyModalItem.farmer?.name || (isTa ? 'உள்ளூர் விவசாயி' : 'Local Farmer')}</p>
                   </div>
                 </div>

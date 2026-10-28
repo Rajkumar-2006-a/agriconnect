@@ -3406,3 +3406,236 @@ body:has(.agri-farmer-app) footer {
   color: #374151;
   line-height: 1.5;
 }
+
+
+/* ========================================================
+   Customer Orders Section Styling (Produce Images & Total Price)
+   ======================================================== */
+.farmer-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.farmer-order-card {
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #e2ece4);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 10px rgba(18, 61, 38, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.farmer-order-card:hover {
+  box-shadow: 0 6px 18px rgba(18, 61, 38, 0.08);
+}
+
+.farmer-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  flex-wrap: wrap;
+}
+
+.farmer-order-id {
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--primary-btn, #16803c);
+  letter-spacing: 0.3px;
+}
+
+.farmer-order-date {
+  font-size: 12.5px;
+  color: var(--secondary-text, #64748b);
+  font-weight: 500;
+}
+
+.farmer-order-buyer-info {
+  font-size: 13.5px;
+  color: var(--main-text, #334155);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.farmer-order-phone-link {
+  color: #16a34a;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 2px 8px;
+  background: rgba(22, 163, 74, 0.08);
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  border-radius: 6px;
+  font-size: 12.5px;
+  transition: all 0.15s ease;
+}
+
+.farmer-order-phone-link:hover {
+  background: rgba(22, 163, 74, 0.16);
+  color: #15803d;
+}
+
+.farmer-order-location-tag {
+  font-size: 12px;
+  font-weight: 600;
+  color: #047857;
+  background: #eef8f2;
+  border: 1px solid #d1fae5;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.farmer-order-actions-wrap {
+  flex-shrink: 0;
+}
+
+.farmer-order-products-wrap {
+  padding: 14px 0 12px;
+}
+
+.farmer-order-products-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--secondary-text, #64748b);
+  margin-bottom: 10px;
+}
+
+.farmer-order-products-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.farmer-order-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #f9fbf9;
+  border: 1px solid #eef3ef;
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.farmer-order-thumb-box {
+  width: 58px;
+  height: 58px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eef6f0;
+  flex-shrink: 0;
+  border: 1px solid #dce8df;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.farmer-order-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.farmer-order-item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.farmer-order-item-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--main-text, #1e293b);
+  margin: 0 0 4px;
+}
+
+.farmer-order-category-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #15803d;
+  background: #dcfce7;
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+
+.farmer-order-rate-tag {
+  font-size: 12.5px;
+  color: var(--secondary-text, #64748b);
+  font-weight: 600;
+}
+
+.farmer-order-item-qty-price {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.farmer-order-qty-val {
+  font-size: 13.5px;
+  color: var(--main-text, #334155);
+}
+
+.farmer-order-item-subtotal {
+  font-size: 15px;
+  font-weight: 800;
+  color: #16803c;
+  margin-top: 2px;
+}
+
+.farmer-order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.farmer-order-footer-items {
+  font-size: 13px;
+  color: var(--secondary-text, #64748b);
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.farmer-order-total-price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.farmer-order-total-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--main-text, #334155);
+}
+
+.farmer-order-total-val {
+  font-size: 21px;
+  font-weight: 900;
+  color: #16803c;
+}
+
+.status-pill.status-pending {
+  background: #fef9c3;
+  color: #854d0e;
+  border: 1px solid #fde047;
+}
+
+.status-pill.status-confirmed {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.status-pill.status-cancelled {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}

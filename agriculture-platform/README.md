@@ -321,7 +321,7 @@ CLIENT_URL=http://localhost:5173
 
 # Default Platform Administrator (used by npm run seed)
 ADMIN_EMAIL=admin@agriconnect.com
-ADMIN_PASSWORD=Admin@12345
+ADMIN_PASSWORD=admin@123
 ADMIN_PHONE=9876543210
 
 # External Agriculture APIs & Caching

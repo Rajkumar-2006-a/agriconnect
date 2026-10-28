@@ -114,7 +114,7 @@ export default function BuyerOrders() {
                           <div className="buyer-order-item-details">
                             <span className="buyer-order-item-name">{item.productName}</span>
                             <span className="buyer-order-item-qty">
-                              Quantity: {item.quantity} units · ₹{item.price}/unit
+                              Quantity: {item.quantity} kg · ₹{item.price}/kg
                             </span>
                           </div>
                           <div className="buyer-order-item-price">

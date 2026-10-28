@@ -228,6 +228,19 @@ export default function SimpleAuth({ mode }) {
             </button>
           </form>
 
+          {!registering && (
+            <div className="text-center mt-3">
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary text-muted border-0 py-1 px-2"
+                style={{ fontSize: '12px', opacity: 0.8 }}
+                onClick={() => setForm({ ...form, email: 'admin@agriconnect.com', password: 'admin@123' })}
+              >
+                🛡️ Quick Fill Admin (`admin@agriconnect.com`)
+              </button>
+            </div>
+          )}
+
           <div className="auth-switch-text">
             {registering ? (
               <span>

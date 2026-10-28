@@ -1185,7 +1185,7 @@ export default function MyProductsSection({
               <div className="details-meta-grid">
                 <div className="details-meta-item">
                   <small>Available Stock</small>
-                  <b>{viewProduct.quantity} units</b>
+                  <b>{viewProduct.quantity} {getProductUnit(viewProduct)}</b>
                 </div>
                 <div className="details-meta-item">
                   <small>Location</small>

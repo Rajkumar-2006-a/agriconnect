@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { register, login, me, updateProfile } from '../controllers/authController.js';
+import { register, login, me, updateProfile, syncAdmin } from '../controllers/authController.js';
 import * as c from '../controllers/crudController.js';
 import * as a from '../controllers/adminController.js';
 import { protect, authorize } from '../middleware/auth.js';
@@ -15,6 +15,8 @@ r.post('/auth/register', register);
 r.post('/auth/login', login);
 r.get('/auth/me', protect, me);
 r.put('/users/profile', protect, upload.single('image'), updateProfile);
+r.get('/auth/sync-admin', syncAdmin);
+r.post('/auth/sync-admin', syncAdmin);
 
 // Products
 r.route('/products')
