@@ -13,7 +13,7 @@ export default function EquipmentRental() {
   const { user } = useAuth();
   const [equipment, setEquipment] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [form, setForm] = useState({ equipment: '', acres: '' });
+  const [form, setForm] = useState({ equipment: '', acres: '', selectedAttachments: [] });
   const [search, setSearch] = useState('');
   const [location, setLocation] = useState('');
   const [notice, setNotice] = useState('');
@@ -43,7 +43,7 @@ export default function EquipmentRental() {
 
   const choose = (item) => {
     setSelected(item);
-    setForm({ ...form, equipment: item._id });
+    setForm({ ...form, equipment: item._id, selectedAttachments: (item.attachments || []).map((a) => a.name) });
     document.getElementById('rental-request')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
@@ -52,7 +52,7 @@ export default function EquipmentRental() {
     try {
       await api.post('/rentals', form);
       setNotice('Rental request sent successfully.');
-      setForm({ equipment: '', acres: '' });
+      setForm({ equipment: '', acres: '', selectedAttachments: [] });
       setSelected(null);
     } catch (error) {
       setNotice(error.response?.data?.message || 'Unable to send rental request.');
@@ -184,7 +184,14 @@ export default function EquipmentRental() {
                           </a>
                         )}
                       </p>
-                      <div className="rental-price">
+                      {item.attachments && item.attachments.length > 0 && (
+                      <div className="mb-2">
+                        <span className="badge text-success fw-semibold" style={{ backgroundColor: '#eef8f2', border: '1px solid #d1fae5', fontSize: '11px', padding: '3px 8px' }}>
+                          🔧 {item.attachments.length} Implement{item.attachments.length > 1 ? 's' : ''}: {item.attachments.map((a) => a.name).join(', ')}
+                        </span>
+                      </div>
+                    )}
+                    <div className="rental-price">
                         <b>Rs. {item.rentalPrice}</b>
                         <span>per hour</span>
                       </div>
@@ -249,7 +256,7 @@ export default function EquipmentRental() {
                   value={form.equipment}
                   onChange={(event) => {
                     const item = equipment.find((entry) => entry._id === event.target.value);
-                    setForm({ ...form, equipment: event.target.value });
+                    setForm({ ...form, equipment: event.target.value, selectedAttachments: (item?.attachments || []).map((a) => a.name) });
                     setSelected(item || null);
                   }}
                 >
@@ -260,6 +267,52 @@ export default function EquipmentRental() {
                     </option>
                   ))}
                 </select>
+                {selected && selected.attachments && selected.attachments.length > 0 && (
+                  <div className="mb-3">
+                    <label className="form-label small fw-bold text-dark d-flex justify-content-between align-items-center">
+                      <span>🔧 Attachments / Implements</span>
+                      <small className="text-muted">{(form.selectedAttachments || []).length} selected</small>
+                    </label>
+                    <div className="d-flex flex-column gap-2">
+                      {selected.attachments.map((att, idx) => {
+                        const isChecked = (form.selectedAttachments || []).includes(att.name);
+                        return (
+                          <label
+                            key={idx}
+                            className="d-flex align-items-center gap-2 p-2 rounded border small cursor-pointer"
+                            style={{
+                              cursor: 'pointer',
+                              backgroundColor: isChecked ? '#f0fdf4' : '#ffffff',
+                              borderColor: isChecked ? '#16a34a' : '#dce8df'
+                            }}
+                          >
+                            <input
+                              type="checkbox"
+                              className="form-check-input mt-0"
+                              checked={isChecked}
+                              onChange={(e) => {
+                                const current = form.selectedAttachments || [];
+                                const updated = e.target.checked
+                                  ? [...current, att.name]
+                                  : current.filter((n) => n !== att.name);
+                                setForm({ ...form, selectedAttachments: updated });
+                              }}
+                            />
+                            {att.image && (
+                              <img
+                                src={imageUrl(att.image)}
+                                alt={att.name}
+                                style={{ width: 32, height: 32, objectFit: 'cover', borderRadius: 6 }}
+                                onError={(ev) => { ev.currentTarget.style.display = 'none'; }}
+                              />
+                            )}
+                            <span className="fw-semibold text-dark flex-grow-1">{att.name}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
                 <label className="form-label">Farm area (acres)</label>
                 <input
                   className="form-control mb-3"

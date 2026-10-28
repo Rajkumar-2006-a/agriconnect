@@ -144,17 +144,20 @@ export default function FarmerDashboardMain({ initialSection }) {
   const [bookingAcres, setBookingAcres] = useState('');
   const [bookingNotice, setBookingNotice] = useState('');
   const [isSubmittingBooking, setIsSubmittingBooking] = useState(false);
+  const [selectedAttachments, setSelectedAttachments] = useState([]);
 
   const handleOpenBooking = (item) => {
     setBookingEquip(item);
     setBookingAcres('');
     setBookingNotice('');
+    setSelectedAttachments((item.attachments || []).map((a) => a.name));
   };
 
   const handleCloseBooking = () => {
     setBookingEquip(null);
     setBookingAcres('');
     setBookingNotice('');
+    setSelectedAttachments([]);
   };
 
   const handleSubmitBooking = async (e) => {
@@ -169,7 +172,8 @@ export default function FarmerDashboardMain({ initialSection }) {
     try {
       await api.post('/rentals', {
         equipment: bookingEquip._id,
-        acres: acresVal
+        acres: acresVal,
+        selectedAttachments: selectedAttachments
       });
       setBookingNotice(`Rental request for ${bookingEquip.equipmentName} sent! The owner will review your booking.`);
       // Refresh rentals
@@ -867,6 +871,22 @@ export default function FarmerDashboardMain({ initialSection }) {
                         </p>
                       )}
 
+                      {item.attachments && item.attachments.length > 0 && (
+                        <div className="mb-2">
+                          <span
+                            className="badge text-success fw-semibold"
+                            style={{
+                              backgroundColor: '#eef8f2',
+                              border: '1px solid #d1fae5',
+                              fontSize: '11px',
+                              padding: '3px 8px'
+                            }}
+                          >
+                            🔧 {item.attachments.length} Implement{item.attachments.length > 1 ? 's' : ''}: {item.attachments.map((a) => a.name).join(', ')}
+                          </span>
+                        </div>
+                      )}
+
                       <div className="farmer-equipment-price-row">
                         <span className="farmer-equipment-price">₹{item.rentalPrice}</span>
                         <span className="farmer-equipment-unit">/hour</span>
@@ -990,6 +1010,11 @@ export default function FarmerDashboardMain({ initialSection }) {
                           {item.equipment?.rentalPrice && (
                             <div className="rental-spec-pill">
                               💰 <span><b>₹{item.equipment.rentalPrice}</b> / hr</span>
+                            </div>
+                          )}
+                          {item.selectedAttachments && item.selectedAttachments.length > 0 && (
+                            <div className="rental-spec-pill" style={{ gridColumn: '1 / -1' }}>
+                              🔧 <span><b>Implements:</b> {item.selectedAttachments.join(', ')}</span>
                             </div>
                           )}
                         </div>
@@ -1324,6 +1349,86 @@ export default function FarmerDashboardMain({ initialSection }) {
                     )}
                   </div>
                 </div>
+
+                {/* Available Attachments / Implements Section */}
+                {bookingEquip.attachments && bookingEquip.attachments.length > 0 && (
+                  <div className="mb-3">
+                    <label className="form-label fw-bold text-dark small d-flex justify-content-between align-items-center mb-2">
+                      <span>🔧 Tractor Attachments / Implements</span>
+                      <span className="text-muted fw-normal" style={{ fontSize: '11px' }}>
+                        {selectedAttachments.length} of {bookingEquip.attachments.length} selected
+                      </span>
+                    </label>
+                    <div className="d-flex flex-column gap-2">
+                      {bookingEquip.attachments.map((att, idx) => {
+                        const isSelected = selectedAttachments.includes(att.name);
+                        return (
+                          <div
+                            key={idx}
+                            onClick={() => {
+                              if (isSelected) {
+                                setSelectedAttachments(selectedAttachments.filter((n) => n !== att.name));
+                              } else {
+                                setSelectedAttachments([...selectedAttachments, att.name]);
+                              }
+                            }}
+                            className="d-flex align-items-center gap-3 p-2 rounded-3 border"
+                            style={{
+                              cursor: 'pointer',
+                              borderColor: isSelected ? '#16a34a' : '#e2e8f0',
+                              backgroundColor: isSelected ? '#f0fdf4' : '#ffffff',
+                              transition: 'all 0.15s ease'
+                            }}
+                          >
+                            <input
+                              type="checkbox"
+                              className="form-check-input mt-0"
+                              checked={isSelected}
+                              onChange={() => {}}
+                              style={{ cursor: 'pointer', accentColor: '#16a34a' }}
+                            />
+                            {att.image ? (
+                              <img
+                                src={imageUrl(att.image)}
+                                alt={att.name}
+                                style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: 8, border: '1px solid #dce8df' }}
+                                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                              />
+                            ) : (
+                              <div
+                                style={{
+                                  width: 44,
+                                  height: 44,
+                                  borderRadius: 8,
+                                  background: '#e8f5ec',
+                                  display: 'grid',
+                                  placeItems: 'center',
+                                  fontSize: '20px'
+                                }}
+                              >
+                                ⚙️
+                              </div>
+                            )}
+                            <div className="flex-grow-1 min-w-0">
+                              <span className="fw-bold d-block text-dark text-truncate" style={{ fontSize: '13.5px' }}>
+                                {att.name}
+                              </span>
+                              <span className="text-muted d-block" style={{ fontSize: '11.5px' }}>
+                                Included with machinery upon booking
+                              </span>
+                            </div>
+                            <span
+                              className={`badge rounded-pill ${isSelected ? 'bg-success' : 'bg-light text-muted border'}`}
+                              style={{ fontSize: '10.5px', padding: '5px 10px' }}
+                            >
+                              {isSelected ? '✓ Added' : 'Tap to add'}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
 
                 {/* Booking Form */}
                 {bookingNotice ? (

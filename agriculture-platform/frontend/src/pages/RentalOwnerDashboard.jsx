@@ -445,6 +445,11 @@ export default function RentalOwnerDashboard() {
                       )}
                     </small>
                     <small>Farm area: {item.acres} acres</small>
+                    {item.selectedAttachments && item.selectedAttachments.length > 0 && (
+                      <small className="d-block text-success fw-semibold mt-1">
+                        🔧 Requested Implements: {item.selectedAttachments.join(', ')}
+                      </small>
+                    )}
                   </div>
                   {item.requestStatus === 'pending' ? (
                     <div>
