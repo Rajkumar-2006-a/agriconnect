@@ -147,10 +147,13 @@
 /* 2. MAIN CONTENT AREA */
 .owner-content {
   width: 100%;
-  max-width: 1360px;
-  padding: 32px 36px;
-  margin: 0 auto;
+  max-width: 100%;
+  padding: 28px 32px 36px;
+  margin: 0;
   flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
 }
 
@@ -245,6 +248,11 @@
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(18, 61, 38, 0.05);
   padding: 26px 28px;
+  width: 100%;
+  flex: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .owner-panel h2 {
@@ -548,7 +556,7 @@
 
 /* 8. FORM STYLES */
 .owner-form {
-  max-width: 840px;
+  max-width: 100%;
 }
 
 .owner-checkbox {
