@@ -3409,55 +3409,26 @@ body:has(.agri-farmer-app) footer {
 
 
 /* ========================================================
-   Customer Orders & Dashboard Panels: Glassmorphism Black Shade, Blur & Glowing Borders
+   Customer Orders Section Styling (Produce Images & Total Price)
    ======================================================== */
-.farm-panel {
-  background: rgba(14, 20, 16, 0.88) !important;
-  backdrop-filter: blur(18px) !important;
-  -webkit-backdrop-filter: blur(18px) !important;
-  border: 1px solid rgba(0, 220, 130, 0.30) !important;
-  border-radius: var(--radius-card, 16px);
-  padding: 24px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
-  color: #FFFFFF !important;
-  margin-bottom: 24px;
-  width: 100%;
-  max-width: 100%;
-  animation: cardFadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.farm-panel h2 {
-  color: #FFFFFF !important;
-  font-weight: 800 !important;
-}
-
-.farm-panel .text-muted {
-  color: #CBD5E1 !important;
-}
-
 .farmer-orders-list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  margin-top: 16px;
+  gap: 16px;
+  margin-top: 14px;
 }
 
 .farmer-order-card {
-  background: rgba(8, 12, 10, 0.90) !important;
-  backdrop-filter: blur(18px) !important;
-  -webkit-backdrop-filter: blur(18px) !important;
-  border: 1px solid rgba(0, 220, 130, 0.35) !important;
-  border-radius: 16px !important;
-  padding: 20px 24px !important;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.60), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  color: #FFFFFF !important;
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #e2ece4);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 10px rgba(18, 61, 38, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .farmer-order-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(0, 220, 130, 0.65) !important;
-  box-shadow: 0 14px 42px rgba(0, 0, 0, 0.75), 0 0 24px rgba(0, 220, 130, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.20) !important;
+  box-shadow: 0 6px 18px rgba(18, 61, 38, 0.08);
 }
 
 .farmer-order-header {
@@ -3465,63 +3436,58 @@ body:has(.agri-farmer-app) footer {
   justify-content: space-between;
   align-items: flex-start;
   gap: 14px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   flex-wrap: wrap;
 }
 
 .farmer-order-id {
   font-weight: 800;
-  font-size: 16px;
-  color: #00DC82 !important;
-  letter-spacing: 0.5px;
+  font-size: 15px;
+  color: var(--primary-btn, #16803c);
+  letter-spacing: 0.3px;
 }
 
 .farmer-order-date {
-  font-size: 13px;
-  color: #94A3B8 !important;
+  font-size: 12.5px;
+  color: var(--secondary-text, #64748b);
   font-weight: 500;
 }
 
 .farmer-order-buyer-info {
   font-size: 13.5px;
-  color: #E2E8F0 !important;
+  color: var(--main-text, #334155);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
-.farmer-order-buyer-info strong {
-  color: #FFFFFF !important;
-}
-
 .farmer-order-phone-link {
-  color: #00DC82 !important;
+  color: #16a34a;
   font-weight: 600;
   text-decoration: none;
-  padding: 3px 10px;
-  background: rgba(0, 220, 130, 0.14) !important;
-  border: 1px solid rgba(0, 220, 130, 0.35) !important;
-  border-radius: 8px;
+  padding: 2px 8px;
+  background: rgba(22, 163, 74, 0.08);
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  border-radius: 6px;
   font-size: 12.5px;
   transition: all 0.15s ease;
 }
 
 .farmer-order-phone-link:hover {
-  background: rgba(0, 220, 130, 0.25) !important;
-  color: #FFFFFF !important;
-  border-color: rgba(0, 220, 130, 0.60) !important;
+  background: rgba(22, 163, 74, 0.16);
+  color: #15803d;
 }
 
 .farmer-order-location-tag {
   font-size: 12px;
   font-weight: 600;
-  color: #34D399 !important;
-  background: rgba(16, 185, 129, 0.18) !important;
-  border: 1px solid rgba(52, 211, 153, 0.35) !important;
-  padding: 3px 9px;
-  border-radius: 8px;
+  color: #047857;
+  background: #eef8f2;
+  border: 1px solid #d1fae5;
+  padding: 2px 8px;
+  border-radius: 6px;
 }
 
 .farmer-order-actions-wrap {
@@ -3529,50 +3495,42 @@ body:has(.agri-farmer-app) footer {
 }
 
 .farmer-order-products-wrap {
-  padding: 16px 0 14px;
+  padding: 14px 0 12px;
 }
 
 .farmer-order-products-title {
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
-  color: #94A3B8 !important;
-  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+  color: var(--secondary-text, #64748b);
+  margin-bottom: 10px;
 }
 
 .farmer-order-products-grid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .farmer-order-item {
   display: flex;
   align-items: center;
-  gap: 16px;
-  background: rgba(0, 0, 0, 0.60) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  border-radius: 12px !important;
-  padding: 12px 18px !important;
-  transition: all 0.2s ease;
-}
-
-.farmer-order-item:hover {
-  border-color: rgba(0, 220, 130, 0.45) !important;
-  background: rgba(0, 0, 0, 0.70) !important;
+  gap: 14px;
+  background: #f9fbf9;
+  border: 1px solid #eef3ef;
+  border-radius: 10px;
+  padding: 10px 14px;
 }
 
 .farmer-order-thumb-box {
-  width: 62px;
-  height: 62px;
-  border-radius: 10px;
+  width: 58px;
+  height: 58px;
+  border-radius: 8px;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.75) !important;
+  background: #eef6f0;
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border: 1px solid #dce8df;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3590,25 +3548,24 @@ body:has(.agri-farmer-app) footer {
 }
 
 .farmer-order-item-name {
-  font-size: 15.5px;
+  font-size: 15px;
   font-weight: 700;
-  color: #FFFFFF !important;
-  margin: 0 0 5px;
+  color: var(--main-text, #1e293b);
+  margin: 0 0 4px;
 }
 
 .farmer-order-category-tag {
   font-size: 11px;
   font-weight: 700;
-  color: #00DC82 !important;
-  background: rgba(0, 220, 130, 0.16) !important;
-  border: 1px solid rgba(0, 220, 130, 0.35) !important;
-  padding: 2px 8px;
+  color: #15803d;
+  background: #dcfce7;
+  padding: 1px 7px;
   border-radius: 10px;
 }
 
 .farmer-order-rate-tag {
-  font-size: 13px;
-  color: #94A3B8 !important;
+  font-size: 12.5px;
+  color: var(--secondary-text, #64748b);
   font-weight: 600;
 }
 
@@ -3619,17 +3576,13 @@ body:has(.agri-farmer-app) footer {
 
 .farmer-order-qty-val {
   font-size: 13.5px;
-  color: #CBD5E1 !important;
-}
-
-.farmer-order-qty-val strong {
-  color: #FFFFFF !important;
+  color: var(--main-text, #334155);
 }
 
 .farmer-order-item-subtotal {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 800;
-  color: #00DC82 !important;
+  color: #16803c;
   margin-top: 2px;
 }
 
@@ -3637,141 +3590,52 @@ body:has(.agri-farmer-app) footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 12px;
 }
 
 .farmer-order-footer-items {
-  font-size: 13.5px;
-  color: #94A3B8 !important;
+  font-size: 13px;
+  color: var(--secondary-text, #64748b);
   display: flex;
-  gap: 18px;
+  gap: 16px;
   align-items: center;
-}
-
-.farmer-order-footer-items strong {
-  color: #FFFFFF !important;
 }
 
 .farmer-order-total-price-box {
   display: flex;
   align-items: baseline;
-  gap: 10px;
+  gap: 8px;
 }
 
 .farmer-order-total-label {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
-  color: #E2E8F0 !important;
+  color: var(--main-text, #334155);
 }
 
 .farmer-order-total-val {
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 900;
-  color: #00DC82 !important;
-  letter-spacing: 0.3px;
-  text-shadow: 0 0 16px rgba(0, 220, 130, 0.40);
+  color: #16803c;
 }
 
 .status-pill.status-pending {
-  background: rgba(251, 191, 36, 0.18) !important;
-  color: #FBBF24 !important;
-  border: 1px solid rgba(251, 191, 36, 0.40) !important;
-  border-radius: 9999px;
-  padding: 5px 14px;
-  font-size: 12.5px;
-  font-weight: 700;
+  background: #fef9c3;
+  color: #854d0e;
+  border: 1px solid #fde047;
 }
 
 .status-pill.status-confirmed {
-  background: rgba(0, 220, 130, 0.18) !important;
-  color: #00DC82 !important;
-  border: 1px solid rgba(0, 220, 130, 0.40) !important;
-  border-radius: 9999px;
-  padding: 5px 14px;
-  font-size: 12.5px;
-  font-weight: 700;
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
 }
 
 .status-pill.status-cancelled {
-  background: rgba(239, 68, 68, 0.18) !important;
-  color: #F87171 !important;
-  border: 1px solid rgba(239, 68, 68, 0.40) !important;
-  border-radius: 9999px;
-  padding: 5px 14px;
-  font-size: 12.5px;
-  font-weight: 700;
-}
-
-/* Also style other farmer dashboard cards with the same translucent black shade, blur, and borders */
-.doctor-card {
-  transition: all 0.2s ease;
-  background: rgba(14, 20, 16, 0.88) !important;
-  border: 1px solid rgba(0, 220, 130, 0.28) !important;
-  border-radius: 14px !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-}
-
-.doctor-card:hover {
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.65), 0 0 18px rgba(0, 220, 130, 0.20) !important;
-  border-color: rgba(0, 220, 130, 0.55) !important;
-  transform: translateY(-2px);
-}
-
-.doctor-card b, .doctor-card .text-dark {
-  color: #FFFFFF !important;
-}
-
-.doctor-card .text-muted {
-  color: #CBD5E1 !important;
-}
-
-.farmer-equipment-card {
-  background: rgba(14, 20, 16, 0.88) !important;
-  border: 1px solid rgba(0, 220, 130, 0.28) !important;
-  border-radius: 16px !important;
-  overflow: hidden;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-}
-
-.farmer-equipment-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.70), 0 0 20px rgba(0, 220, 130, 0.22) !important;
-  border-color: rgba(0, 220, 130, 0.60) !important;
-}
-
-.farmer-equipment-card-body {
-  color: #FFFFFF !important;
-}
-
-.farmer-equipment-title {
-  color: #FFFFFF !important;
-}
-
-.farmer-equipment-desc {
-  color: #CBD5E1 !important;
-}
-
-.dashboard-filter-box {
-  background: rgba(14, 20, 16, 0.88) !important;
-  border: 1px solid rgba(0, 220, 130, 0.28) !important;
-  border-radius: 14px !important;
-  padding: 18px 22px !important;
-  margin-bottom: 22px !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-  color: #FFFFFF !important;
-}
-
-.dashboard-filter-box .filter-subheading {
-  color: #CBD5E1 !important;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
 }

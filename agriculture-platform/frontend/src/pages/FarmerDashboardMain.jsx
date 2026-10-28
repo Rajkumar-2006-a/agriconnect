@@ -1110,7 +1110,7 @@ export default function FarmerDashboardMain({ initialSection }) {
                     <article className="border rounded p-3 h-100 doctor-card d-flex flex-column justify-content-between">
                       <div>
                         <div className="d-flex justify-content-between align-items-start mb-2">
-                          <b className="fs-6 text-white">{doc.name}</b>
+                          <b className="fs-6 text-dark">{doc.name}</b>
                           <span className="badge-tn-location">📍 {doc.location}</span>
                         </div>
                         <p className="text-muted small mb-3">
