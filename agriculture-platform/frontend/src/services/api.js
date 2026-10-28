@@ -30,21 +30,6 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Response Interceptor:
-// - If 401 Invalid/Expired token, clear stale token so it doesn't break subsequent calls
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      const msg = String(error.response?.data?.message || '');
-      if (msg.toLowerCase().includes('token') || msg.toLowerCase().includes('expire') || msg.toLowerCase().includes('authorized')) {
-        localStorage.removeItem('token');
-      }
-    }
-    return Promise.reject(error);
-  }
-);
-
 export const DEFAULT_EQUIPMENT_IMAGE =
   'https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=900&q=80';
 

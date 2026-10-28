@@ -17,29 +17,29 @@ const TOPIC_CONFIG = {
     label: 'Plant Disease Help',
     icon: '🩺',
     badgeClass: 'topic-badge-disease',
-    color: '#F87171',
-    bg: 'rgba(239, 68, 68, 0.16)'
+    color: '#DC2626',
+    bg: '#FEF2F2'
   },
   experience: {
     label: 'Farmer Experience',
     icon: '🌾',
     badgeClass: 'topic-badge-experience',
-    color: '#00DC82',
-    bg: 'rgba(0, 220, 130, 0.16)'
+    color: '#059669',
+    bg: '#ECFDF5'
   },
   tip: {
     label: 'Growing Tip',
     icon: '💡',
     badgeClass: 'topic-badge-tip',
-    color: '#FBBF24',
-    bg: 'rgba(245, 158, 11, 0.16)'
+    color: '#D97706',
+    bg: '#FFFBEB'
   },
   question: {
     label: 'Farming Question',
     icon: '❓',
     badgeClass: 'topic-badge-question',
-    color: '#38BDF8',
-    bg: 'rgba(56, 189, 248, 0.16)'
+    color: '#2563EB',
+    bg: '#EFF6FF'
   }
 };
 
@@ -469,7 +469,7 @@ export default function FarmerCollaborationSection({ onNavigateSection }) {
                               <CheckIcon size={11} /> Verified {item.author?.role === 'rentalOwner' ? 'Owner' : item.author?.role === 'buyer' ? 'Buyer' : 'Farmer'}
                             </span>
                             {item.author?.location && (
-                              <span className="badge" style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '12px', background: '#1E293B', border: '1px solid #334155', color: '#CBD5E1' }}>
+                              <span className="badge text-bg-light border text-muted" style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '12px' }}>
                                 📍 {item.author.location}
                               </span>
                             )}
@@ -640,10 +640,10 @@ export default function FarmerCollaborationSection({ onNavigateSection }) {
               <span>🌾 Seasonal Crop Advisory</span>
             </h3>
             <div className="collab-advisory-box">
-              <b className="d-block text-white mb-1" style={{ fontSize: 13.5 }}>
+              <b className="d-block text-dark mb-1" style={{ fontSize: 13.5 }}>
                 Tamil Nadu Monsoon & Post-Rain Advisory
               </b>
-              <p className="text-light small mb-2" style={{ opacity: 0.85 }}>
+              <p className="text-muted small mb-2">
                 High humidity during overcast days increases leaf blight, powdery mildew, and root fungal rot across tomato, brinjal, and paddy fields.
               </p>
               <ul className="collab-advisory-list">
@@ -657,10 +657,10 @@ export default function FarmerCollaborationSection({ onNavigateSection }) {
           {/* Need Urgent Doctor Card */}
           <div className="farming-promo-banner-card p-3">
             <div className="d-flex align-items-center gap-2 mb-2">
-              <StethoscopeIcon size={20} className="text-info" />
-              <b className="text-white" style={{ fontSize: 14 }}>Need Official Agri Doctor Help?</b>
+              <StethoscopeIcon size={20} className="text-success" />
+              <b className="text-dark" style={{ fontSize: 14 }}>Need Official Agri Doctor Help?</b>
             </div>
-            <p className="small text-light mb-3" style={{ opacity: 0.85 }}>
+            <p className="small text-muted mb-3">
               If your crops face severe unknown diseases or urgent pest attacks, connect directly with verified Agricultural Doctors.
             </p>
             <button

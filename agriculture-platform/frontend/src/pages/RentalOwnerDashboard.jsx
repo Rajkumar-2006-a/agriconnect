@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import api, { imageUrl, DEFAULT_EQUIPMENT_IMAGE } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { TAMIL_NADU_DISTRICTS } from '../constants/tamilNaduLocations';
-import BinaryOrbits from '../components/BinaryOrbits';
 import './RentalOwnerDashboard.css';
 
 const blank = {
@@ -150,7 +149,6 @@ export default function RentalOwnerDashboard() {
 
   return (
     <main className="owner-dashboard">
-      <BinaryOrbits className="binary-orbits-fixed-bg" />
       <aside className="owner-sidebar">
         <div className="owner-brand auth-logo d-inline-flex align-items-center">
           <img src="/logo.png" alt="AgriConnect" className="brand-logo-img me-2" style={{ width: 34, height: 34 }} />
@@ -225,45 +223,27 @@ export default function RentalOwnerDashboard() {
         )}
 
         {section === 'overview' && (
-          <div className="owner-overview-stack">
-            <div className="owner-welcome-banner d-flex justify-content-between align-items-center flex-wrap gap-3">
-              <div>
-                <h2 className="mb-1">Welcome back, {user?.name} 👋</h2>
-                <p className="text-muted mb-0 small">
-                  Manage your machinery listings, track rental requests, and monitor your rental business in Tamil Nadu.
-                </p>
-              </div>
-              <button className="btn btn-success d-inline-flex align-items-center gap-2" onClick={handleAddNew}>
-                <span>+</span> Add new equipment
-              </button>
-            </div>
-
+          <div className="owner-panel">
+            <h2>Welcome, {user?.name}</h2>
             <div className="owner-stats">
               <Metric label="My equipment" value={equipment.length} icon="🚜" />
               <Metric label="Available for rent" value={equipment.filter((item) => item.availability).length} icon="✅" />
               <Metric label="Rental requests" value={rentals.length} icon="📋" />
             </div>
 
-            <div className="owner-overview-grid">
-              {/* Left Column: Recent Machinery Listings */}
-              <div className="owner-panel owner-overview-panel">
+            {equipment.length > 0 && (
+              <div className="owner-quick-section mt-4">
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                  <div>
-                    <h3 className="h5 mb-1 fw-bold text-dark">Recent Equipment Listings</h3>
-                    <small className="text-muted">Your active machinery catalog</small>
-                  </div>
-                  {equipment.length > 0 && (
-                    <button
-                      className="btn btn-sm btn-outline-success"
-                      onClick={() => setSection('equipment')}
-                    >
-                      View all ({equipment.length}) →
-                    </button>
-                  )}
+                  <h3 className="h5 mb-0 fw-bold text-dark">Recent Equipment Listings</h3>
+                  <button
+                    className="btn btn-sm btn-outline-success"
+                    onClick={() => setSection('equipment')}
+                  >
+                    View all ({equipment.length}) →
+                  </button>
                 </div>
-
                 <div className="owner-equipment-grid">
-                  {equipment.slice(0, 4).map((item) => (
+                  {equipment.slice(0, 3).map((item) => (
                     <article className="owner-equipment-card" key={item._id}>
                       <div className="owner-equipment-image">
                         {item.image ? (
@@ -323,91 +303,9 @@ export default function RentalOwnerDashboard() {
                       </div>
                     </article>
                   ))}
-
-                  {/* Add Equipment Quick Tile when owner has fewer items */}
-                  {equipment.length < 3 && (
-                    <div
-                      className="owner-equipment-add-tile"
-                      onClick={handleAddNew}
-                      role="button"
-                      tabIndex={0}
-                    >
-                      <div className="owner-add-tile-icon">+</div>
-                      <b>Add More Equipment</b>
-                      <small>List another tractor, tiller, or harvester to increase rental income</small>
-                      <span className="btn btn-sm btn-outline-success mt-2">+ Add listing</span>
-                    </div>
-                  )}
                 </div>
               </div>
-
-              {/* Right Column: Rental Requests & Booking Activity */}
-              <div className="owner-panel owner-overview-panel">
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                  <div>
-                    <h3 className="h5 mb-1 fw-bold text-dark">Rental Requests</h3>
-                    <small className="text-muted">Farmer booking requests</small>
-                  </div>
-                  {rentals.length > 0 && (
-                    <button
-                      className="btn btn-sm btn-outline-success"
-                      onClick={() => setSection('requests')}
-                    >
-                      View all ({rentals.length}) →
-                    </button>
-                  )}
-                </div>
-
-                {rentals.length > 0 ? (
-                  <div className="owner-recent-requests">
-                    {rentals.slice(0, 4).map((item) => (
-                      <div className="order-row mb-2" key={item._id}>
-                        <div>
-                          <b>{item.equipment?.equipmentName}</b>
-                          <small>
-                            Farmer: {item.farmer?.name || 'Local Farmer'} · {item.farmer?.phone || 'Phone not provided'}
-                            {item.farmer?.location && (
-                              <span className="ms-1 text-success fw-semibold">· 📍 {item.farmer.location}</span>
-                            )}
-                          </small>
-                          <small>Farm area: {item.acres} acres</small>
-                        </div>
-                        {item.requestStatus === 'pending' ? (
-                          <div className="d-flex gap-1">
-                            <button
-                              className="btn btn-sm btn-success"
-                              onClick={() => updateRequest(item._id, 'accepted')}
-                            >
-                              Accept
-                            </button>
-                            <button
-                              className="btn btn-sm btn-outline-danger"
-                              onClick={() => updateRequest(item._id, 'rejected')}
-                            >
-                              Reject
-                            </button>
-                          </div>
-                        ) : (
-                          <span className={`status-pill ${item.requestStatus}`}>
-                            {item.requestStatus}
-                          </span>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="owner-overview-empty-requests">
-                    <span className="empty-requests-icon">📋</span>
-                    <b>No pending rental requests</b>
-                    <p>When farmers in Tamil Nadu book your machinery, their requests will appear here for you to accept or decline.</p>
-                    <div className="owner-listing-status-card">
-                      <span className="status-dot-pulse"></span>
-                      <span>Your machinery is live & visible to farmers</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+            )}
           </div>
         )}
 
@@ -432,8 +330,7 @@ export default function RentalOwnerDashboard() {
 
             <div className="owner-equipment-grid">
               {equipment.length ? (
-                <>
-                  {equipment.map((item) => (
+                equipment.map((item) => (
                   <article className="owner-equipment-card" key={item._id}>
                     <div className="owner-equipment-image">
                       {item.image ? (
@@ -512,20 +409,7 @@ export default function RentalOwnerDashboard() {
                       </div>
                     </div>
                   </article>
-                ))}
-
-                <div
-                  className="owner-equipment-add-tile"
-                  onClick={handleAddNew}
-                  role="button"
-                  tabIndex={0}
-                >
-                  <div className="owner-add-tile-icon">+</div>
-                  <b>Add Another Equipment</b>
-                  <small>List more machinery to grow your rental business</small>
-                  <span className="btn btn-sm btn-outline-success mt-2">+ Add new listing</span>
-                </div>
-              </>
+                ))
               ) : (
                 <div className="owner-empty-box">
                   <div className="owner-empty-icon">🚜</div>

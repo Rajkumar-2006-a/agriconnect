@@ -270,6 +270,25 @@ export default function FertilizerPricePage() {
 
   return (
     <div className="fertilizer-page-wrapper">
+      {/* Language Toggle */}
+      <div className="fert-toolbar-row">
+        <div className="lang-switch-box">
+          <button
+            type="button"
+            className={`lang-switch-btn ${language === 'en' ? 'active' : ''}`}
+            onClick={() => toggleLanguage('en')}
+          >
+            English
+          </button>
+          <button
+            type="button"
+            className={`lang-switch-btn ${language === 'ta' ? 'active' : ''}`}
+            onClick={() => toggleLanguage('ta')}
+          >
+            தமிழ்
+          </button>
+        </div>
+      </div>
 
       {/* Green Alert Banner */}
       <div className="fert-alert-banner">

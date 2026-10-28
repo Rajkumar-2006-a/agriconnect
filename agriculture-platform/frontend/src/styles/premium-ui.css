@@ -1,42 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
 /* ========================================================
-   1. GLOBAL DESIGN TOKENS & ROOTS (Forest Green & Emerald)
+   1. GLOBAL DESIGN TOKENS & ROOTS
    ======================================================== */
 :root {
-  --navbar-bg: #131816;
-  --navbar-text: #FFFFFF;
-  --primary-btn: #00DC82;
-  --primary-btn-hover: #059669;
-  --primary: #00DC82;
-  --primary-hover: #059669;
-  --main-text: #FFFFFF;
-  --secondary-text: #E2E8F0;
-  --card-bg: #1B221E;
-  --card-border: rgba(255, 255, 255, 0.15);
-  --card-text: #FFFFFF;
-  --card-text-muted: #CBD5E1;
-  --input-bg: #232B27;
-  --input-text: #FFFFFF;
-  --input-border: rgba(255, 255, 255, 0.18);
-  --subtle-accent: #00DC82;
-  --surface-translucent: #1B221E;
-  --surface-dark: #0F1412;
-  --success: #10B981;
-  --error: #EF4444;
-
-  /* Legacy aliases for backward compatibility */
-  --agro-900: #0E1210;
-  --agro-800: #131816;
-  --agro-700: #00DC82;
-  --agro-600: #059669;
-  --agro-100: rgba(0, 220, 130, 0.16);
-  --earth-100: #1B221E;
-  --ink: #FFFFFF;
-  --muted: #A0AEC0;
-  --line: rgba(255, 255, 255, 0.15);
-  --shadow: 0 10px 28px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.16);
-  --radius: 14px;
+  --agro-900: #123d2a;
+  --agro-800: #155a38;
+  --agro-700: #1d7545;
+  --agro-600: #278a51;
+  --agro-100: #e9f5ec;
+  --earth-100: #f4f0e6;
+  --ink: #1c3025;
+  --muted: #6d7d73;
+  --line: #dce8de;
+  --shadow: 0 12px 30px rgba(23, 79, 46, 0.09);
+  --radius: 16px;
 }
 
 /* ========================================================
@@ -50,9 +28,9 @@ body {
 }
 
 body {
-  background-color: transparent;
+  background-color: #ffffff;
   font-family: 'Inter', system-ui, sans-serif;
-  color: var(--main-text);
+  color: var(--ink);
   min-height: 100vh;
 }
 
@@ -77,11 +55,10 @@ h1,
   position: sticky;
   top: 0;
   z-index: 1030;
-  background: var(--navbar-bg) !important;
+  background: rgba(34, 88, 62, 0.94);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 4px 18px rgba(10, 30, 20, 0.25);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 3px 15px rgba(12, 48, 31, 0.12);
   padding: 9px 0;
 }
 
@@ -158,29 +135,19 @@ h1,
   box-shadow: 0 8px 16px rgba(20, 89, 52, 0.16);
 }
 
-.btn-primary,
 .btn-success {
-  background: var(--primary-btn) !important;
-  border-color: var(--primary-btn) !important;
-  color: #FFFFFF !important;
+  background: var(--agro-700);
+  border-color: var(--agro-700);
 }
 
-.btn-primary:hover,
 .btn-success:hover {
-  background: var(--primary-btn-hover) !important;
-  border-color: var(--primary-btn-hover) !important;
-  color: #FFFFFF !important;
+  background: var(--agro-800);
+  border-color: var(--agro-800);
 }
 
 .btn-outline-success {
-  color: var(--primary-btn);
+  color: var(--agro-700);
   border-color: #8fcaa0;
-}
-
-.btn-outline-success:hover {
-  background: var(--primary-btn);
-  border-color: var(--primary-btn);
-  color: #FFFFFF;
 }
 
 .btn-warning {
@@ -206,7 +173,7 @@ h1,
   font-size: clamp(2.7rem, 5.5vw, 4.8rem);
   max-width: 800px;
   line-height: 1.05;
-  text-shadow: none;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.14);
 }
 
 .hero .badge {
@@ -218,7 +185,7 @@ h1,
 
 .hero p {
   color: #eff9f0;
-  text-shadow: none;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
 }
 
 .hero .btn-warning {
@@ -244,15 +211,12 @@ h1,
 .sidebar,
 .stat,
 .card {
-  border: 1px solid var(--card-border) !important;
+  border: 1px solid var(--line) !important;
   box-shadow: 
     0 8px 24px rgba(18, 55, 34, 0.08), 
     0 2px 6px rgba(0, 0, 0, 0.04) !important;
   border-radius: var(--radius) !important;
-  background: var(--card-bg) !important;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  color: var(--card-text);
+  background: #ffffff !important;
 }
 
 .feature {
@@ -467,51 +431,4 @@ footer {
     border-radius: 12px;
     border: 1px solid var(--line);
   }
-}
-
-/* ========================================================
-   13. GLOBAL LOADING SPINNERS & SKELETONS
-   ======================================================== */
-.spinner-border,
-.spinner-border.text-success {
-  color: #00DC82 !important;
-  border-width: 3px !important;
-  border-color: rgba(0, 220, 130, 0.20) !important;
-  border-right-color: #00DC82 !important;
-  width: 2.75rem !important;
-  height: 2.75rem !important;
-  animation: spinner-border .75s linear infinite !important;
-}
-
-.spinner-border-sm {
-  width: 1.25rem !important;
-  height: 1.25rem !important;
-  border-width: 2px !important;
-}
-
-.loading-container,
-.loading-state-box,
-.text-center.py-5:has(.spinner-border) {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 3rem 1.5rem !important;
-  background: #1B221E !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
-  margin: 1.5rem auto !important;
-  max-width: 550px !important;
-  text-align: center !important;
-  animation: contentFadeUp 0.35s ease both !important;
-}
-
-.text-center.py-5:has(.spinner-border) p,
-.loading-state-box p,
-.loading-container p {
-  color: #E2E8F0 !important;
-  font-size: 14.5px !important;
-  font-weight: 500 !important;
-  margin-top: 14px !important;
 }

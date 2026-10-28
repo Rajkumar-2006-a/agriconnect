@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { TAMIL_NADU_DISTRICTS } from '../constants/tamilNaduLocations';
-import InterferenceRibbons from '../components/InterferenceRibbons';
 import './SimpleAuth.css';
 
 const roles = [
@@ -52,30 +51,6 @@ export default function SimpleAuth({ mode }) {
 
   return (
     <main className="auth-page">
-      {/* Dynamic Animated Interference Ribbons Background - Exact Aurora Configuration */}
-      <InterferenceRibbons
-        colors={['#6B3CFF', '#D46BFF']}
-        backgroundColor="#0A0A0A"
-        wires={64}
-        lineWidth={1.6}
-        ribbonWidth={0.24}
-        amplitude={0.60}
-        waveLength={1.00}
-        angle={42}
-        twist={1.60}
-        curl={0.25}
-        depth={0.65}
-        stripes={2.2}
-        colorFlow={0}
-        glow={0.45}
-        intensity={1.00}
-        speed={0.70}
-        spin={0.22}
-        pulseSpeed={0.85}
-        pulseStrength={1.00}
-        interactive={true}
-      />
-
       {/* 1. Left Side: Yellow Logo + "Login" + 2-line statement */}
       <section className="auth-left-section">
         <div className="auth-logo-wrap">

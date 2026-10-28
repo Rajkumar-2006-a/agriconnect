@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api, { imageUrl, DEFAULT_PRODUCT_IMAGE } from '../services/api';
-import BinaryOrbits from '../components/BinaryOrbits';
 import './CartPage.css';
 
 export default function CartPage() {
@@ -104,8 +103,7 @@ export default function CartPage() {
 
   return (
     <div className="cart-page-wrapper py-4">
-      <BinaryOrbits className="binary-orbits-fixed-bg" />
-      <div className="container-fluid px-3 px-md-4 cart-page-content">
+      <div className="container-fluid px-3 px-md-4">
         <div className="d-flex flex-wrap justify-content-between align-items-center mb-4">
           <div>
             <h1 className="cart-title mb-1">🛒 Shopping Cart</h1>
@@ -123,8 +121,8 @@ export default function CartPage() {
           <div className="row g-4">
             <div className="col-lg-8">
               <div className="cart-items-box">
-                <div className="d-flex justify-content-between align-items-center pb-3 border-bottom mb-3 cart-items-header">
-                  <span className="fw-bold text-white">Item Details</span>
+                <div className="d-flex justify-content-between align-items-center pb-3 border-bottom mb-3">
+                  <span className="fw-bold text-dark">Item Details</span>
                   <button
                     className="btn btn-sm btn-link text-danger p-0 text-decoration-none fw-semibold"
                     onClick={clearCart}

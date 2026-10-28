@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: transparent !important;
+  background-color: #f7faf8;
 }
 
 .app-main-content {
@@ -11,33 +11,13 @@
 }
 
 .agro-nav {
-  background: rgba(14, 46, 31, 0.82) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(90deg, #124024 0%, #1b5e34 100%);
+  box-shadow: 0 4px 20px rgba(10, 40, 20, 0.12);
   padding: 0.75rem 0;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid rgba(167, 243, 208, 0.16);
-}
-
-.agro-nav .btn-warning {
-  background: linear-gradient(135deg, #168348 0%, #116B3A 100%) !important;
-  border: 1px solid rgba(167, 243, 208, 0.35) !important;
-  color: #FFFFFF !important;
-  border-radius: 20px;
-  padding: 5px 16px;
-  font-weight: 700;
-  box-shadow: 0 4px 14px rgba(22, 131, 72, 0.35);
-  transition: all 0.2s ease;
-}
-
-.agro-nav .btn-warning:hover {
-  background: linear-gradient(135deg, #116B3A 0%, #0D522C 100%) !important;
-  border-color: #A7F3D0 !important;
-  box-shadow: 0 6px 18px rgba(22, 131, 72, 0.45);
-  transform: translateY(-1px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .navbar-brand.auth-logo {
@@ -77,7 +57,7 @@
 }
 
 .nav-link-custom {
-  color: #F1F5F2 !important;
+  color: #e2e8f0 !important;
   font-weight: 600;
   font-size: 14.5px;
   padding: 0.5rem 0.9rem !important;
@@ -94,8 +74,7 @@
 
 .nav-link-custom.active {
   color: #ffffff !important;
-  background-color: rgba(167, 243, 208, 0.2);
-  border: 1px solid rgba(167, 243, 208, 0.35);
+  background-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -154,8 +133,8 @@
 }
 
 .user-role-badge {
-  background: rgba(167, 243, 208, 0.2);
-  color: #A7F3D0;
+  background: rgba(16, 185, 129, 0.25);
+  color: #a7f3d0;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -182,30 +161,30 @@
 }
 
 .app-footer {
-  background: #0f2c1f;
-  color: #B7C8BE;
+  background: #0f321d;
+  color: #a7f3d0;
   padding: 28px 0;
   text-align: center;
   font-size: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   margin-top: auto;
 }
 
 .app-footer-brand {
   font-size: 16px;
   font-weight: 700;
-  color: #F1F5F2;
+  color: #ffffff;
   margin-bottom: 6px;
 }
 
 .app-footer-tagline {
-  color: #A7F3D0;
+  color: #86efac;
   font-size: 12.5px;
   margin-bottom: 12px;
 }
 
 .app-footer-copy {
-  color: #B7C8BE;
+  color: #94a3b8;
   font-size: 12px;
   margin-bottom: 0;
 }
